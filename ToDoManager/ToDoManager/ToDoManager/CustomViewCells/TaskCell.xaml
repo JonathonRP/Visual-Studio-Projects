@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converter="clr-namespace:ToDoManager.Converters"
+             xmlns:CXC="clr-namespace:CustomXamarinControls;assembly=CustomXamarinControls.Android"
+             xmlns:vm="clr-namespace:ToDoManager.ViewModels;"
+             xmlns:prism="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             x:Class="ToDoManager.CustomViewCells.TaskCell"
+             x:Name="TaskCell">
+    <ViewCell.View>
+        <Frame Margin="5" CornerRadius="5" HasShadow="True" IsClippedToBounds="True" BackgroundColor="#D4FFFFFF" Padding="5,10,10,10" OutlineColor="Gray">
+            <StackLayout Padding="5" Orientation="Horizontal">
+                <CXC:CheckBox x:Name="CheckBox" Checked="{Binding IsComplete}" CheckedChanged="CheckBox_CheckedChanged"/>
+                <StackLayout VerticalOptions="Center" HorizontalOptions="StartAndExpand">
+                    <CXC:LabelStriked Text="{Binding Title}" 
+                    LineBreakMode="NoWrap" IsStrikeThrough="{Binding Path=Checked, Source={x:Reference CheckBox}}"
+                    Style="{DynamicResource ListItemTextStyle}" 
+                    FontSize="16" />
+                    <!--<Label Text="{Binding Description}" 
+                    LineBreakMode="NoWrap"
+                    Style="{DynamicResource ListItemDetailTextStyle}"
+                    FontSize="13" />-->
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+    </ViewCell.View>
+    <ViewCell.ContextActions>
+        <MenuItem Text="Edit" Icon="Edit.png" Command="{Binding ParentContext.Edit, Source={x:Reference TaskCell}}" CommandParameter="{Binding .}"/>
+        <MenuItem Text="Delete" Icon="delete.png" Command="{Binding ParentContext.Delete, Source={x:Reference TaskCell}}" CommandParameter="{Binding .}" IsDestructive="True"/>
+    </ViewCell.ContextActions>
+</ViewCell>

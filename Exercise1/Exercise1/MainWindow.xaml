@@ -1,0 +1,34 @@
+﻿<Window x:Class="Exercise1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Exercise1"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="Black" Offset="0"/>
+                <GradientStop Color="#FF7474D4" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Separator HorizontalAlignment="Left" Height="320" Margin="101,78,0,-79" VerticalAlignment="Top" Width="310"/>
+        <TextBox x:Name="MealCost" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="28" Margin="197,78,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="181"/>
+        <TextBox x:Name="TipPercent" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="27" Margin="222,136,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="156"/>
+        <CheckBox x:Name="TotalCost" Content="Display Total Cost" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="128,168,0,0" FontSize="11" Width="124" Height="18" Foreground="White"/>
+        <Button x:Name="Calculate" Content="Calculate" HorizontalAlignment="Left" Margin="128,186,0,0" VerticalAlignment="Top" Width="250" Height="54" FontSize="20" Foreground="White" Click="Calculate_Click">
+            <Button.BorderBrush>
+                <SolidColorBrush Color="White" Opacity="0"/>
+            </Button.BorderBrush>
+            <Button.Background>
+                <SolidColorBrush Color="#FFF9F9F9" Opacity="0"/>
+            </Button.Background>
+        </Button>
+        <TextBlock x:Name="Cost" TextAlignment="Center" HorizontalAlignment="Left" Margin="101,245,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="70" Width="310" FontSize="24"/>
+        <Label Content="Meal Cost :" HorizontalAlignment="Left" Margin="128,55,0,0" VerticalAlignment="Top" Height="23" Foreground="White"/>
+        <Label Content="Tip Percentage :" HorizontalAlignment="Left" Margin="128,110,0,0" VerticalAlignment="Top" Foreground="White" Height="26"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Fancy Tip Calculator" VerticalAlignment="Top" Width="497" Height="40" Foreground="White" FontSize="24" FontFamily="MV Boli" FontWeight="Bold"/>
+
+    </Grid>
+</Window>

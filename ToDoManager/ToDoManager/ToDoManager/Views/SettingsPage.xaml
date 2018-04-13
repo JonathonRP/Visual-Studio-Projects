@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:CXC="clr-namespace:CustomXamarinControls;assembly=CustomXamarinControls.Android"
+             xmlns:prismBehaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="true"
+             x:Class="ToDoManager.Views.Settings"
+             Title="{Binding Title}">
+    <ContentPage.Content>
+        <StackLayout>
+            <CXC:TableView Intent="Settings">
+                <TableRoot>
+                    <TableSection>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <StackLayout Style="{DynamicResource CellStyle}">
+                                    <Label Text="Pick Theme's Colors" Style="{DynamicResource CellLabelStyle}"/>
+                                    <StackLayout Orientation="Horizontal" Padding="0,5,0,5" VerticalOptions="Center">
+                                        <CXC:RoundableBoxView Style="{DynamicResource PrimaryRoundableBoxView}">
+                                            <CXC:RoundableBoxView.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding PrimaryTapped}"/>
+                                            </CXC:RoundableBoxView.GestureRecognizers>
+                                        </CXC:RoundableBoxView>
+                                        <CXC:RoundableBoxView Style="{DynamicResource AccentRoundableBoxView}">
+                                            <CXC:RoundableBoxView.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding AccentTapped}"/>
+                                            </CXC:RoundableBoxView.GestureRecognizers>
+                                        </CXC:RoundableBoxView>
+                                    </StackLayout>
+                                </StackLayout>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </TableSection>
+                    <TableSection Title="Task">
+                        <ViewCell>
+                            <ViewCell.View>
+                                <StackLayout Style="{DynamicResource CellStyle}">
+                                    <Label Text="Group Tasks" Style="{DynamicResource CellLabelStyle}"/>
+                                    <CXC:CheckBox/>
+                                </StackLayout>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </TableSection>
+                    <TableSection>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <StackLayout Style="{DynamicResource CellStyle}">
+                                    <Label Text="Delete Completed Tasks" Style="{DynamicResource CellLabelStyle}"/>
+                                    <CXC:CheckBox Checked="{Binding Checked, Mode=TwoWay}"/>
+                                </StackLayout>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </TableSection>
+                    <TableSection>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <StackLayout Style="{DynamicResource CellStyle}">
+                                    <Label Text="View Deleted Tasks" Style="{DynamicResource CellLabelStyle}"/>
+                                    <CXC:CheckBox x:Name="ViewDeletedTasks"/>
+                                </StackLayout>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </TableSection>
+                </TableRoot>
+            </CXC:TableView>
+            <StackLayout BindingContext="{x:Reference ViewDeletedTasks}" Padding="30,0,0,0" IsVisible="{Binding Checked}">
+                <CXC:FlatButton Text="Clear All" Command="{Binding ClearAll}"/>
+                <ListView ItemsSource="{Binding Deleted}"
+                          VerticalOptions="FillAndExpand"
+                            BackgroundColor="Transparent"
+                                HasUnevenRows="true"
+                                SeparatorVisibility="None"
+                                RefreshCommand="{Binding LoadItemsCommand}"
+                                IsPullToRefreshEnabled="true"
+                                IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                                CachingStrategy="RecycleElement">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Margin="5" CornerRadius="5" HasShadow="True" IsClippedToBounds="True" BackgroundColor="#D4FFFFFF" Padding="5,10,10,10" OutlineColor="Gray">
+                                <StackLayout Padding="5" Orientation="Horizontal">
+                                    <CXC:CheckBox x:Name="DeleteCheckBox" Checked="{Binding IsComplete}"/>
+                                    <StackLayout VerticalOptions="Center" HorizontalOptions="StartAndExpand">
+                                        <CXC:LabelStriked Text="{Binding Title}" 
+                                                        LineBreakMode="NoWrap" IsStrikeThrough="{Binding Path=Checked, Source={x:Reference DeleteCheckBox}}"
+                                                        Style="{DynamicResource ListItemTextStyle}" 
+                                                        FontSize="16" />
+                                    </StackLayout>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

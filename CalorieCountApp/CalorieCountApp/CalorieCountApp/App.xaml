@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CalorieCountApp.App">
+    <Application.Resources>
+        <!-- Application resource dictionary -->
+        <ResourceDictionary>
+            <Color x:Key="Primary">#009AB0</Color>
+            <Color x:Key="Accent">#00b016</Color>
+            <Color x:Key="Accent2">#b0009a</Color>
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="{DynamicResource Primary}"/>
+                <Setter Property="BarTextColor" Value="White"/>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

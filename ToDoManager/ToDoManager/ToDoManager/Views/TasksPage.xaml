@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:CVC="clr-namespace:ToDoManager.CustomViewCells"
+             xmlns:CXC="clr-namespace:CustomXamarinControls;assembly=CustomXamarinControls.Android"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="true"
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             x:Class="ToDoManager.Views.Tasks"
+              Title="{Binding Title}"
+             x:Name="TasksPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Icon="list_add.png" Command="{Binding AddTask}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView x:Name="ItemsListView" 
+                            ItemsSource="{Binding Tasks}"
+                            VerticalOptions="FillAndExpand"
+                            BackgroundColor="Transparent"
+                                HasUnevenRows="true"
+                                SeparatorVisibility="None"
+                                RefreshCommand="{Binding LoadItemsCommand}"
+                                IsPullToRefreshEnabled="true"
+                                IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                                CachingStrategy="RecycleElement">
+                <ListView.Behaviors>
+                    <b:EventToCommandBehavior EventName="ItemTapped"
+                                                  Command="{Binding Tapped}"
+                                                  EventArgsParameterPath="Item"/>
+                    <CXC:DisableListViewSelection/>
+                </ListView.Behaviors>
+                <ListView.ItemTemplate>
+                    <CVC:TaskDataTemplateSelector>
+                        <CVC:TaskDataTemplateSelector.TaskCell>
+                            <DataTemplate>
+                                <CVC:TaskCell ParentContext="{Binding BindingContext, Source={x:Reference TasksPage}}"/>
+                            </DataTemplate>
+                        </CVC:TaskDataTemplateSelector.TaskCell>
+                        <CVC:TaskDataTemplateSelector.TaskCellInEdit>
+                            <DataTemplate>
+                                <CVC:TaskCellInEdit/>
+                            </DataTemplate>
+                        </CVC:TaskDataTemplateSelector.TaskCellInEdit>
+                    </CVC:TaskDataTemplateSelector>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

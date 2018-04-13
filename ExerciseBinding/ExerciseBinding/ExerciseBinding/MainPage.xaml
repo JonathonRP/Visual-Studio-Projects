@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ExerciseBinding"
+             x:Class="ExerciseBinding.MainPage">
+    
+    <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+        <StackLayout Orientation="Horizontal">
+            <Label BindingContext="{x:Reference entry}" Text="{Binding Text, StringFormat='Value: {0}'}" 
+                   VerticalOptions="Center" HorizontalOptions="Start"/>
+            <Entry BindingContext="{x:Reference stepper}" x:Name="entry" Text="{Binding Value, Mode=OneWayToSource}" WidthRequest="100" 
+                   VerticalOptions="Center" HorizontalOptions="Center"/>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Label BindingContext="{x:Reference stepper}" Text="{Binding Value, StringFormat='Value: {0}'}"
+                   VerticalOptions="Center" HorizontalOptions="Start"/>
+            <Stepper BindingContext="{x:Reference slider}" x:Name="stepper" Value="{Binding Value, Mode=OneWayToSource}" Maximum="1000"
+                     HeightRequest="60" WidthRequest="175" Scale=".8" VerticalOptions="Center" HorizontalOptions="Center"/>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Label BindingContext="{x:Reference slider}" Text="{Binding Value, StringFormat='Value: {0}'}"
+                   VerticalOptions="Center" HorizontalOptions="Start"/>
+            <Slider BindingContext="{x:Reference entry}" x:Name="slider" Value="{Binding Text, Mode=OneWayToSource}" Maximum="1000" 
+                    WidthRequest="100" VerticalOptions="Center" HorizontalOptions="Center"/>
+        </StackLayout>
+    </StackLayout>
+
+</ContentPage>
