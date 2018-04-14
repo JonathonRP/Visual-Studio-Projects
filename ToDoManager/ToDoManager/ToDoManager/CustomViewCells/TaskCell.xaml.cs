@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using ToDoManager.CustomViewCells;
 using ToDoManager.Models;
+using ToDoManager.ViewModels;
 
 namespace ToDoManager.CustomViewCells
 {
@@ -33,20 +34,6 @@ namespace ToDoManager.CustomViewCells
             if (newValue != oldValue && newValue != null)
             {
                 (bindable as TaskCell).ParentContext = newValue;
-            }
-        }
-
-        private void CheckBox_CheckedChanged(object sender, CustomXamarinControls.EventArgs<bool> e)
-        {
-            if (e.Value)
-            {
-                if (App.Current.Properties.Keys.Contains("delete"))
-                {
-                    if ((bool)App.Current.Properties["delete"] == true)
-                    {
-                        MessagingCenter.Send<ToDoTask>(((ToDoTask)BindingContext), "deleteTask");
-                    }
-                }
             }
         }
     }

@@ -64,7 +64,7 @@
                     </TableSection>
                 </TableRoot>
             </CXC:TableView>
-            <StackLayout BindingContext="{x:Reference ViewDeletedTasks}" Padding="30,0,0,0" IsVisible="{Binding Checked}">
+            <StackLayout BindingContext="{x:Reference ViewDeletedTasks}" Padding="0,0,0,0" IsVisible="{Binding Checked}">
                 <CXC:FlatButton Text="Clear All" Command="{Binding ClearAll}"/>
                 <ListView ItemsSource="{Binding Deleted}"
                           VerticalOptions="FillAndExpand"

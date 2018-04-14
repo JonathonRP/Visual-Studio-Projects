@@ -38,12 +38,14 @@ namespace ToDoManager.ViewModels
             set { SetProperty(ref _subtasks, value); }
         }
 
-        public DelegateCommand AddSubtask => new DelegateCommand(Add);
+        public DelegateCommand Add => new DelegateCommand(OnAdd);
 
         private DelegateCommand<ToDoTask> _tapped;
         public DelegateCommand<ToDoTask> Tapped => _tapped ?? (_tapped = new DelegateCommand<ToDoTask>(OnItemTapped, CanNavigate));
         public DelegateCommand<ToDoTask> Edit => new DelegateCommand<ToDoTask>(OnEditingEntered);
         public DelegateCommand<ToDoTask> Delete => new DelegateCommand<ToDoTask>(OnDeleting);
+
+        public DelegateCommand<ToDoTask> CheckChanged => new DelegateCommand<ToDoTask>(OnCheckedChanged);
 
         public Command LoadItemsCommand { get; set; }
         
@@ -118,6 +120,27 @@ namespace ToDoManager.ViewModels
             }
         }
 
+        private void OnCheckedChanged(ToDoTask subtask)
+        {
+            if (subtask.IsComplete)
+            {
+                subtask.Complete();
+                EventAggregator.GetEvent<UpdateTask>().Publish(subtask);
+                if (App.Current.Properties.Keys.Contains("delete"))
+                {
+                    if ((bool)App.Current.Properties["delete"] == true)
+                    {
+                        EventAggregator.GetEvent<DeleteSubtask>().Publish(new DeleteSubtask() { Task = Task, Subtask = subtask });
+                    }
+                }
+            }
+            else
+            {
+                subtask.Incomplete();
+                EventAggregator.GetEvent<UpdateSubtask>().Publish(new UpdateSubtask() { Task = Task, Subtask = subtask });
+            }
+        }
+
         private bool CanNavigate(ToDoTask subtask)
         {
             if (subtask == null)
@@ -171,7 +194,7 @@ namespace ToDoManager.ViewModels
             await NavigationService.NavigateAsync("Subtasks", param);
         }
 
-        void Add()
+        void OnAdd()
         {
             var Subtask = new ToDoTask
             {

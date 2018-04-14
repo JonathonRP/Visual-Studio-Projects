@@ -11,6 +11,8 @@ using ToDoManager.Views;
 using Prism;
 using Prism.Commands;
 using Prism.Navigation;
+using ToDoManager.Events;
+using Prism.Events;
 
 namespace ToDoManager.ViewModels
 {
@@ -44,7 +46,7 @@ namespace ToDoManager.ViewModels
             set { SetProperty(ref _deleted, value); }
         }
 
-        public SettingsViewModel(INavigationService navigationService) : base(navigationService)
+        public SettingsViewModel(INavigationService navigationService, IEventAggregator eventAggregator) : base(navigationService, eventAggregator)
         {
             Title = "Settings";
             Deleted = new ObservableCollection<ToDoTask>();
@@ -116,7 +118,7 @@ namespace ToDoManager.ViewModels
 
                 foreach (var task in tasks.Where(t => t.IsComplete == true))
                 {
-                    await DataStore.DeleteAsync(task);
+                    EventAggregator.GetEvent<DeleteTask>().Publish(task);
                     await DataStore.AddDeletedAsync(task);
                 }
 

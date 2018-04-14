@@ -24,12 +24,14 @@ namespace ToDoManager.ViewModels
             set { SetProperty(ref _tasks, value); }
         }
 
-        public DelegateCommand AddTask => new DelegateCommand(Add);
+        public DelegateCommand Add => new DelegateCommand(OnAdd);
 
         private DelegateCommand<ToDoTask> _tapped;
         public DelegateCommand<ToDoTask> Tapped => _tapped ?? (_tapped = new DelegateCommand<ToDoTask>(OnItemTapped, CanNavigate));
         public DelegateCommand<ToDoTask> Edit => new DelegateCommand<ToDoTask>(OnEditingEntered);
         public DelegateCommand<ToDoTask> Delete => new DelegateCommand<ToDoTask>(OnDeleting);
+
+        public DelegateCommand<ToDoTask> CheckChanged => new DelegateCommand<ToDoTask>(OnCheckedChanged);
 
         public Command LoadItemsCommand { get; set; }
 
@@ -40,17 +42,10 @@ namespace ToDoManager.ViewModels
             Tasks = new ObservableCollection<ToDoTask>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
-            MessagingCenter.Subscribe<ToDoTask>(this, "deleteTask", async task =>
-            {
-                Tasks.Remove(task);
-                await DataStore.DeleteAsync(task);
-            });
-
             eventAggregator.GetEvent<AddTask>().Subscribe(async task =>
             {
-                var _task = task as ToDoTask;
-                Tasks.Insert(0, _task);
-                await DataStore.AddAsync(_task);
+                Tasks.Insert(0, task);
+                await DataStore.AddAsync(task);
             });
 
             eventAggregator.GetEvent<UpdateTask>().Subscribe(async task =>
@@ -63,9 +58,8 @@ namespace ToDoManager.ViewModels
 
             eventAggregator.GetEvent<DeleteTask>().Subscribe(async task =>
             {
-                var _task = task as ToDoTask;
-                Tasks.Remove(_task);
-                await DataStore.DeleteAsync(_task);
+                Tasks.Remove(task);
+                await DataStore.DeleteAsync(task);
             });
 
             if (Tasks.Count == 0)
@@ -120,6 +114,27 @@ namespace ToDoManager.ViewModels
             return result;
         }
 
+        private void OnCheckedChanged(ToDoTask task)
+        {
+            if (task.IsComplete)
+            {
+                task.Complete();
+                EventAggregator.GetEvent<UpdateTask>().Publish(task);
+                if (App.Current.Properties.Keys.Contains("delete"))
+                {
+                    if ((bool)App.Current.Properties["delete"] == true)
+                    {
+                        EventAggregator.GetEvent<DeleteTask>().Publish(task);
+                    }
+                }
+            }
+            else
+            {
+                task.Incomplete();
+                EventAggregator.GetEvent<UpdateTask>().Publish(task);
+            }
+        }
+
         private bool CanNavigate(ToDoTask task)
         {
             if (task == null)
@@ -172,7 +187,7 @@ namespace ToDoManager.ViewModels
             await NavigationService.NavigateAsync("Subtasks", param);
         }
 
-        void Add()
+        void OnAdd()
         {
             var Task = new ToDoTask
             {

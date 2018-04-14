@@ -10,7 +10,7 @@
               Title="{Binding Title}"
              x:Name="TasksPage">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" Icon="list_add.png" Command="{Binding AddTask}"/>
+        <ToolbarItem Text="Add" Icon="list_add.png" Command="{Binding Add}"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>

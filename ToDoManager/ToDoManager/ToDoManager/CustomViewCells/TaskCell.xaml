@@ -10,7 +10,14 @@
     <ViewCell.View>
         <Frame Margin="5" CornerRadius="5" HasShadow="True" IsClippedToBounds="True" BackgroundColor="#D4FFFFFF" Padding="5,10,10,10" OutlineColor="Gray">
             <StackLayout Padding="5" Orientation="Horizontal">
-                <CXC:CheckBox x:Name="CheckBox" Checked="{Binding IsComplete}" CheckedChanged="CheckBox_CheckedChanged"/>
+                <CXC:CheckBox x:Name="CheckBox" Checked="{Binding IsComplete, Mode=TwoWay}">
+                    <CXC:CheckBox.Behaviors>
+                        <prism:EventToCommandBehavior EventName="CheckedChanged" 
+                                                      Command="{Binding ParentContext.CheckChanged, 
+                                                                        Source={x:Reference TaskCell}}" 
+                                                      CommandParameter="{Binding .}"/>
+                    </CXC:CheckBox.Behaviors>
+                </CXC:CheckBox>
                 <StackLayout VerticalOptions="Center" HorizontalOptions="StartAndExpand">
                     <CXC:LabelStriked Text="{Binding Title}" 
                     LineBreakMode="NoWrap" IsStrikeThrough="{Binding Path=Checked, Source={x:Reference CheckBox}}"

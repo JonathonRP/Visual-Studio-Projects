@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Collections.ObjectModel;
 using Prism.Mvvm;
 using ToDoManager.Services;
+using ToDoManager.ViewModels;
 
 namespace ToDoManager.Models
 {
@@ -56,10 +57,17 @@ namespace ToDoManager.Models
             get { return subtasks; }
             set { SetProperty(ref subtasks, value, nameof(Subtasks)); }
         }
+    }
 
-        public void Complete(ToDoTask task)
+    public static class ToDoExtensions
+    {
+        public static void Complete(this ToDoTask task)
         {
             task.IsComplete = true;
+        }
+        public static void Incomplete(this ToDoTask task)
+        {
+            task.IsComplete = false;
         }
     }
 }
