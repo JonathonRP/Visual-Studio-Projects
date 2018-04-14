@@ -23,13 +23,16 @@ namespace ToDoManager.ViewModels
 
         public DelegateCommand ClearAll => new DelegateCommand(OnClearDeleted);
 
-        public bool Checked
+        private bool check_change = false;
+        public bool CheckChange
         {
-            get {
-                return (bool)App.Current.Properties["delete"] ? true : false;
+            get
+            {
+                return check_change;
             }
-            set {
-
+            set
+            {
+                SetProperty(ref check_change, value, nameof(CheckChange));
                 OnCheckChange(value);
             }
         }
@@ -46,6 +49,11 @@ namespace ToDoManager.ViewModels
             Title = "Settings";
             Deleted = new ObservableCollection<ToDoTask>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+
+            if (App.Current.Properties.Keys.Contains("delete"))
+            {
+                CheckChange = (bool)App.Current.Properties["delete"];
+            }
 
             if (Deleted.Count == 0)
                 LoadItemsCommand.Execute(null);
@@ -101,7 +109,7 @@ namespace ToDoManager.ViewModels
 
         async void OnCheckChange(bool check)
         {
-            if(check)
+            if (check)
             {
                 App.Current.Properties["delete"] = true;
                 var tasks = await DataStore.GetItemsAsync();
@@ -111,10 +119,13 @@ namespace ToDoManager.ViewModels
                     await DataStore.DeleteAsync(task);
                     await DataStore.AddDeletedAsync(task);
                 }
+
+                await App.Current.SavePropertiesAsync();
             }
             else
             {
                 App.Current.Properties["delete"] = false;
+                await App.Current.SavePropertiesAsync();
             }
         }
 

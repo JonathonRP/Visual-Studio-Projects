@@ -40,9 +40,12 @@ namespace ToDoManager.CustomViewCells
         {
             if (e.Value)
             {
-                if((bool)App.Current.Properties["delete"] == true)
+                if (App.Current.Properties.Keys.Contains("delete"))
                 {
-                    MessagingCenter.Send<ToDoTask>((ToDoTask)BindingContext, "deleteTask");
+                    if ((bool)App.Current.Properties["delete"] == true)
+                    {
+                        MessagingCenter.Send<ToDoTask>(((ToDoTask)BindingContext), "deleteTask");
+                    }
                 }
             }
         }

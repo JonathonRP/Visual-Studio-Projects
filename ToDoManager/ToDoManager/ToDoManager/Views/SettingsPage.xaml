@@ -47,7 +47,7 @@
                             <ViewCell.View>
                                 <StackLayout Style="{DynamicResource CellStyle}">
                                     <Label Text="Delete Completed Tasks" Style="{DynamicResource CellLabelStyle}"/>
-                                    <CXC:CheckBox Checked="{Binding Checked, Mode=TwoWay}"/>
+                                    <CXC:CheckBox Checked="{Binding CheckChange}"/>
                                 </StackLayout>
                             </ViewCell.View>
                         </ViewCell>
