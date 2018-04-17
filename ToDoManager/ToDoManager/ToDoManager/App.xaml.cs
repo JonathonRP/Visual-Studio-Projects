@@ -8,13 +8,13 @@ using Xamarin.Forms;
 using Prism;
 using Prism.Ioc;
 using Prism.Plugin.Popups;
+using Xamarin.Forms.Xaml;
 
+[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace ToDoManager
 {
 	public partial class App : PrismApplication
 	{
-        public App() : this(null) { }
-
         public App (IPlatformInitializer initializer = null) : base(initializer) { }
 
 		protected override void OnInitialized()

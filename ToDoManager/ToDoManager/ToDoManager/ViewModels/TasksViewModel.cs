@@ -17,12 +17,16 @@ namespace ToDoManager.ViewModels
 {
     public class TasksViewModel : BaseViewModel
     {
-        private ObservableCollection<ToDoTask> _tasks;
-        public ObservableCollection<ToDoTask> Tasks
+        private ObservableCollection<TaskList> _tasks;
+        public ObservableCollection<TaskList> Tasks
         {
             get { return _tasks; }
             set { SetProperty(ref _tasks, value); }
         }
+
+        private TaskList Today;
+
+        private TaskList General;
 
         public DelegateCommand Add => new DelegateCommand(OnAdd);
 
@@ -39,18 +43,23 @@ namespace ToDoManager.ViewModels
             : base (navigationService, eventAggregator, pageDialogService)
         {
             Title = "ToDo's";
-            Tasks = new ObservableCollection<ToDoTask>();
+            Tasks = new ObservableCollection<TaskList>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+
+            Today = new TaskList();
+            Today.Heading = nameof(Today);
+            General = new TaskList();
+            General.Heading = nameof(General);
 
             eventAggregator.GetEvent<AddTask>().Subscribe(async task =>
             {
-                Tasks.Insert(0, task);
+                General.Insert(0, task);
                 await DataStore.AddAsync(task);
             });
 
             eventAggregator.GetEvent<UpdateTask>().Subscribe(async task =>
             {
-                var _task = Tasks.Where(x => x.Id == task.Id).FirstOrDefault();
+                var _task = General.Where(x => x.Id == task.Id).FirstOrDefault();
                 //Tasks.Remove(_task);
                 //Tasks.Add(task);
                 await DataStore.UpdateAsync(task);
@@ -58,7 +67,7 @@ namespace ToDoManager.ViewModels
 
             eventAggregator.GetEvent<DeleteTask>().Subscribe(async task =>
             {
-                Tasks.Remove(task);
+                General.Remove(task);
                 await DataStore.DeleteAsync(task);
             });
 
@@ -79,7 +88,7 @@ namespace ToDoManager.ViewModels
                 var items = await DataStore.GetItemsAsync(true);
                 foreach (var item in items)
                 {
-                    Tasks.Add(item);
+                    General.Add(item);
                 }
             }
             catch (Exception ex)
@@ -165,9 +174,9 @@ namespace ToDoManager.ViewModels
 
         private void OnEditingEntered(ToDoTask task)
         {
-            if (Tasks.Contains(Tasks.Where(x => x.InEdit == true).SingleOrDefault()))
+            if (General.Contains(General.Where(x => x.InEdit == true).SingleOrDefault()))
             {
-                foreach (var _task in Tasks.Where(x => x.InEdit == true))
+                foreach (var _task in General.Where(x => x.InEdit == true))
                 {
                     _task.InEdit = false;
                 }

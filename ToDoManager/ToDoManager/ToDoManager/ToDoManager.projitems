@@ -35,6 +35,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Events\UpdateSubtask.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Events\UpdateTask.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Events\AddTask.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\TaskList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\ToDoTask.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SettingsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SubtasksViewModel.cs" />

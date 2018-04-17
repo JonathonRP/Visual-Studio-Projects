@@ -16,6 +16,7 @@
         <StackLayout>
             <ListView x:Name="ItemsListView" 
                             ItemsSource="{Binding Tasks}"
+                            IsGroupingEnabled="True"
                             VerticalOptions="FillAndExpand"
                             BackgroundColor="Transparent"
                                 HasUnevenRows="true"
@@ -30,6 +31,15 @@
                                                   EventArgsParameterPath="Item"/>
                     <CXC:DisableListViewSelection/>
                 </ListView.Behaviors>
+                <ListView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Label Text="{Binding Heading}"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.GroupHeaderTemplate>
                 <ListView.ItemTemplate>
                     <CVC:TaskDataTemplateSelector>
                         <CVC:TaskDataTemplateSelector.TaskCell>

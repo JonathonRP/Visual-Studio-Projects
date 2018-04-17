@@ -114,10 +114,13 @@ namespace ToDoManager.ViewModels
             }
         }
 
-        void SetNewColor()
+        async void SetNewColor()
         {
             Color = Color.FromHsla(Hue, Saturation, Luminosity);
             App.Current.Resources[Name] = Color;
+
+            App.Current.Properties[Name] = Color;
+            await App.Current.SavePropertiesAsync();
         }
 
         public override void OnNavigatingTo(INavigationParameters parameters)

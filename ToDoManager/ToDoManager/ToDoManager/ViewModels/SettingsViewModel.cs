@@ -20,10 +20,10 @@ namespace ToDoManager.ViewModels
     {
         public Command LoadItemsCommand { get; set; }
 
-        public DelegateCommand PrimaryTapped => new DelegateCommand(OnPrimaryTapped);
-        public DelegateCommand AccentTapped => new DelegateCommand(OnAccentTapped);
+        public DelegateCommand PrimaryTapped { get; set; }
+        public DelegateCommand AccentTapped { get; set; }
 
-        public DelegateCommand ClearAll => new DelegateCommand(OnClearDeleted);
+        public DelegateCommand ClearAll { get; set; }
 
         private bool check_change = false;
         public bool CheckChange
@@ -56,6 +56,10 @@ namespace ToDoManager.ViewModels
             {
                 CheckChange = (bool)App.Current.Properties["delete"];
             }
+
+            PrimaryTapped = new DelegateCommand(OnPrimaryTapped);
+            AccentTapped = new DelegateCommand(OnAccentTapped);
+            ClearAll = new DelegateCommand(OnClearDeleted);
 
             if (Deleted.Count == 0)
                 LoadItemsCommand.Execute(null);

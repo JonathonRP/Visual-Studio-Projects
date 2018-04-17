@@ -17,6 +17,7 @@ namespace ToDoManager.Services
     {
         private SQLiteConnection database;
         private static object collisionLock = new object();
+        public ObservableCollection<ToDoTask> Today;
         public ObservableCollection<ToDoTask> Tasks;
         public ObservableCollection<ToDoTask> DeletedTasks;
 
@@ -26,6 +27,7 @@ namespace ToDoManager.Services
             //database.DropTable<ToDoTask>();
             database.CreateTable<ToDoTask>();
 
+            //Today = new ObservableCollection<ToDoTask>(database.GetAllWithChildren<ToDoTask>().Where(x => x.Tags == nameof(Today)));
             Tasks = new ObservableCollection<ToDoTask>(database.GetAllWithChildren<ToDoTask>());
 
             if (!database.Table<ToDoTask>().Any())

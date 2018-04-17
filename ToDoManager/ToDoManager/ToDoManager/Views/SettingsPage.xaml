@@ -6,6 +6,7 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="true"
              x:Class="ToDoManager.Views.Settings"
+             x:Name="Settings"
              Title="{Binding Title}">
     <ContentPage.Content>
         <StackLayout>
@@ -36,16 +37,6 @@
                         <ViewCell>
                             <ViewCell.View>
                                 <StackLayout Style="{DynamicResource CellStyle}">
-                                    <Label Text="Group Tasks" Style="{DynamicResource CellLabelStyle}"/>
-                                    <CXC:CheckBox/>
-                                </StackLayout>
-                            </ViewCell.View>
-                        </ViewCell>
-                    </TableSection>
-                    <TableSection>
-                        <ViewCell>
-                            <ViewCell.View>
-                                <StackLayout Style="{DynamicResource CellStyle}">
                                     <Label Text="Delete Completed Tasks" Style="{DynamicResource CellLabelStyle}"/>
                                     <CXC:CheckBox Checked="{Binding CheckChange}"/>
                                 </StackLayout>
@@ -64,7 +55,7 @@
                     </TableSection>
                 </TableRoot>
             </CXC:TableView>
-            <StackLayout BindingContext="{x:Reference ViewDeletedTasks}" Padding="0,0,0,0" IsVisible="{Binding Checked}">
+            <StackLayout BindingContext="{x:Reference ViewDeletedTasks}" Padding="0,0,0,0" IsVisible="{Binding Checked}" VerticalOptions="FillAndExpand">
                 <CXC:FlatButton Text="Clear All" Command="{Binding ClearAll}"/>
                 <ListView ItemsSource="{Binding Deleted}"
                           VerticalOptions="FillAndExpand"

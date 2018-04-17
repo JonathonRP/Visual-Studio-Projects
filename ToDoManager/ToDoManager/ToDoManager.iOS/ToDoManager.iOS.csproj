@@ -122,8 +122,8 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FAB.Forms">
-      <Version>2.1.1</Version>
+    <PackageReference Include="NETStandard.Library">
+      <Version>2.0.2</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>11.0.2</Version>
@@ -131,7 +131,7 @@
     <PackageReference Include="Prism.DryIoc.Forms">
       <Version>7.1.0.123-pre</Version>
     </PackageReference>
-    <PackageReference Include="Prism.Plugin.Popups.DryIoc">
+    <PackageReference Include="Prism.Plugin.Popups">
       <Version>2.0.0.528-pre</Version>
     </PackageReference>
     <PackageReference Include="Rg.Plugins.Popup">

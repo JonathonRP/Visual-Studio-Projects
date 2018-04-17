@@ -1,11 +1,62 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <prism:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="clr-namespace:Prism.DryIoc;assembly=Prism.DryIoc.Forms"
-             x:Class="DryIocPrismTest.App">
-	<Application.Resources>
+             xmlns:CXC="clr-namespace:CustomXamarinControls;assembly=CustomXamarinControls.Android"
+             x:Class="DryIocPrismTest.App"
+             xmlns:prism="clr-namespace:Prism.DryIoc;assembly=Prism.DryIoc.Forms">
+    <Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Primary">#2196F3</Color>
+            <Color x:Key="PrimaryDark">#1976D2</Color>
+            <Color x:Key="Accent">#FFC107</Color>
+            <Color x:Key="LightBackgroundColor">#FAFAFA</Color>
+            <Color x:Key="DarkBackgroundColor">#C0C0C0</Color>
+            <Color x:Key="MediumGrayTextColor">#4d4d4d</Color>
+            <Color x:Key="LightTextColor">#999999</Color>
+            <Color x:Key="Accent2">#96f321</Color>
+            <Color x:Key="Accent3">#009AB0</Color>
 
-		<!-- Application resource dictionary -->
-
-	</Application.Resources>
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="{DynamicResource Primary}"/>
+                <Setter Property="BarTextColor" Value="White"/>
+            </Style>
+            <Style TargetType="CXC:Switch">
+                <Setter Property="Color" Value="{DynamicResource Accent}"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            <Style TargetType="CXC:CheckBox">
+                <Setter Property="Color" Value="{DynamicResource Accent}"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            <Style TargetType="CXC:FlatButton">
+                <Setter Property="TextColor" Value="{DynamicResource Primary}"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+            </Style>
+            <Style TargetType="CXC:RoundableBoxView">
+                <Setter Property="HeightRequest" Value="30"/>
+                <Setter Property="WidthRequest" Value="30"/>
+                <Setter Property="CornerRadius" Value="30"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            <Style TargetType="CXC:TableView">
+                <Setter Property="Color" Value="{DynamicResource Accent}"/>
+            </Style>
+            <Style x:Key="CellStyle" TargetType="StackLayout">
+                <Setter Property="Orientation" Value="Horizontal"/>
+                <Setter Property="Padding" Value="18,0,18,0"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            <Style x:Key="CellLabelStyle" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="PrimaryRoundableBoxView"  TargetType="CXC:RoundableBoxView">
+                <Setter Property="BackgroundColor" Value="{DynamicResource Primary}"/>
+            </Style>
+            <Style x:Key="AccentRoundableBoxView"  TargetType="CXC:RoundableBoxView">
+                <Setter Property="BackgroundColor" Value="{DynamicResource Accent}"/>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
 </prism:PrismApplication>
