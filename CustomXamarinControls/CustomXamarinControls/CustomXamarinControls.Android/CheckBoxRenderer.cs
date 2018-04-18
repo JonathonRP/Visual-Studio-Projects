@@ -82,6 +82,16 @@ namespace CustomXamarinControls.Droid
                     }
 
                     break;
+                case "Color":
+                    if (Control.Checked)
+                    {
+                        Control.ButtonDrawable.SetTint(Element.Color.ToAndroid());
+                    }
+                    else
+                    {
+                        Control.ButtonDrawable.SetTint(Xamarin.Forms.Color.Gray.ToAndroid());
+                    }
+                    break;
                 case "TextColor":
                     UpdateTextColor();
                     break;

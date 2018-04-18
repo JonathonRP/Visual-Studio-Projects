@@ -43,17 +43,24 @@ namespace ToDoManager.ViewModels
             : base (navigationService, eventAggregator, pageDialogService)
         {
             Title = "ToDo's";
-            Tasks = new ObservableCollection<TaskList>();
-            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
             Today = new TaskList();
             Today.Heading = nameof(Today);
+
             General = new TaskList();
             General.Heading = nameof(General);
 
+            Tasks = new ObservableCollection<TaskList>()
+            {
+                Today,
+                General
+            };
+
+            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+
             eventAggregator.GetEvent<AddTask>().Subscribe(async task =>
             {
-                General.Insert(0, task);
+                Today.Insert(0, task);
                 await DataStore.AddAsync(task);
             });
 
@@ -71,7 +78,7 @@ namespace ToDoManager.ViewModels
                 await DataStore.DeleteAsync(task);
             });
 
-            if (Tasks.Count == 0)
+            if (General.Count == 0)
                 LoadItemsCommand.Execute(null);
         }
 
@@ -84,9 +91,17 @@ namespace ToDoManager.ViewModels
 
             try
             {
-                Tasks.Clear();
+                Today.Clear();
+                General.Clear();
+
                 var items = await DataStore.GetItemsAsync(true);
-                foreach (var item in items)
+
+                foreach (var item in items.Where(x => x.IsToday == true))
+                {
+                    Today.Add(item);
+                }
+
+                foreach (var item in items.Where(x => x.IsToday == false))
                 {
                     General.Add(item);
                 }

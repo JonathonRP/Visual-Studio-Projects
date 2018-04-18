@@ -13,6 +13,7 @@ using Android.Widget;
 using Android.Support.V7.Widget;
 using Xamarin.Forms.Platform.Android;
 using Xamarin.Forms;
+using System.ComponentModel;
 
 [assembly: ExportRenderer(typeof(CustomXamarinControls.Switch), typeof(CustomXamarinControls.Droid.SwitchRenderer))]
 namespace CustomXamarinControls.Droid
@@ -49,6 +50,32 @@ namespace CustomXamarinControls.Droid
                         Control.ThumbDrawable.SetColorFilter(Xamarin.Forms.Color.WhiteSmoke.ToAndroid(), PorterDuff.Mode.Multiply);
                     }
                     Control.CheckedChange += OnCheckedChange;
+                }
+                //Control.TrackDrawable.SetColorFilter(view.SwitchBGColor.ToAndroid(), PorterDuff.Mode.Multiply);  
+            }
+        }
+
+        protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            base.OnElementPropertyChanged(sender, e);
+
+            @switch = (Switch)Element;
+
+            if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.JellyBean)
+            {
+                if (Control != null)
+                {
+                    if (Control.Checked)
+                    {
+                        Control.TrackDrawable.SetColorFilter(@switch.Color.ToAndroid(), PorterDuff.Mode.SrcAtop);
+                        Control.ThumbDrawable.SetColorFilter(@switch.Color.ToAndroid(), PorterDuff.Mode.Multiply);
+                    }
+                    else
+                    {
+                        Control.TrackDrawable.ClearColorFilter();
+                        Control.ThumbDrawable.SetColorFilter(Xamarin.Forms.Color.WhiteSmoke.ToAndroid(), PorterDuff.Mode.Multiply);
+                    }
+                    //Control.CheckedChange += OnCheckedChange;
                 }
                 //Control.TrackDrawable.SetColorFilter(view.SwitchBGColor.ToAndroid(), PorterDuff.Mode.Multiply);  
             }

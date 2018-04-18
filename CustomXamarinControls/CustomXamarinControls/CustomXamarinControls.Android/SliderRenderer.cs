@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
 using Android.App;
 using Android.Content;
+using Android.Content.Res;
 using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
@@ -36,8 +38,31 @@ namespace CustomXamarinControls.Droid
 
             if (Control != null)
             {
-                Control.ProgressDrawable.SetColorFilter(slider.Color.ToAndroid(), PorterDuff.Mode.SrcAtop);
-                Control.Thumb.SetColorFilter(slider.Color.ToAndroid(), PorterDuff.Mode.Multiply);
+                Control.ProgressTintList = ColorStateList.ValueOf(slider.Color.ToAndroid());
+                Control.ProgressTintMode = PorterDuff.Mode.SrcIn;
+
+                Control.ProgressBackgroundTintList = ColorStateList.ValueOf(slider.Color.ToAndroid());
+                Control.ProgressBackgroundTintMode = PorterDuff.Mode.SrcIn;
+
+                Control.Thumb.SetColorFilter(slider.Color.ToAndroid(), PorterDuff.Mode.SrcIn);
+            }
+        }
+
+        protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            base.OnElementPropertyChanged(sender, e);
+
+            slider = (Slider)Element;
+
+            if (Control != null)
+            {
+                Control.ProgressTintList = ColorStateList.ValueOf(slider.Color.ToAndroid());
+                Control.ProgressTintMode = PorterDuff.Mode.SrcIn;
+
+                Control.ProgressBackgroundTintList = ColorStateList.ValueOf(slider.Color.ToAndroid());
+                Control.ProgressBackgroundTintMode = PorterDuff.Mode.SrcIn;
+
+                Control.Thumb.SetColorFilter(slider.Color.ToAndroid(), PorterDuff.Mode.SrcIn);
             }
         }
     }

@@ -19,6 +19,14 @@ namespace ToDoManager.Models
             set { SetProperty(ref id, value, nameof(Id)); }
         }
 
+        private bool isToday = false;
+        [Bindable(true)]
+        public bool IsToday
+        {
+            get { return isToday; }
+            set { SetProperty(ref isToday, value, nameof(IsToday)); }
+        }
+
         private bool inEdit = false;
         [Bindable(true), Ignore]
         public bool InEdit {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using Prism.Commands;
 using Prism.Navigation;
 using Xamarin.Forms;
 
@@ -13,6 +14,12 @@ namespace ToDoManager.ViewModels
         Color color;
         string name;
         string color_name;
+
+        Color Primary = Color.FromHex("#9121F3");
+        Color Accent = Color.FromHex("#FF07C5");
+
+        public DelegateCommand Close => new DelegateCommand(OnClose);
+        public DelegateCommand Reset => new DelegateCommand(OnReset);
 
         public double Hue
         {
@@ -114,13 +121,35 @@ namespace ToDoManager.ViewModels
             }
         }
 
+        public ThemeColorPickerViewModel(INavigationService navigationService) : base(navigationService)
+        {
+
+        }
+
         async void SetNewColor()
         {
             Color = Color.FromHsla(Hue, Saturation, Luminosity);
-            App.Current.Resources[Name] = Color;
+            App.Current.Resources[$"{Name}"] = Color;
 
-            App.Current.Properties[Name] = Color;
+            App.Current.Properties[$"{Name}"] = Color;
             await App.Current.SavePropertiesAsync();
+        }
+
+        public async void OnClose()
+        {
+            await NavigationService.ClearPopupStackAsync();
+        }
+
+        public async void OnReset()
+        {
+            App.Current.Resources["Primary"] = Primary;
+            App.Current.Properties["Primary"] = Primary;
+
+            App.Current.Resources["Accent"] = Accent;
+            App.Current.Properties["Accent"] = Accent;
+
+            await App.Current.SavePropertiesAsync();
+            await NavigationService.ClearPopupStackAsync();
         }
 
         public override void OnNavigatingTo(INavigationParameters parameters)
@@ -128,8 +157,12 @@ namespace ToDoManager.ViewModels
             if (parameters.ContainsKey("Color"))
             {
                 Color = (Color)parameters["Color"];
-                Name = (string)parameters["Label"];
-                ColorName = $"{(string)parameters["Label"]} Color";
+            }
+
+            if (parameters.ContainsKey("Name"))
+            {
+                Name = (string)parameters["Name"];
+                ColorName = $"{(string)parameters["Name"]} Color";
             }
         }
     }

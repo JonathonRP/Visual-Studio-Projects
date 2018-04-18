@@ -26,28 +26,28 @@ namespace CustomXamarinControls.Droid
 
         }
 
-        //protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.TableView> e)
-        //{
-        //    base.OnElementChanged(e);
-        //    if (Control == null)
-        //        return;
+        protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.TableView> e)
+        {
+            base.OnElementChanged(e);
+            if (Control == null)
+                return;
 
-        //    var listView = Control as Android.Widget.ListView;
-        //    var TableView = (TableView)Element;
-        //    listView.Divider = new ColorDrawable(TableView.Color.ToAndroid());
-        //    listView.DividerHeight = 3;
-        //}
+            //var listView = Control as Android.Widget.ListView;
+            //var TableView = (TableView)Element;
 
-        //protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
-        //{
-        //    base.OnElementPropertyChanged(sender, e);
-        //    if (e.PropertyName == "Color")
-        //    {
-        //        var listView = Control as Android.Widget.ListView;
-        //        var TableView = (TableView)Element;
-        //        listView.Divider = new ColorDrawable(TableView.Color.ToAndroid());
-        //    }
-        //}
+            //this.GetModelRenderer(listView, TableView).GetView(this.Id, TableView.GetRenderer().View, this).ForceLayout();
+        }
+
+        protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            base.OnElementPropertyChanged(sender, e);
+            if (e.PropertyName == "Color")
+            {
+                var listView = Control as Android.Widget.ListView;
+                var TableView = (TableView)Element;
+                
+            }
+        }
 
         protected override Xamarin.Forms.Platform.Android.TableViewModelRenderer GetModelRenderer(Android.Widget.ListView listView, Xamarin.Forms.TableView view)
         {

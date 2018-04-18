@@ -6,15 +6,15 @@
              xmlns:prism="clr-namespace:Prism.DryIoc;assembly=Prism.DryIoc.Forms">
     <Application.Resources>
         <ResourceDictionary>
-            <Color x:Key="Primary">#2196F3</Color>
-            <Color x:Key="PrimaryDark">#1976D2</Color>
-            <Color x:Key="Accent">#FFC107</Color>
+            <Color x:Key="Primary">#9121F3</Color>
+            <Color x:Key="PrimaryDark">#7B19D2</Color>
+            <Color x:Key="Accent">#FF07C5</Color>
             <Color x:Key="LightBackgroundColor">#FAFAFA</Color>
             <Color x:Key="DarkBackgroundColor">#C0C0C0</Color>
             <Color x:Key="MediumGrayTextColor">#4d4d4d</Color>
             <Color x:Key="LightTextColor">#999999</Color>
-            <Color x:Key="Accent2">#96f321</Color>
-            <Color x:Key="Accent3">#009AB0</Color>
+            <!--<Color x:Key="Accent2">#96f321</Color>
+            <Color x:Key="Accent3">#009AB0</Color>-->
 
             <Style TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor" Value="{DynamicResource Primary}"/>
