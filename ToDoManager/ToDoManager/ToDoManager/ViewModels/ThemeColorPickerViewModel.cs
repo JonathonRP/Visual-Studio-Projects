@@ -5,6 +5,7 @@ using System.Text;
 using Prism.Commands;
 using Prism.Navigation;
 using Xamarin.Forms;
+using CustomXamarinControls;
 
 namespace ToDoManager.ViewModels
 {
@@ -121,7 +122,8 @@ namespace ToDoManager.ViewModels
             }
         }
 
-        public ThemeColorPickerViewModel(INavigationService navigationService) : base(navigationService)
+        public ThemeColorPickerViewModel(INavigationService navigationService)
+            : base(navigationService)
         {
 
         }
@@ -130,6 +132,8 @@ namespace ToDoManager.ViewModels
         {
             Color = Color.FromHsla(Hue, Saturation, Luminosity);
             App.Current.Resources[$"{Name}"] = Color;
+
+            MessagingCenter.Send(this, "UpdateStatusbar");
 
             App.Current.Properties[$"{Name}"] = Color;
             await App.Current.SavePropertiesAsync();
@@ -143,9 +147,11 @@ namespace ToDoManager.ViewModels
         public async void OnReset()
         {
             App.Current.Resources["Primary"] = Primary;
-            App.Current.Properties["Primary"] = Primary;
-
             App.Current.Resources["Accent"] = Accent;
+
+            MessagingCenter.Send(this, "UpdateStatusbar");
+
+            App.Current.Properties["Primary"] = Primary;
             App.Current.Properties["Accent"] = Accent;
 
             await App.Current.SavePropertiesAsync();

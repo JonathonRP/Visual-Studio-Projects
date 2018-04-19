@@ -11,8 +11,10 @@ using Prism.Ioc;
 using ToDoManager.Services;
 using System.IO;
 using DryIoc;
+using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Color = Xamarin.Forms.Color;
+using ToDoManager.ViewModels;
 
 namespace ToDoManager.Droid
 {
@@ -31,10 +33,17 @@ namespace ToDoManager.Droid
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App(new AndroidInitializer()));
 
-            Android.Graphics.Color statues_bar = ((Color)App.Current.Resources["Primary"]).AddLuminosity(-.07).ToAndroid();
+            Android.Graphics.Color status_bar = ((Color)App.Current.Resources["Primary"]).AddLuminosity(-.07).ToAndroid();
 
-            Window.SetStatusBarColor(statues_bar);
-            this.SetStatusBarColor(statues_bar);
+            Window.SetStatusBarColor(status_bar);
+            this.SetStatusBarColor(status_bar);
+
+            MessagingCenter.Subscribe<ThemeColorPickerViewModel>(this, "UpdateStatusbar", (sender) =>
+            {
+                var update_statusbar = ((Color)App.Current.Resources["Primary"]).AddLuminosity(-.07).ToAndroid();
+                Window.SetStatusBarColor(update_statusbar);
+                this.SetStatusBarColor(update_statusbar);
+            });
         }
     }
 

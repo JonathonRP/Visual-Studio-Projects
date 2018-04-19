@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ToDoManager.Converters
 {
-    class BooleanToSubtasksConverter : IValueConverter
+    public class BooleanToSubtasksConverter : IValueConverter
     {
         private ObservableCollection<ToDoTask> Subtasks;
 
@@ -47,14 +47,7 @@ namespace ToDoManager.Converters
                 }
                 else
                 {
-                    if (Subtasks?.Count > 0)
-                    {
-                        return value;
-                    }
-                    else
-                    {
                         return null;
-                    }
                 }
             }
 

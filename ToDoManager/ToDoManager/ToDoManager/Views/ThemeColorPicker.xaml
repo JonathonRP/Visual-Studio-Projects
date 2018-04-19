@@ -15,7 +15,7 @@
             <Frame HorizontalOptions="Start" VerticalOptions="Start" HeightRequest="255" WidthRequest="255">
                 <StackLayout Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <Label Text="Pick Color" FontSize="Medium"/>
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <StackLayout Orientation="Horizontal" Padding="0,25,0,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                         <CXC:RoundableBoxView Color="{Binding Color}" HeightRequest="80" WidthRequest="80" CornerRadius="80"/>
                         <StackLayout Padding="25,35,0,0">
                             <Label Text="{Binding Name}" VerticalOptions="Center" VerticalTextAlignment="Center"/>

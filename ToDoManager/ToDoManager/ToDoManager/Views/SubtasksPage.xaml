@@ -31,18 +31,18 @@
                     <CXC:DisableListViewSelection/>
                 </ListView.Behaviors>
                 <ListView.ItemTemplate>
-                    <CVC:TaskDataTemplateSelector>
+                    <CVC:SubtaskDataTemplateSelector>
                         <CVC:TaskDataTemplateSelector.TaskCell>
                             <DataTemplate>
                                 <CVC:TaskCell ParentContext="{Binding BindingContext, Source={x:Reference Subtasks}}"/>
                             </DataTemplate>
                         </CVC:TaskDataTemplateSelector.TaskCell>
-                        <CVC:TaskDataTemplateSelector.TaskCellInEdit>
+                        <CVC:TaskDataTemplateSelector.SubtaskCellInEdit>
                             <DataTemplate>
-                                <CVC:TaskCellInEdit/>
+                                <CVC:SubtaskCellInEdit/>
                             </DataTemplate>
-                        </CVC:TaskDataTemplateSelector.TaskCellInEdit>
-                    </CVC:TaskDataTemplateSelector>
+                        </CVC:TaskDataTemplateSelector.SubtaskCellInEdit>
+                    </CVC:SubtaskDataTemplateSelector>
                 </ListView.ItemTemplate>
             </ListView>
         </StackLayout>

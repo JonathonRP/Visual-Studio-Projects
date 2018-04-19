@@ -25,16 +25,16 @@ namespace ToDoManager.ViewModels
 
         public DelegateCommand ClearAll => new DelegateCommand(OnClearDeleted);
 
-        private bool check_change = false;
-        public bool CheckChange
+        private bool toggled = false;
+        public bool Toggled
         {
             get
             {
-                return check_change;
+                return toggled;
             }
             set
             {
-                SetProperty(ref check_change, value, nameof(CheckChange));
+                SetProperty(ref toggled, value, nameof(Toggled));
                 OnCheckChange(value);
             }
         }
@@ -54,7 +54,7 @@ namespace ToDoManager.ViewModels
 
             if (App.Current.Properties.Keys.Contains("delete"))
             {
-                CheckChange = (bool)App.Current.Properties["delete"];
+                Toggled = (bool)App.Current.Properties["delete"];
             }
 
             if (Deleted.Count == 0)

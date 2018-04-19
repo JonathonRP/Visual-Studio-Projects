@@ -64,6 +64,7 @@ namespace ToDoManager.ViewModels
                 if (!(_task.Subtasks.Contains(_subtask)))
                 {
                     _task.Subtasks.Insert(0, _subtask);
+
                     await DataStore.UpdateAsync(_task);
                 }
             });
@@ -199,7 +200,7 @@ namespace ToDoManager.ViewModels
             var Subtask = new ToDoTask
             {
                 InEdit = true,
-                Title = "SubTask name",
+                Title = "Subtask name",
                 Description = "This is a subtask description.",
                 Subtasks = null
             };

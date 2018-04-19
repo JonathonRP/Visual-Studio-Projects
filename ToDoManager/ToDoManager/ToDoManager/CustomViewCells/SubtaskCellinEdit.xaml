@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converters="clr-namespace:ToDoManager.Converters"
              xmlns:CXC="clr-namespace:CustomXamarinControls;assembly=CustomXamarinControls.Android"
-             x:Class="ToDoManager.CustomViewCells.TaskCellInEdit"
-             x:Name="TaskCellInEdit">
+             x:Class="ToDoManager.CustomViewCells.SubtaskCellInEdit"
+             x:Name="SubtaskCellInEdit">
     <ViewCell.View>
         <Frame Margin="5" CornerRadius="8" HasShadow="True" IsClippedToBounds="True" BackgroundColor="#D4FFFFFF" Padding="10" OutlineColor="Gray">
             <StackLayout Padding="5" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
@@ -25,11 +25,6 @@
                     <!--<Editor Text="{Binding Description}"
                             Style="{DynamicResource ListItemDetailTextStyle}"
                             FontSize="13" HorizontalOptions="FillAndExpand"/>-->
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Doing Today" VerticalOptions="Center" HorizontalOptions="EndAndExpand"/>
-                        <CXC:CheckBox Checked="{Binding IsToday}" 
-                                        VerticalOptions="Center" HorizontalOptions="End"/>
-                    </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label Text="add subtasks to this task" VerticalOptions="Center" HorizontalOptions="EndAndExpand"/>
                         <CXC:CheckBox Checked="{Binding Subtasks, Converter={StaticResource BooleanToSubtasksConverter}}" 

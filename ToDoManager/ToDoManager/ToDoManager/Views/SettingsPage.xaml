@@ -38,7 +38,7 @@
                             <ViewCell.View>
                                 <StackLayout Style="{DynamicResource CellStyle}">
                                     <Label Text="Delete Completed Tasks" Style="{DynamicResource CellLabelStyle}"/>
-                                    <CXC:CheckBox Checked="{Binding CheckChange}"/>
+                                    <CXC:Switch IsToggled="{Binding Toggled}"/>
                                 </StackLayout>
                             </ViewCell.View>
                         </ViewCell>
@@ -48,17 +48,18 @@
                             <ViewCell.View>
                                 <StackLayout Style="{DynamicResource CellStyle}">
                                     <Label Text="View Deleted Tasks" Style="{DynamicResource CellLabelStyle}"/>
-                                    <CXC:CheckBox x:Name="ViewDeletedTasks"/>
+                                    <CXC:Switch x:Name="ViewDeletedTasks"/>
                                 </StackLayout>
                             </ViewCell.View>
                         </ViewCell>
                     </TableSection>
                 </TableRoot>
             </CXC:TableView>
-            <StackLayout BindingContext="{x:Reference ViewDeletedTasks}" Padding="0,0,0,0" IsVisible="{Binding Checked}" VerticalOptions="FillAndExpand">
+            <StackLayout BindingContext="{x:Reference ViewDeletedTasks}" Padding="25,0,0,0" IsVisible="{Binding IsToggled}" VerticalOptions="FillAndExpand">
                 <CXC:FlatButton Text="Clear All" Command="{Binding ClearAll}"/>
                 <ListView ItemsSource="{Binding Deleted}"
                           VerticalOptions="FillAndExpand"
+                          HorizontalOptions="FillAndExpand"
                             BackgroundColor="Transparent"
                                 HasUnevenRows="true"
                                 SeparatorVisibility="None"
@@ -66,6 +67,9 @@
                                 IsPullToRefreshEnabled="true"
                                 IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                                 CachingStrategy="RecycleElement">
+                    <ListView.Behaviors>
+                        <CXC:DisableListViewSelection/>
+                    </ListView.Behaviors>
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Frame Margin="5" CornerRadius="5" HasShadow="True" IsClippedToBounds="True" BackgroundColor="#D4FFFFFF" Padding="5,10,10,10" OutlineColor="Gray">

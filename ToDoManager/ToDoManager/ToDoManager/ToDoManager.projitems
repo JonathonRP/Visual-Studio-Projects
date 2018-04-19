@@ -10,6 +10,10 @@
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)App.xaml" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)CustomViewCells\SubtaskCellinEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\SettingsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -28,6 +32,7 @@
       <DependentUpon>TaskCellinEdit.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)CustomViewCells\SubtaskDataTemplateSelector.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CustomViewCells\TaskDataTemplateSelector.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Events\AddSubtask.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Events\DeleteSubtask.cs" />
@@ -37,6 +42,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Events\AddTask.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\TaskList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\ToDoTask.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CustomViewCells\SubtaskCellinEdit.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>SubtaskCellinEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SettingsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SubtasksViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ThemeColorPickerViewModel.cs" />

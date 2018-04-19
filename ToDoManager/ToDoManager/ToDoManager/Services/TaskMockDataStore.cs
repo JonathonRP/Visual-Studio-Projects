@@ -84,8 +84,8 @@ namespace ToDoManager.Services
 
         public async Task<bool> AddAsync(ToDoTask item)
         {
-            database.InsertWithChildren(item, true);
             Tasks.Add(item);
+            database.InsertWithChildren(item, true);
 
             return await Task.FromResult(true);
         }

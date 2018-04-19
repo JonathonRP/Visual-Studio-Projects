@@ -61,20 +61,26 @@ namespace ToDoManager.ViewModels
             eventAggregator.GetEvent<AddTask>().Subscribe(async task =>
             {
                 Today.Insert(0, task);
+
                 await DataStore.AddAsync(task);
             });
 
             eventAggregator.GetEvent<UpdateTask>().Subscribe(async task =>
             {
-                var _task = General.Where(x => x.Id == task.Id).FirstOrDefault();
-                //Tasks.Remove(_task);
-                //Tasks.Add(task);
                 await DataStore.UpdateAsync(task);
             });
 
             eventAggregator.GetEvent<DeleteTask>().Subscribe(async task =>
             {
-                General.Remove(task);
+                if (task.IsToday)
+                {
+                    Today.Remove(task);
+                }
+                else
+                {
+                    General.Remove(task);
+                }
+
                 await DataStore.DeleteAsync(task);
             });
 
@@ -116,22 +122,8 @@ namespace ToDoManager.ViewModels
             }
         }
 
-        private async Task<bool> DeleteSubtasks(ToDoTask task)
+        private async Task<bool> DeleteSubtasks()
         {
-            //var result = await PageDialogService.DisplayAlertAsync("Subtasks Are About to be Deleted",
-            //                        "Are you sure you want to delete current subtasks?", "Delete", "Cancel");
-
-            //if (result)
-            //{
-            //    task.Subtasks = null;
-            //    return true;
-            //}
-            //else
-            //{
-            //    task.InEdit = true;
-            //    LoadItemsCommand.Execute(null);
-            //    return false;
-            //}
             var result = await PageDialogService.DisplayAlertAsync("Subtasks Are About to be Deleted",
                                     "Are you sure you want to delete current subtasks?", "Delete", "Cancel");
 
@@ -215,6 +207,7 @@ namespace ToDoManager.ViewModels
         {
             var Task = new ToDoTask
             {
+                IsToday = true,
                 InEdit = true,
                 Title = "Task name",
                 Description = "This is a task description.",
