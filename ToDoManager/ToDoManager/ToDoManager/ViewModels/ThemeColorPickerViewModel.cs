@@ -136,6 +136,7 @@ namespace ToDoManager.ViewModels
             MessagingCenter.Send(this, "UpdateStatusbar");
 
             App.Current.Properties[$"{Name}"] = Color;
+            Console.WriteLine($"{Name}");
             await App.Current.SavePropertiesAsync();
         }
 

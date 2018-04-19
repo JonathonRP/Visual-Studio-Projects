@@ -46,13 +46,14 @@ namespace ToDoManager.ViewModels
             set { SetProperty(ref _deleted, value); }
         }
 
-        public SettingsViewModel(INavigationService navigationService, IEventAggregator eventAggregator) : base(navigationService, eventAggregator)
+        public SettingsViewModel(INavigationService navigationService, IEventAggregator eventAggregator) 
+            : base(navigationService, eventAggregator)
         {
             Title = "Settings";
             Deleted = new ObservableCollection<ToDoTask>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
-            if (App.Current.Properties.Keys.Contains("delete"))
+            if (App.Current.Properties.ContainsKey("delete"))
             {
                 Toggled = (bool)App.Current.Properties["delete"];
             }
@@ -122,6 +123,7 @@ namespace ToDoManager.ViewModels
                     await DataStore.AddDeletedAsync(task);
                 }
 
+                LoadItemsCommand.Execute(null);
                 await App.Current.SavePropertiesAsync();
             }
             else
@@ -140,6 +142,8 @@ namespace ToDoManager.ViewModels
             {
                 await DataStore.RemoveDeletedAsync(item);
             }
+
+            LoadItemsCommand.Execute(null);
         }
     }
 }

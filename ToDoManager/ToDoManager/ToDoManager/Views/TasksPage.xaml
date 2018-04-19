@@ -34,8 +34,8 @@
                 <ListView.GroupHeaderTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout>
-                                <Label Text="{Binding Heading}"/>
+                            <StackLayout Padding="5,0,0,0">
+                                <Label Text="{Binding Heading}" FontSize="Medium"/>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

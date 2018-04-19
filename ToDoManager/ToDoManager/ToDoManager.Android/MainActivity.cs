@@ -38,6 +38,16 @@ namespace ToDoManager.Droid
             Window.SetStatusBarColor(status_bar);
             this.SetStatusBarColor(status_bar);
 
+            if (App.Current.Properties.ContainsKey("Primary"))
+            {
+                App.Current.Resources["Primary"] = (Color)App.Current.Properties["Primary"];
+            }
+
+            if (App.Current.Properties.ContainsKey("Accent"))
+            {
+                App.Current.Resources["Accent"] = (Color)App.Current.Properties["Accent"];
+            }
+
             MessagingCenter.Subscribe<ThemeColorPickerViewModel>(this, "UpdateStatusbar", (sender) =>
             {
                 var update_statusbar = ((Color)App.Current.Resources["Primary"]).AddLuminosity(-.07).ToAndroid();

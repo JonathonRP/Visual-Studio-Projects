@@ -136,7 +136,7 @@ namespace ToDoManager.ViewModels
             {
                 task.Complete();
                 EventAggregator.GetEvent<UpdateTask>().Publish(task);
-                if (App.Current.Properties.Keys.Contains("delete"))
+                if (App.Current.Properties.ContainsKey("delete"))
                 {
                     if ((bool)App.Current.Properties["delete"] == true)
                     {

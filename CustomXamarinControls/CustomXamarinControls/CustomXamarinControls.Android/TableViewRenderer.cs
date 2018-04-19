@@ -26,17 +26,17 @@ namespace CustomXamarinControls.Droid
 
         }
 
-        protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.TableView> e)
-        {
-            base.OnElementChanged(e);
-            if (Control == null)
-                return;
+        //protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.TableView> e)
+        //{
+        //    base.OnElementChanged(e);
+        //    if (Control == null)
+        //        return;
 
-            //var listView = Control as Android.Widget.ListView;
-            //var TableView = (TableView)Element;
+        //    var listView = Control as Android.Widget.ListView;
+        //    var TableView = (TableView)Element;
 
-            //this.GetModelRenderer(listView, TableView).GetView(this.Id, TableView.GetRenderer().View, this).ForceLayout();
-        }
+        //    this.GetModelRenderer(listView, TableView).GetView(this.Id, TableView.GetRenderer().View, this).ForceLayout();
+        //}
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -45,7 +45,11 @@ namespace CustomXamarinControls.Droid
             {
                 var listView = Control as Android.Widget.ListView;
                 var TableView = (TableView)Element;
-                
+
+                var section = new TableSection();
+
+                TableView.Root.Add(section);
+                TableView.Root.Remove(section);
             }
         }
 

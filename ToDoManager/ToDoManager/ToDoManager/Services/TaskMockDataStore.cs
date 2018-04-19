@@ -34,36 +34,28 @@ namespace ToDoManager.Services
                 Tasks.Add(new ToDoTask
                 {
                     Title = "Task 1",
-                    Description = "This is a task description.",
                     Subtasks = new ObservableCollection<ToDoTask>(){
-                    new ToDoTask() { Title = "Subtask 1", Description = "This is a subtask description." },
-                    new ToDoTask() { Title = "Subtask 2", Description = "This is a subtask description." },
+                    new ToDoTask() { Title = "Subtask 1" },
+                    new ToDoTask() { Title = "Subtask 2" },
                     },
                 });
             }
-
-            DeletedTasks = new ObservableCollection<ToDoTask>();
-
-            var mockItems = new ObservableCollection<ToDoTask>
+            
+            DeletedTasks = new ObservableCollection<ToDoTask>
             {
-                new ToDoTask { Title = "Task 1", Description="This is a task description.",
+                new ToDoTask { Title = "Task 1",
                 Subtasks = new ObservableCollection<ToDoTask>(){
-                    new ToDoTask() { Title = "Subtask 1", Description = "This is a subtask description." },
-                    new ToDoTask() { Title = "Subtask 2", Description = "This is a subtask description." },
+                    new ToDoTask() { Title = "Subtask 1" },
+                    new ToDoTask() { Title = "Subtask 2" },
                     },
                 },
-                new ToDoTask { Title = "Task 2", Description="This is a task description.",
+                new ToDoTask { Title = "Task 2",
                 Subtasks = new ObservableCollection<ToDoTask>(){
-                    new ToDoTask() { Title = "Subtask 1", Description = "This is a subtask description." },
-                    new ToDoTask() { Title = "Subtask 2", Description = "This is a subtask description." },
+                    new ToDoTask() { Title = "Subtask 1" },
+                    new ToDoTask() { Title = "Subtask 2" },
                     },
-                },
+                }
             };
-
-            foreach (var item in mockItems)
-            {
-                DeletedTasks.Add(item);
-            }
         }
         
         public SQLiteConnection DataConnection()
@@ -102,9 +94,6 @@ namespace ToDoManager.Services
                 database.UpdateWithChildren(item);
                 database.InsertOrReplaceWithChildren(item);
             }
-            
-            //Tasks.Remove(_item);
-            //Tasks.Add(_item);
 
             return await Task.FromResult(true);
         }

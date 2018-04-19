@@ -63,7 +63,9 @@ namespace ToDoManager.ViewModels
 
                 if (!(_task.Subtasks.Contains(_subtask)))
                 {
-                    _task.Subtasks.Insert(0, _subtask);
+                    Subtasks.Insert(0, _subtask);
+
+                    _task.Subtasks = Subtasks;
 
                     await DataStore.UpdateAsync(_task);
                 }
@@ -72,13 +74,15 @@ namespace ToDoManager.ViewModels
             eventAggregator.GetEvent<UpdateSubtask>().Subscribe(async task =>
             {
                 var _task = task.Task;
-                var _subtask = _task.Subtasks.Where(x => x.Id == task.Subtask.Id).FirstOrDefault();
+                var _subtask = Subtasks.Where(x => x.Id == task.Subtask.Id).FirstOrDefault();
 
                 _subtask.Title = task.Subtask.Title;
                 _subtask.InEdit = task.Subtask.InEdit;
                 _subtask.IsComplete = task.Subtask.IsComplete;
                 _subtask.SubtaskBook = task.Subtask.SubtaskBook;
                 _subtask.Subtasks = task.Subtask.Subtasks;
+
+                _task.Subtasks = Subtasks;
 
                 await DataStore.UpdateAsync(_task);
             });
@@ -87,7 +91,11 @@ namespace ToDoManager.ViewModels
             {
                 var _task = task.Task;
                 var _subtask = task.Subtask;
-                _task.Subtasks.Remove(_subtask);
+
+                Subtasks.Remove(_subtask);
+
+                _task.Subtasks = Subtasks;
+
                 await DataStore.UpdateAsync(_task);
             });
         }
@@ -127,7 +135,7 @@ namespace ToDoManager.ViewModels
             {
                 subtask.Complete();
                 EventAggregator.GetEvent<UpdateTask>().Publish(subtask);
-                if (App.Current.Properties.Keys.Contains("delete"))
+                if (App.Current.Properties.ContainsKey("delete"))
                 {
                     if ((bool)App.Current.Properties["delete"] == true)
                     {
@@ -152,7 +160,7 @@ namespace ToDoManager.ViewModels
                 subtask.InEdit = false;
 
                 EventAggregator.GetEvent<UpdateSubtask>().Publish(new UpdateSubtask() { Task = Task, Subtask = subtask });
-                LoadItemsCommand.Execute(null);
+                LoadItemsCommand.Execute(Task);
                 return false;
             }
             else if(subtask.Subtasks != null)
@@ -182,7 +190,7 @@ namespace ToDoManager.ViewModels
 
             subtask.InEdit = true;
 
-            LoadItemsCommand.Execute(null);
+            LoadItemsCommand.Execute(Task);
         }
 
         async void OnItemTapped(ToDoTask task)
@@ -216,6 +224,9 @@ namespace ToDoManager.ViewModels
                 Title = Task?.Title;
                 Subtasks = Task.Subtasks;
                 LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand(Task));
+
+                if (Subtasks.Count == 0)
+                    LoadItemsCommand.Execute(Task);
             }
         }
     }
