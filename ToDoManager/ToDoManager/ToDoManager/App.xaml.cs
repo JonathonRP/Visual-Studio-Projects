@@ -21,6 +21,16 @@ namespace ToDoManager
         {
             InitializeComponent();
 
+            if (App.Current.Properties.ContainsKey("Primary"))
+            {
+                App.Current.Resources["Primary"] = (Color)App.Current.Properties["Primary"];
+            }
+
+            if (App.Current.Properties.ContainsKey("Accent"))
+            {
+                App.Current.Resources["Accent"] = (Color)App.Current.Properties["Accent"];
+            }
+
             NavigationService.NavigateAsync("MainPage/NavigationPage/Tasks");
         }
 

@@ -27,14 +27,14 @@ namespace ToDoManager.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            //Animation ZoomOut = new Animation { { 0, 1, new Animation(a => Opacity = a, .7, 1) },
-            //    { 0, 1, new Animation(a => Scale = a, 2, 1) },
-            //    { 0, 1, new Animation(a => HeightRequest = 1) },
-            //    { 0, 1, new Animation(a => AnchorX = a, 2, 1) },
-            //    { 0, 1, new Animation(a => AnchorY = 1) }
-            //};
+            Animation FadeIn = new Animation { { 0, 1, new Animation(a => Opacity = a, .1, 1) },
+                //{ 0, 1, new Animation(a => Scale = a, 2, 1) },
+                //{ 0, 1, new Animation(a => HeightRequest = 1) },
+                //{ 0, 1, new Animation(a => AnchorX = a, 2, 1) },
+                //{ 0, 1, new Animation(a => AnchorY = 1) }
+            };
 
-            //this.Animate("ZoomOut", ZoomOut, 16, 260, Easing.SinOut, null, null);
+            this.Animate("FadeIn", FadeIn, 16, 260, Easing.SinOut, null, null);
         }
 
         //protected override void OnDisappearing()

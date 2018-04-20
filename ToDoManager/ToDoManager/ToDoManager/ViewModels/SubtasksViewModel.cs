@@ -76,11 +76,9 @@ namespace ToDoManager.ViewModels
                 var _task = task.Task;
                 var _subtask = Subtasks.Where(x => x.Id == task.Subtask.Id).FirstOrDefault();
 
-                _subtask.Title = task.Subtask.Title;
-                _subtask.InEdit = task.Subtask.InEdit;
-                _subtask.IsComplete = task.Subtask.IsComplete;
-                _subtask.SubtaskBook = task.Subtask.SubtaskBook;
-                _subtask.Subtasks = task.Subtask.Subtasks;
+                Subtasks.Add(_subtask);
+                _subtask = task.Subtask;
+                Subtasks.Remove(_subtask);
 
                 _task.Subtasks = Subtasks;
 
@@ -111,7 +109,7 @@ namespace ToDoManager.ViewModels
             {
                 Subtasks.Clear();
                 var tasks = await DataStore.GetItemsAsync(true);
-                foreach (var task in tasks.Where(x => x.Title == _task.Title))
+                foreach (var task in tasks.Where(x => x.Id == _task.Id))
                 {
                     foreach (var subtask in task.Subtasks)
                     {
@@ -129,12 +127,20 @@ namespace ToDoManager.ViewModels
             }
         }
 
+        private async void Reload()
+        {
+            var task = await DataStore.GetItemAsync(Task.Id);
+            Subtasks = task.Subtasks;
+
+            await ExecuteLoadItemsCommand(task);
+        }
+
         private void OnCheckedChanged(ToDoTask subtask)
         {
             if (subtask.IsComplete)
             {
                 subtask.Complete();
-                EventAggregator.GetEvent<UpdateTask>().Publish(subtask);
+                EventAggregator.GetEvent<UpdateSubtask>().Publish(new UpdateSubtask() { Task = Task, Subtask = subtask });
                 if (App.Current.Properties.ContainsKey("delete"))
                 {
                     if ((bool)App.Current.Properties["delete"] == true)
@@ -160,7 +166,10 @@ namespace ToDoManager.ViewModels
                 subtask.InEdit = false;
 
                 EventAggregator.GetEvent<UpdateSubtask>().Publish(new UpdateSubtask() { Task = Task, Subtask = subtask });
+
                 LoadItemsCommand.Execute(Task);
+                Reload();
+
                 return false;
             }
             else if(subtask.Subtasks != null)

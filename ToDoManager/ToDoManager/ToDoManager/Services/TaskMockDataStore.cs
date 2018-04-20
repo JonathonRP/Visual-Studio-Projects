@@ -86,14 +86,11 @@ namespace ToDoManager.Services
         {
             ToDoTask _item;
 
-            lock (collisionLock)
-            {
-                _item = database.GetAllWithChildren<ToDoTask>(arg => arg.Id == item.Id).FirstOrDefault();
-                //database.Table<ToDoTask>().Where(arg => arg.Id == item.Id).FirstOrDefault()
-                
-                database.UpdateWithChildren(item);
-                database.InsertOrReplaceWithChildren(item);
-            }
+            _item = database.GetAllWithChildren<ToDoTask>(arg => arg.Id == item.Id).FirstOrDefault();
+            //database.Table<ToDoTask>().Where(arg => arg.Id == item.Id).FirstOrDefault()
+
+            database.UpdateWithChildren(item);
+            database.InsertOrReplaceWithChildren(item);
 
             return await Task.FromResult(true);
         }

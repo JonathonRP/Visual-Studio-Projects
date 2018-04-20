@@ -6,48 +6,51 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              xmlns:Popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
              xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
-             x:Class="ToDoManager.Views.ThemeColorPicker">
+             x:Class="ToDoManager.Views.ThemeColorPicker"
+                 CloseWhenBackgroundIsClicked="True">
     <Popup:PopupPage.Animation>
         <animations:ScaleAnimation/>
     </Popup:PopupPage.Animation>
     <Popup:PopupPage.Content>
-        <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="45,45,0,0">
-            <Frame HorizontalOptions="Start" VerticalOptions="Start" HeightRequest="255" WidthRequest="255">
-                <StackLayout Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                    <Label Text="Pick Color" FontSize="Medium"/>
-                    <StackLayout Orientation="Horizontal" Padding="0,25,0,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                        <CXC:RoundableBoxView Color="{Binding Color}" HeightRequest="80" WidthRequest="80" CornerRadius="80"/>
-                        <StackLayout Padding="25,35,0,0">
-                            <Label Text="{Binding Name}" VerticalOptions="Center" VerticalTextAlignment="Center"/>
+        <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent" Padding="45,45,0,0">
+                <Frame HorizontalOptions="Start" VerticalOptions="Start" HeightRequest="265" WidthRequest="255">
+                    <StackLayout Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <Label Text="Pick Color" FontSize="Medium"/>
+                        <StackLayout Orientation="Horizontal" Padding="0,15,0,15" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                            <CXC:RoundableBoxView Color="{Binding Color}" HeightRequest="80" WidthRequest="80" CornerRadius="80"/>
+                            <StackLayout Padding="25,35,0,0">
+                                <Label Text="{Binding Name}" VerticalOptions="Center" VerticalTextAlignment="Center"/>
+                            </StackLayout>
                         </StackLayout>
-                    </StackLayout>
-                    <StackLayout Padding="35,10,0,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                            <Label Text="H"/>
-                            <CXC:Slider Value="{Binding Hue}" Color="{Binding Color}" HorizontalOptions="FillAndExpand"/>
-                        </StackLayout>
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                            <Label Text="S"/>
-                            <CXC:Slider Value="{Binding Saturation}" Color="{Binding Color}" HorizontalOptions="FillAndExpand"/>
-                        </StackLayout>
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                            <Label Text="L"/>
-                            <CXC:Slider Value="{Binding Luminosity}" Color="{Binding Color}" HorizontalOptions="FillAndExpand"/>
-                        </StackLayout>
-                        <Label Text="Reset" TextColor="DodgerBlue" HorizontalOptions="End" 
+                        <StackLayout Padding="35,10,0,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                <Label Text="H"/>
+                                <CXC:Slider Value="{Binding Hue}" Color="{Binding Color}" HorizontalOptions="FillAndExpand"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                <Label Text="S"/>
+                                <CXC:Slider Value="{Binding Saturation}" Color="{Binding Color}" HorizontalOptions="FillAndExpand"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" Padding="0,0,0,10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                <Label Text="L"/>
+                                <CXC:Slider Value="{Binding Luminosity}" Color="{Binding Color}" HorizontalOptions="FillAndExpand"/>
+                            </StackLayout>
+                            <Label Text="Reset" TextColor="DodgerBlue" HorizontalOptions="End" 
                                VerticalOptions="End" 
                                HorizontalTextAlignment="Center"
                                VerticalTextAlignment="Center">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Reset}"/>
-                            </Label.GestureRecognizers>
-                        </Label>
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Reset}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
                     </StackLayout>
-                </StackLayout>
-                <Frame.GestureRecognizers>
+                </Frame>
+                <StackLayout.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding Close}"/>
-                </Frame.GestureRecognizers>
-            </Frame>
+                </StackLayout.GestureRecognizers>
+            </StackLayout>
         </ScrollView>
     </Popup:PopupPage.Content>
 </Popup:PopupPage>
