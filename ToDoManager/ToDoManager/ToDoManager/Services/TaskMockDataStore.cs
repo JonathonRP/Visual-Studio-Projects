@@ -86,11 +86,17 @@ namespace ToDoManager.Services
         {
             ToDoTask _item;
 
-            _item = database.GetAllWithChildren<ToDoTask>(arg => arg.Id == item.Id).FirstOrDefault();
-            //database.Table<ToDoTask>().Where(arg => arg.Id == item.Id).FirstOrDefault()
+            lock (collisionLock)
+            {
+                _item = database.GetAllWithChildren<ToDoTask>(arg => arg.Id == item.Id).FirstOrDefault();
+                //database.Table<ToDoTask>().Where(arg => arg.Id == item.Id).FirstOrDefault()
 
-            database.UpdateWithChildren(item);
-            database.InsertOrReplaceWithChildren(item);
+                database.UpdateWithChildren(_item);
+                database.InsertOrReplaceWithChildren(_item, true);
+            }
+
+            Tasks.Remove(item);
+            Tasks.Add(item);
 
             return await Task.FromResult(true);
         }

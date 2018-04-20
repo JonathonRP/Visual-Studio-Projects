@@ -1,5 +1,4 @@
 ﻿using System;
-
 using ToDoManager.Views;
 using ToDoManager.ViewModels;
 using Prism.Services;
@@ -21,15 +20,16 @@ namespace ToDoManager
         {
             InitializeComponent();
 
-            if (App.Current.Properties.ContainsKey("Primary"))
-            {
-                App.Current.Resources["Primary"] = (Color)App.Current.Properties["Primary"];
-            }
+            //if (App.Current.Properties.ContainsKey("Primary"))
+            //{
+            //    App.Current.Resources["Primary"] = (Color)App.Current.Properties["Primary"];
+            //    MessagingCenter.Send(typeof(ThemeColorPickerViewModel), "UpdateStatusbar");
+            //}
 
-            if (App.Current.Properties.ContainsKey("Accent"))
-            {
-                App.Current.Resources["Accent"] = (Color)App.Current.Properties["Accent"];
-            }
+            //if (App.Current.Properties.ContainsKey("Accent"))
+            //{
+            //    App.Current.Resources["Accent"] = (Color)App.Current.Properties["Accent"];
+            //}
 
             NavigationService.NavigateAsync("MainPage/NavigationPage/Tasks");
         }

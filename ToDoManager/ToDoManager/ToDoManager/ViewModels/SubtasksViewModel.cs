@@ -76,13 +76,17 @@ namespace ToDoManager.ViewModels
                 var _task = task.Task;
                 var _subtask = Subtasks.Where(x => x.Id == task.Subtask.Id).FirstOrDefault();
 
-                Subtasks.Add(_subtask);
-                _subtask = task.Subtask;
-                Subtasks.Remove(_subtask);
+                if (!(_task.Subtasks.Contains(_subtask)))
+                {
+                    Subtasks.Remove(_subtask);
 
-                _task.Subtasks = Subtasks;
+                    _subtask = task.Subtask;
+                    Subtasks.Add(_subtask);
+                    
+                    _task.Subtasks = Subtasks;
 
-                await DataStore.UpdateAsync(_task);
+                    await DataStore.UpdateAsync(_task);
+                }
             });
 
             eventAggregator.GetEvent<DeleteSubtask>().Subscribe(async task =>
@@ -127,14 +131,6 @@ namespace ToDoManager.ViewModels
             }
         }
 
-        private async void Reload()
-        {
-            var task = await DataStore.GetItemAsync(Task.Id);
-            Subtasks = task.Subtasks;
-
-            await ExecuteLoadItemsCommand(task);
-        }
-
         private void OnCheckedChanged(ToDoTask subtask)
         {
             if (subtask.IsComplete)
@@ -168,8 +164,6 @@ namespace ToDoManager.ViewModels
                 EventAggregator.GetEvent<UpdateSubtask>().Publish(new UpdateSubtask() { Task = Task, Subtask = subtask });
 
                 LoadItemsCommand.Execute(Task);
-                Reload();
-
                 return false;
             }
             else if(subtask.Subtasks != null)

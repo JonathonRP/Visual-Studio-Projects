@@ -5,7 +5,6 @@ using System.Text;
 using Prism.Commands;
 using Prism.Navigation;
 using Xamarin.Forms;
-using CustomXamarinControls;
 
 namespace ToDoManager.ViewModels
 {
