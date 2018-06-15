@@ -40,7 +40,7 @@ namespace ToDoManager.Services
                     },
                 });
             }
-            
+
             DeletedTasks = new ObservableCollection<ToDoTask>
             {
                 new ToDoTask { Title = "Task 1",

@@ -8,6 +8,8 @@ using Prism;
 using Prism.Ioc;
 using Prism.Plugin.Popups;
 using Xamarin.Forms.Xaml;
+using Plugin.Settings;
+using CustomXamarinControls;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace ToDoManager
@@ -19,17 +21,11 @@ namespace ToDoManager
 		protected override void OnInitialized()
         {
             InitializeComponent();
+            
+            App.Current.Resources["Primary"] = Color.FromHex(CrossSettings.Current.GetValueOrDefault("Primary", ((Color)App.Current.Resources["Primary"]).ToHex()));
+            MessagingCenter.Send(typeof(ThemeColorPickerViewModel), "UpdateStatusbar");
 
-            //if (App.Current.Properties.ContainsKey("Primary"))
-            //{
-            //    App.Current.Resources["Primary"] = (Color)App.Current.Properties["Primary"];
-            //    MessagingCenter.Send(typeof(ThemeColorPickerViewModel), "UpdateStatusbar");
-            //}
-
-            //if (App.Current.Properties.ContainsKey("Accent"))
-            //{
-            //    App.Current.Resources["Accent"] = (Color)App.Current.Properties["Accent"];
-            //}
+            App.Current.Resources["Accent"] = Color.FromHex(CrossSettings.Current.GetValueOrDefault("Accent", ((Color)App.Current.Resources["Accent"]).ToHex()));
 
             NavigationService.NavigateAsync("MainPage/NavigationPage/Tasks");
         }

@@ -16,8 +16,7 @@ namespace TestBrokenApp.Models
         public string Title { get; set; }
 
         public ToDoTask Subtask { get; set; }
-
-        [MapTo(nameof(Subtask))]
+        
         public IList<ToDoTask> Subtasks { get; }
     }
 }

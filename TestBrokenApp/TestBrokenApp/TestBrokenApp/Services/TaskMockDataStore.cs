@@ -24,7 +24,7 @@ namespace TestBrokenApp.Services
 
         public TaskMockDataStore(IDataConnection data)
         {
-            setupRealm();
+            SetupRealm();
 
             if (Tasks.All<ToDoTask>().Count() <= 0)
             {
@@ -104,10 +104,10 @@ namespace TestBrokenApp.Services
             return await Task.FromResult(Tasks.All<ToDoTask>());
         }
 
-        private async void setupRealm()
+        private async void SetupRealm()
         {
             User.ConfigurePersistence(UserPersistenceMode.NotEncrypted);
-            Credentials credentials = Credentials.UsernamePassword("realm-adman", " ", false);
+            Credentials credentials = Credentials.Nickname("realm-admin", true);
             await User.LoginAsync(credentials, AuthUser);
             var user = User.Current;
             config = new SyncConfiguration(user, serverURL);

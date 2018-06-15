@@ -5,6 +5,8 @@ using System.Text;
 using Prism.Commands;
 using Prism.Navigation;
 using Xamarin.Forms;
+using Plugin.Settings;
+using CustomXamarinControls;
 
 namespace ToDoManager.ViewModels
 {
@@ -127,15 +129,14 @@ namespace ToDoManager.ViewModels
 
         }
 
-        async void SetNewColor()
+        void SetNewColor()
         {
             Color = Color.FromHsla(Hue, Saturation, Luminosity);
             App.Current.Resources[$"{Name}"] = Color;
 
             MessagingCenter.Send(this, "UpdateStatusbar");
 
-            App.Current.Properties[$"{Name}"] = Color;
-            await App.Current.SavePropertiesAsync();
+            CrossSettings.Current.AddOrUpdateValue($"{Name}", Color.ToHex());
         }
 
         public async void OnClose()
@@ -150,10 +151,9 @@ namespace ToDoManager.ViewModels
 
             MessagingCenter.Send(this, "UpdateStatusbar");
 
-            App.Current.Properties["Primary"] = Primary;
-            App.Current.Properties["Accent"] = Accent;
+            CrossSettings.Current.AddOrUpdateValue("Primary", Primary.ToHex());
+            CrossSettings.Current.AddOrUpdateValue("Accent", Accent.ToHex());
 
-            await App.Current.SavePropertiesAsync();
             await NavigationService.ClearPopupStackAsync();
         }
 
