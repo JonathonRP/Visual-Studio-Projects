@@ -97,38 +97,23 @@ namespace MGO
             { 
                 if (path.Contains("Reports/Manager", StringComparison.CurrentCultureIgnoreCase))
                 {
-                    friendly_url = "~/" + path.Replace("/Manager", "", RegexOptions.IgnoreCase).Replace(".aspx", "", RegexOptions.IgnoreCase);
-                }
-                else if (path.Contains("Sales", StringComparison.CurrentCultureIgnoreCase))
-                {
+                    friendly_url = "~/" + path.Replace("Manager/", "", RegexOptions.IgnoreCase).Replace(".aspx", "", RegexOptions.IgnoreCase);
 
-                }
-                else if (path.Contains("Revenue", StringComparison.CurrentCultureIgnoreCase))
-                {
-
+                    if (path.Contains("Sales", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        friendly_url = "~/" + path.Replace("Manager/", "Sales/").Replace("Sales.aspx", "");
+                    }
+                    else if (path.Contains("Category", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        friendly_url = "~/" + path.Replace("Manager/", "Revenue/").Replace("Revenue.aspx", "");
+                    }
                 }
                 else
                 {
                     friendly_url = "~/" + path.Replace(".aspx", "", RegexOptions.IgnoreCase);
                 }
 
-                string[] url_splits = new string[] { "Product", "Info", "Purchases" };
-                string url_split_on = "";
-
-                foreach (var url_split in url_splits)
-                {
-                    if (path.Contains(url_split, StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        url_split_on = url_split;
-                    }
-                }
-
-                if (url_split_on.Equals("Product", StringComparison.CurrentCultureIgnoreCase))
-                {
-                    return string.Join("/", new[] { friendly_url.Replace("ProductData", "Data", RegexOptions.IgnoreCase), url_split_on });
-                }
-
-                return friendly_url.Insert(friendly_url.IndexOf(url_split_on, StringComparison.CurrentCultureIgnoreCase), "/");
+                return friendly_url;
             }
             else if (path.Contains("Default", StringComparison.CurrentCultureIgnoreCase))
             {
