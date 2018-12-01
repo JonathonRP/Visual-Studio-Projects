@@ -1,0 +1,48 @@
+﻿@model MGO.Models.SaleItem
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>SaleItem</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SI_Qty_Sold)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SI_Qty_Sold)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item.Item_Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item.Item_Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sale.Sale_Num)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sale.Sale_Num)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

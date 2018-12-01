@@ -1,0 +1,40 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="SportsPro.Site" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>SportsPro Software</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/Site.css" rel="stylesheet" />
+    <script src="Scripts/jquery-1.10.2.min.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <div class="container">
+        <form id="form1" runat="server" class="form-horizontal">
+
+            <header class="jumbotron">
+                <h1>SportsPro</h1>
+                <h2>Sports management software for the sports enthusiast</h2>
+            </header>
+            <nav class="highlight">
+                <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/ContactUs.aspx">Contact Us</asp:HyperLink>
+                <asp:HyperLink ID="Hyperlink1" runat="server" NavigateUrl="~/CustomerDisplay.aspx">Display Customers</asp:HyperLink>
+                <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/CustomerSurvey.aspx">Customer Survey</asp:HyperLink>
+            </nav>
+            <main>
+                <asp:ContentPlaceHolder ID="mainContent" runat="server">
+                </asp:ContentPlaceHolder>
+            </main>
+            <footer class="highlight small">
+                To contact us, call us at 800-555-0400 or email us at 
+            <a href="mailto:sportspro@sportsprosoftware.com">sportspro@sportsprosoftware.com</a> 
+            </footer>
+        </form>
+    </div>
+</body>
+</html>

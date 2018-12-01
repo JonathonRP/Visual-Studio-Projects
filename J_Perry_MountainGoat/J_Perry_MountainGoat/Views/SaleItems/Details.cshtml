@@ -1,0 +1,42 @@
+﻿@model MGO.Models.SaleItem
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SaleItem</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SI_Qty_Sold)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SI_Qty_Sold)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item.Item_Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item.Item_Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sale.Sale_Num)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sale.Sale_Num)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,16 @@
+﻿label {
+    font-weight: normal;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.jumbotron h1 {
+    font-size: 250%;
+}
+
+.container {
+    border: 1px solid #cecece;
+}
+

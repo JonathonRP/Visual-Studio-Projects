@@ -1,0 +1,552 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MGO_Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Cat_Num" />
+          </Key>
+          <Property Name="Cat_Num" Type="smallint" Nullable="false" />
+          <Property Name="Cat_Description" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Cust_ID" />
+          </Key>
+          <Property Name="Cust_ID" Type="smallint" Nullable="false" />
+          <Property Name="Cust_FName" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Cust_LName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Cust_Street1" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Cust_Street2" Type="nvarchar" MaxLength="15" />
+          <Property Name="Cust_City" Type="nvarchar" MaxLength="255" />
+          <Property Name="Cust_State" Type="nvarchar" MaxLength="255" />
+          <Property Name="Cust_ZIP" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="Cust_EMail" Type="nvarchar" MaxLength="35" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Emp_ID" />
+          </Key>
+          <Property Name="Emp_ID" Type="smallint" Nullable="false" />
+          <Property Name="Emp_FName" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Emp_LName" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Emp_Position" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Emp_Commission" Type="real" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="SKU" />
+          </Key>
+          <Property Name="SKU" Type="smallint" Nullable="false" />
+          <Property Name="Item_Description" Type="nvarchar" MaxLength="45" Nullable="false" />
+          <Property Name="Item_Price" Type="money" Nullable="false" />
+          <Property Name="Cat_Num" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Purchase">
+          <Key>
+            <PropertyRef Name="PO_Num" />
+          </Key>
+          <Property Name="PO_Num" Type="smallint" Nullable="false" />
+          <Property Name="Purchase_Date" Type="datetime" Nullable="false" />
+          <Property Name="Emp_ID" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PurchaseItem">
+          <Key>
+            <PropertyRef Name="PO_Num" />
+            <PropertyRef Name="SKU" />
+          </Key>
+          <Property Name="PO_Num" Type="smallint" Nullable="false" />
+          <Property Name="PI_Qty" Type="smallint" Nullable="false" />
+          <Property Name="SKU" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sale">
+          <Key>
+            <PropertyRef Name="Sale_Num" />
+          </Key>
+          <Property Name="Sale_Num" Type="smallint" Nullable="false" />
+          <Property Name="S_Date" Type="datetime" Nullable="false" />
+          <Property Name="S_Time" Type="datetime" Nullable="false" />
+          <Property Name="Emp_ID" Type="smallint" Nullable="false" />
+          <Property Name="Cust_ID" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SaleItem">
+          <Key>
+            <PropertyRef Name="Sale_Num" />
+            <PropertyRef Name="SKU" />
+          </Key>
+          <Property Name="Sale_Num" Type="smallint" Nullable="false" />
+          <Property Name="SI_Qty_Sold" Type="smallint" Nullable="false" />
+          <Property Name="SKU" Type="smallint" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Item_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Item" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Cat_Num" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="Cat_Num" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseItem_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="PurchaseItem" Type="Self.PurchaseItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="SKU" />
+            </Principal>
+            <Dependent Role="PurchaseItem">
+              <PropertyRef Name="SKU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseItem_Purchase">
+          <End Role="Purchase" Type="Self.Purchase" Multiplicity="1" />
+          <End Role="PurchaseItem" Type="Self.PurchaseItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Purchase">
+              <PropertyRef Name="PO_Num" />
+            </Principal>
+            <Dependent Role="PurchaseItem">
+              <PropertyRef Name="PO_Num" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sale_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Cust_ID" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="Cust_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sale_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Emp_ID" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="Emp_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SaleItem_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="SaleItem" Type="Self.SaleItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="SKU" />
+            </Principal>
+            <Dependent Role="SaleItem">
+              <PropertyRef Name="SKU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SaleItem_Sale">
+          <End Role="Sale" Type="Self.Sale" Multiplicity="1" />
+          <End Role="SaleItem" Type="Self.SaleItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sale">
+              <PropertyRef Name="Sale_Num" />
+            </Principal>
+            <Dependent Role="SaleItem">
+              <PropertyRef Name="Sale_Num" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MGO_ModelStoreContainer">
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Item" EntityType="Self.Item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Purchase" EntityType="Self.Purchase" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseItem" EntityType="Self.PurchaseItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sale" EntityType="Self.Sale" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SaleItem" EntityType="Self.SaleItem" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Item_Category" Association="Self.FK_Item_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Item" EntitySet="Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseItem_Item" Association="Self.FK_PurchaseItem_Item">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="PurchaseItem" EntitySet="PurchaseItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseItem_Purchase" Association="Self.FK_PurchaseItem_Purchase">
+            <End Role="Purchase" EntitySet="Purchase" />
+            <End Role="PurchaseItem" EntitySet="PurchaseItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sale_Customer" Association="Self.FK_Sale_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Sale" EntitySet="Sale" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sale_Employee" Association="Self.FK_Sale_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Sale" EntitySet="Sale" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SaleItem_Item" Association="Self.FK_SaleItem_Item">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="SaleItem" EntitySet="SaleItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SaleItem_Sale" Association="Self.FK_SaleItem_Sale">
+            <End Role="Sale" EntitySet="Sale" />
+            <End Role="SaleItem" EntitySet="SaleItem" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MGO_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Cat_Num" />
+          </Key>
+          <Property Name="Cat_Num" Type="Int16" Nullable="false" />
+          <Property Name="Cat_Description" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Items" Relationship="Self.FK_Item_Category" FromRole="Category" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Cust_ID" />
+          </Key>
+          <Property Name="Cust_ID" Type="Int16" Nullable="false" />
+          <Property Name="Cust_FName" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cust_LName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cust_Street1" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cust_Street2" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Cust_City" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Cust_State" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Cust_ZIP" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cust_EMail" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Sales" Relationship="Self.FK_Sale_Customer" FromRole="Customer" ToRole="Sale" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Emp_ID" />
+          </Key>
+          <Property Name="Emp_ID" Type="Int16" Nullable="false" />
+          <Property Name="Emp_FName" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Emp_LName" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Emp_Position" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Emp_Commission" Type="Single" />
+          <NavigationProperty Name="Sales" Relationship="Self.FK_Sale_Employee" FromRole="Employee" ToRole="Sale" />
+          <NavigationProperty Name="Purchases" Relationship="MGO_Model.FK_Employee_Purchase" FromRole="Employee" ToRole="Purchase" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="SKU" />
+          </Key>
+          <Property Name="SKU" Type="Int16" Nullable="false" />
+          <Property Name="Item_Description" Type="String" MaxLength="45" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Item_Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Cat_Num" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Item_Category" FromRole="Item" ToRole="Category" />
+          <NavigationProperty Name="PurchaseItems" Relationship="Self.FK_PurchaseItem_Item" FromRole="Item" ToRole="PurchaseItem" />
+          <NavigationProperty Name="SaleItems" Relationship="Self.FK_SaleItem_Item" FromRole="Item" ToRole="SaleItem" />
+        </EntityType>
+        <EntityType Name="Purchase">
+          <Key>
+            <PropertyRef Name="PO_Num" />
+          </Key>
+          <Property Name="PO_Num" Type="Int16" Nullable="false" />
+          <Property Name="Purchase_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Emp_ID" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="PurchaseItems" Relationship="Self.FK_PurchaseItem_Purchase" FromRole="Purchase" ToRole="PurchaseItem" />
+          <NavigationProperty Name="Employee" Relationship="MGO_Model.FK_Employee_Purchase" FromRole="Purchase" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="PurchaseItem">
+          <Key>
+            <PropertyRef Name="PO_Num" />
+            <PropertyRef Name="SKU" />
+          </Key>
+          <Property Name="PO_Num" Type="Int16" Nullable="false" />
+          <Property Name="PI_Qty" Type="Int16" Nullable="false" />
+          <Property Name="SKU" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_PurchaseItem_Item" FromRole="PurchaseItem" ToRole="Item" />
+          <NavigationProperty Name="Purchase" Relationship="Self.FK_PurchaseItem_Purchase" FromRole="PurchaseItem" ToRole="Purchase" />
+        </EntityType>
+        <EntityType Name="Sale">
+          <Key>
+            <PropertyRef Name="Sale_Num" />
+          </Key>
+          <Property Name="Sale_Num" Type="Int16" Nullable="false" />
+          <Property Name="S_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="S_Time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Emp_ID" Type="Int16" Nullable="false" />
+          <Property Name="Cust_ID" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Sale_Customer" FromRole="Sale" ToRole="Customer" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Sale_Employee" FromRole="Sale" ToRole="Employee" />
+          <NavigationProperty Name="SaleItems" Relationship="Self.FK_SaleItem_Sale" FromRole="Sale" ToRole="SaleItem" />
+        </EntityType>
+        <EntityType Name="SaleItem">
+          <Key>
+            <PropertyRef Name="Sale_Num" />
+            <PropertyRef Name="SKU" />
+          </Key>
+          <Property Name="Sale_Num" Type="Int16" Nullable="false" />
+          <Property Name="SI_Qty_Sold" Type="Int16" Nullable="false" />
+          <Property Name="SKU" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_SaleItem_Item" FromRole="SaleItem" ToRole="Item" />
+          <NavigationProperty Name="Sale" Relationship="Self.FK_SaleItem_Sale" FromRole="SaleItem" ToRole="Sale" />
+        </EntityType>
+        <Association Name="FK_Item_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Item" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Cat_Num" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="Cat_Num" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sale_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Cust_ID" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="Cust_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sale_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Emp_ID" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="Emp_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseItem_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="PurchaseItem" Type="Self.PurchaseItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="SKU" />
+            </Principal>
+            <Dependent Role="PurchaseItem">
+              <PropertyRef Name="SKU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SaleItem_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="SaleItem" Type="Self.SaleItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="SKU" />
+            </Principal>
+            <Dependent Role="SaleItem">
+              <PropertyRef Name="SKU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseItem_Purchase">
+          <End Role="Purchase" Type="Self.Purchase" Multiplicity="1" />
+          <End Role="PurchaseItem" Type="Self.PurchaseItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Purchase">
+              <PropertyRef Name="PO_Num" />
+            </Principal>
+            <Dependent Role="PurchaseItem">
+              <PropertyRef Name="PO_Num" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SaleItem_Sale">
+          <End Role="Sale" Type="Self.Sale" Multiplicity="1" />
+          <End Role="SaleItem" Type="Self.SaleItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sale">
+              <PropertyRef Name="Sale_Num" />
+            </Principal>
+            <Dependent Role="SaleItem">
+              <PropertyRef Name="Sale_Num" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MGO_Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Items" EntityType="Self.Item" />
+          <EntitySet Name="Purchases" EntityType="Self.Purchase" />
+          <EntitySet Name="PurchaseItems" EntityType="Self.PurchaseItem" />
+          <EntitySet Name="Sales" EntityType="Self.Sale" />
+          <EntitySet Name="SaleItems" EntityType="Self.SaleItem" />
+          <AssociationSet Name="FK_Item_Category" Association="Self.FK_Item_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sale_Customer" Association="Self.FK_Sale_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Sale" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sale_Employee" Association="Self.FK_Sale_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Sale" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseItem_Item" Association="Self.FK_PurchaseItem_Item">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="PurchaseItem" EntitySet="PurchaseItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SaleItem_Item" Association="Self.FK_SaleItem_Item">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="SaleItem" EntitySet="SaleItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseItem_Purchase" Association="Self.FK_PurchaseItem_Purchase">
+            <End Role="Purchase" EntitySet="Purchases" />
+            <End Role="PurchaseItem" EntitySet="PurchaseItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SaleItem_Sale" Association="Self.FK_SaleItem_Sale">
+            <End Role="Sale" EntitySet="Sales" />
+            <End Role="SaleItem" EntitySet="SaleItems" />
+          </AssociationSet>
+          <AssociationSet Name="EmployeePurchase" Association="MGO_Model.FK_Employee_Purchase">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Purchase" EntitySet="Purchases" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_Employee_Purchase">
+          <End Type="MGO_Model.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="MGO_Model.Purchase" Role="Purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Emp_ID" />
+            </Principal>
+            <Dependent Role="Purchase">
+              <PropertyRef Name="Emp_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MGO_ModelStoreContainer" CdmEntityContainer="MGO_Entities">
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="MGO_Model.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="Cat_Num" ColumnName="Cat_Num" />
+                <ScalarProperty Name="Cat_Description" ColumnName="Cat_Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="MGO_Model.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Cust_ID" ColumnName="Cust_ID" />
+                <ScalarProperty Name="Cust_FName" ColumnName="Cust_FName" />
+                <ScalarProperty Name="Cust_LName" ColumnName="Cust_LName" />
+                <ScalarProperty Name="Cust_Street1" ColumnName="Cust_Street1" />
+                <ScalarProperty Name="Cust_Street2" ColumnName="Cust_Street2" />
+                <ScalarProperty Name="Cust_City" ColumnName="Cust_City" />
+                <ScalarProperty Name="Cust_State" ColumnName="Cust_State" />
+                <ScalarProperty Name="Cust_ZIP" ColumnName="Cust_ZIP" />
+                <ScalarProperty Name="Cust_EMail" ColumnName="Cust_EMail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="MGO_Model.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="Emp_ID" ColumnName="Emp_ID" />
+                <ScalarProperty Name="Emp_FName" ColumnName="Emp_FName" />
+                <ScalarProperty Name="Emp_LName" ColumnName="Emp_LName" />
+                <ScalarProperty Name="Emp_Position" ColumnName="Emp_Position" />
+                <ScalarProperty Name="Emp_Commission" ColumnName="Emp_Commission" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Items">
+            <EntityTypeMapping TypeName="MGO_Model.Item">
+              <MappingFragment StoreEntitySet="Item">
+                <ScalarProperty Name="SKU" ColumnName="SKU" />
+                <ScalarProperty Name="Item_Description" ColumnName="Item_Description" />
+                <ScalarProperty Name="Item_Price" ColumnName="Item_Price" />
+                <ScalarProperty Name="Cat_Num" ColumnName="Cat_Num" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Purchases">
+            <EntityTypeMapping TypeName="MGO_Model.Purchase">
+              <MappingFragment StoreEntitySet="Purchase">
+                <ScalarProperty Name="PO_Num" ColumnName="PO_Num" />
+                <ScalarProperty Name="Purchase_Date" ColumnName="Purchase_Date" />
+                <ScalarProperty Name="Emp_ID" ColumnName="Emp_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseItems">
+            <EntityTypeMapping TypeName="MGO_Model.PurchaseItem">
+              <MappingFragment StoreEntitySet="PurchaseItem">
+                <ScalarProperty Name="PO_Num" ColumnName="PO_Num" />
+                <ScalarProperty Name="PI_Qty" ColumnName="PI_Qty" />
+                <ScalarProperty Name="SKU" ColumnName="SKU" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sales">
+            <EntityTypeMapping TypeName="MGO_Model.Sale">
+              <MappingFragment StoreEntitySet="Sale">
+                <ScalarProperty Name="Sale_Num" ColumnName="Sale_Num" />
+                <ScalarProperty Name="S_Date" ColumnName="S_Date" />
+                <ScalarProperty Name="S_Time" ColumnName="S_Time" />
+                <ScalarProperty Name="Emp_ID" ColumnName="Emp_ID" />
+                <ScalarProperty Name="Cust_ID" ColumnName="Cust_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SaleItems">
+            <EntityTypeMapping TypeName="MGO_Model.SaleItem">
+              <MappingFragment StoreEntitySet="SaleItem">
+                <ScalarProperty Name="Sale_Num" ColumnName="Sale_Num" />
+                <ScalarProperty Name="SI_Qty_Sold" ColumnName="SI_Qty_Sold" />
+                <ScalarProperty Name="SKU" ColumnName="SKU" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

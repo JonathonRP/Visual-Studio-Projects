@@ -1,0 +1,88 @@
+﻿@model MGO.Models.Customer
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Customer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Cust_FName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cust_FName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cust_LName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cust_LName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cust_Street1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cust_Street1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cust_Street2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cust_Street2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cust_City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cust_City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cust_State)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cust_State)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cust_ZIP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cust_ZIP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cust_EMail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cust_EMail)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,23 @@
+﻿/* Bootstrap styles */
+.jumbotron {
+    padding: 1em 0;
+}
+.btn-primary {
+    border-color: darkslateblue;
+    background-color: rebeccapurple;
+}
+.btn-primary:hover, .btn-primary:focus {
+    background-color: darkslateblue;
+}
+label {
+    font-weight: normal;
+}
+
+/* Other styles */
+footer {
+    border-top: 1px solid rebeccapurple;
+    margin: 1em 1em 0 0;
+}
+footer p {
+    font-size: 80%;
+}

@@ -1,0 +1,44 @@
+﻿.jumbotron h2 {
+    font-size: 110%;
+}
+
+select {
+    margin-bottom: 1em;
+}
+
+.btn {
+    margin: 0 0.5em 0.5em 0;
+    min-width: 10em;
+}
+
+p {
+    margin-bottom: 1em;
+}
+
+.options label {
+    font-weight: normal;
+    font-size: 90%;
+    padding-left: 5px;
+    padding-right: 10px;
+}
+
+.highlight {
+    background-color: #eee;
+    padding: 1em;
+    margin: 1em 0;
+}
+.highlight a {
+    font-weight: bold;
+    margin-right: 1em;
+}
+
+.small {
+    font-size: 85%;
+}
+
+.header {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    margin: 10px;
+}

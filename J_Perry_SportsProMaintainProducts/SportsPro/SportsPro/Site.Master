@@ -1,0 +1,84 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="SportsPro.Site" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>SportsPro Software</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="/Content/Site.css" rel="stylesheet" />
+    <script src="/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="/Scripts/bootstrap.js"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <div class="container">
+        <form id="form1" runat="server" class="form-horizontal">
+
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed"
+                            data-toggle="collapse" data-target="#mainMenu">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/Default">SportsPro</a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="mainMenu">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown">Customer Support&nbsp;<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/CustomerSupport/ProductRegistration">Register products</a></li>
+                                    <li><a href="/CustomerSupport/CustomerSurvey">Complete customer survey</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown">Technician Support&nbsp;<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/TechSupport/CustomerIncidentDisplay">Display customer incidents</a></li>
+                                    <li><a href="/TechSupport/IncidentUpdate">Update incidents</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown">Administration&nbsp;<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/Administration/ProductMaintenance">Maintain products</a></li>
+                                    <li><a href="/Administration/CustomerMaintenance">Maintain customers</a></li>
+                                    <li><a href="/Administration/TechnicianMaintenance">Maintain technicians</a></li>
+                                    <li><a href="/Administration/IncidentDisplay">Display incidents</a></li>
+                                    <li><a href="/Administration/CustomerDisplay">Display customers</a></li>
+                                    <li><a href="/Administration/TechnicianIncidentSummary">Display incidents by technician</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="/ContactUs">Contact Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+
+            <header class="jumbotron">
+                <h1>SportsPro</h1>
+                <h2>Sports management software for the sports enthusiast</h2>
+            </header>
+
+            <main>
+                <asp:ContentPlaceHolder ID="mainContent" runat="server">
+                </asp:ContentPlaceHolder>
+            </main>
+
+            <footer class="highlight small">
+                To contact us, call us at 800-555-0400 or email us at 
+            <a href="mailto:sportspro@sportsprosoftware.com">sportspro@sportsprosoftware.com</a>
+            </footer>
+
+        </form>
+    </div>
+</body>
+</html>
