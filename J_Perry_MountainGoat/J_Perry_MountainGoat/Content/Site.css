@@ -1,9 +1,11 @@
 ﻿:root {
     --primary-color: #B9C892;
     --primary-highlight: #bbd37e;
+    --primary-active: #CAE488;
     --primery-menu-header: #a7b584;
     --secondary-color: #9f6841;
     --secondary-highlight: #98633d;
+    --secondary-active: #8A5936;
     --link: #7c9a32;
     --link-highlight: #8db038;
 }
@@ -112,6 +114,12 @@ footer p.float-right {
     border-color: var(--secondary-highlight);
     color: var(--primary-highlight);
 }
+.btn-default:active,
+.btn-default.active {
+    background-color: var(--secondary-active);
+    border-color: var(--secondary-active);
+    color: var(--primary-active);
+}
 .btn-primary {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
@@ -122,6 +130,12 @@ footer p.float-right {
     background-color: var(--primary-highlight);
     border-color: var(--primary-highlight);
     color: var(--secondary-highlight);
+}
+.btn-primary:active,
+.btn-primary.active {
+    background-color: var(--primary-active);
+    border-color: var(--primary-active);
+    color: var(--secondary-active);
 }
 .form-control {
     border-color: var(--primary-color);
@@ -191,7 +205,6 @@ footer p.float-right {
     padding: 0px !important;
     margin-right: 0px !important;
 }
-
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */

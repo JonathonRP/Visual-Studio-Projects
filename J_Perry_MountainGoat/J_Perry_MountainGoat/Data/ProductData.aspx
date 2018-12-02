@@ -45,7 +45,7 @@
         <div class="col-lg-12">
             <asp:FormView ID="FrmViewProduct" CssClass="form-inline pull-left" runat="server" DataKeyNames="SKU" DataSourceID="SqlProducts" OnItemInserted="FrmViewProduct_ItemInserted">
                 <InsertItemTemplate>
-                    <div class="col-sm-2" style="padding: 0px; margin-right: 0px;">
+                    <div class="col-sm-2 mgo-formview-form-group">
                         <div class="input-group">
                             <asp:TextBox ID="SKUTextBox" CssClass="form-control" runat="server" Text='<%# Bind("SKU") %>' PlaceHolder="SKU" />
                             <div class="input-group-addon">
@@ -55,7 +55,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-3" style="padding: 0px; margin-right: 0px;">
+                    <div class="col-sm-3 mgo-formview-form-group">
                         <div class="input-group">
                             <asp:TextBox ID="Item_DescriptionTextBox" CssClass="form-control" runat="server" Text='<%# Bind("Item_Description") %>' PlaceHolder="Product Name" />
                             <div class="input-group-addon">
@@ -63,7 +63,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-3" style="padding: 0px; margin-right: 0px;">
+                    <div class="col-sm-3 mgo-formview-form-group">
                         <div class="input-group">
                             <asp:DropDownList ID="ddlFormItemCatNum" AutoPostBack="true" CssClass="form-control" runat="server" DataSourceID="SqlCategories" DataTextField="Cat_Num" DataValueField="Cat_Num" OnPreRender="ddlFormItemCatNum_PreRender" OnSelectedIndexChanged="ddlFormItemCatNum_SelectedIndexChanged" SelectedValue='<%# Bind("Cat_Num") %>' />
                             <div class="input-group-addon">
@@ -71,7 +71,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-2" style="padding: 0px; margin-right: 0px;">
+                    <div class="col-sm-2 mgo-formview-form-group">
                         <div class="input-group">
                             <asp:TextBox ID="Item_PriceTextBox" CssClass="form-control" runat="server" Text='<%# Bind("Item_Price") %>' PlaceHolder="Price" />
                             <div class="input-group-addon">
@@ -92,7 +92,7 @@
             <div class="col-md-8">
                 <asp:FormView ID="FrmViewCategory" CssClass="form-inline pull-left" runat="server" DataKeyNames="Cat_Num" DataSourceID="SqlCategories" OnItemInserted="FrmViewCategory_CategoryInserted" OnItemUpdated="FrmViewCategory_CategoryUpdated">
                     <EditItemTemplate>
-                        <div class="col-sm-4" style="padding: 0px; margin-right: 0px;">
+                        <div class="col-sm-4 mgo-formview-form-group">
                             <div class="input-group">
                                 <div class="input-group-addon">
                                     <asp:Label runat="server">Category ID:</asp:Label>
@@ -116,7 +116,7 @@
                         <asp:Button ID="btnFrmViewCategoryCancelUpdate" CssClass="btn btn-default" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" />
                     </EditItemTemplate>
                     <InsertItemTemplate>
-                        <div class="col-sm-4" style="padding: 0px; margin-right: 0px;">
+                        <div class="col-sm-4 mgo-formview-form-group">
                             <div class="input-group">
                                 <asp:TextBox ID="Cat_NumTextBox" PlaceHolder="Category ID" runat="server" CssClass="form-control" Text='<%# Bind("Cat_Num") %>' />
                                 <div class="input-group-addon">

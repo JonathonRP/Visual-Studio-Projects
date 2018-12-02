@@ -15,8 +15,25 @@ namespace MGO.Account
         {
             var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var signInManager = Context.GetOwinContext().Get<ApplicationSignInManager>();
-            var user = new ApplicationUser() { UserName = Email.Text, Email = Email.Text };
-            IdentityResult result = manager.Create(user, Password.Text);
+
+            var user = new ApplicationUser();
+            var teacher = new Teacher();
+            IdentityResult result;
+
+            if (Email.Text == "melinda.korzaan@mtsu.edu")
+            {
+                teacher.UserName = Email.Text;
+                teacher.Email = Email.Text;
+
+                result = manager.Create(teacher, Password.Text);
+            }
+            else
+            {
+                user.UserName = Email.Text;
+                user.Email = Email.Text;
+
+                result = manager.Create(user, Password.Text);
+            }
 
             if (result.Succeeded)
             {
@@ -24,8 +41,19 @@ namespace MGO.Account
                 //string code = manager.GenerateEmailConfirmationToken(user.Id);
                 //string callbackUrl = IdentityHelper.GetUserConfirmationRedirectUrl(code, user.Id, Request);
                 //manager.SendEmail(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>.");
-                manager.AddToRole(user.Id, "employee");
-                signInManager.SignIn( user, isPersistent: false, rememberBrowser: false);
+                
+                //manager.AddToRole(user.Id, "employee");
+
+                if (Email.Text == "melinda.korzaan@mtsu.edu" && !Page.User.IsInRole("teacher"))
+                {
+                    manager.AddToRole(teacher.Id, teacher.Role);
+                    signInManager.SignIn(teacher, isPersistent: false, rememberBrowser: false);
+                }
+                else
+                {
+                    signInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
+                }
+                
                 IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
             }
             else 

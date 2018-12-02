@@ -53,10 +53,10 @@ namespace MGO
             string friendly_url = "";
 
             if (path.Contains("ProductData", StringComparison.CurrentCultureIgnoreCase)
-                || path.Contains("CustomerInfo", StringComparison.CurrentCultureIgnoreCase)
-                || path.Contains("CustomerPurchases", StringComparison.CurrentCultureIgnoreCase)
-                || path.Contains("EmployeeInfo", StringComparison.CurrentCultureIgnoreCase)
-                || path.Contains("EmployeePurchases", StringComparison.CurrentCultureIgnoreCase))
+             || path.Contains("CustomerInfo", StringComparison.CurrentCultureIgnoreCase)
+             || path.Contains("CustomerPurchases", StringComparison.CurrentCultureIgnoreCase)
+             || path.Contains("EmployeeInfo", StringComparison.CurrentCultureIgnoreCase)
+             || path.Contains("EmployeePurchases", StringComparison.CurrentCultureIgnoreCase))
             {
                 if (path.Contains("Data/Manager", StringComparison.CurrentCultureIgnoreCase))
                 {
@@ -86,14 +86,14 @@ namespace MGO
                 return friendly_url.Insert(friendly_url.IndexOf(url_split_on, StringComparison.CurrentCultureIgnoreCase), "/");
             }
             else if (path.Contains("Commission", StringComparison.CurrentCultureIgnoreCase)
-                     || path.Contains("Customer", StringComparison.CurrentCultureIgnoreCase)
-                     || path.Contains("Employee", StringComparison.CurrentCultureIgnoreCase)
-                     || path.Contains("Product", StringComparison.CurrentCultureIgnoreCase)
-                     || path.Contains("Revenue", StringComparison.CurrentCultureIgnoreCase)
-                     || path.Contains("CategoryRevenue", StringComparison.CurrentCultureIgnoreCase)
-                     || path.Contains("ProductSales", StringComparison.CurrentCultureIgnoreCase)
-                     || path.Contains("EmployeeSales", StringComparison.CurrentCultureIgnoreCase)
-                     || path.Contains("Trend", StringComparison.CurrentCultureIgnoreCase))
+                  || path.Contains("Customer", StringComparison.CurrentCultureIgnoreCase)
+                  || path.Contains("Employee", StringComparison.CurrentCultureIgnoreCase)
+                  || path.Contains("Product", StringComparison.CurrentCultureIgnoreCase)
+                  || path.Contains("Revenue", StringComparison.CurrentCultureIgnoreCase)
+                  || path.Contains("CategoryRevenue", StringComparison.CurrentCultureIgnoreCase)
+                  || path.Contains("ProductSales", StringComparison.CurrentCultureIgnoreCase)
+                  || path.Contains("EmployeeSales", StringComparison.CurrentCultureIgnoreCase)
+                  || path.Contains("Trend", StringComparison.CurrentCultureIgnoreCase))
             { 
                 if (path.Contains("Reports/Manager", StringComparison.CurrentCultureIgnoreCase))
                 {

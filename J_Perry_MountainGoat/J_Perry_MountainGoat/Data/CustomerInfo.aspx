@@ -5,7 +5,7 @@
         <div class="col-lg-12">
             <asp:FormView ID="FrmViewCustomer" CssClass="form-inline pull-left" runat="server" DataKeyNames="Cust_ID" DataSourceID="EntityCustomers" OnItemInserted="FrmViewCustomer_CustomerInserted">
                 <InsertItemTemplate>
-                    <div class="col-sm-1" style="padding: 0px; margin-right: 0px;">
+                    <div class="col-sm-1 mgo-formview-form-group">
                         <div class="input-group">
                             <asp:TextBox ID="txtCustID" CssClass="form-control" runat="server" Text='<%# Bind("Cust_ID") %>' PlaceHolder="ID" />
                             <div class="input-group-addon">
@@ -15,7 +15,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-3" style="padding: 0px; margin-right: 0px;">
+                    <div class="col-sm-3 mgo-formview-form-group">
                         <div class="input-group">
                             <asp:TextBox ID="txtCustFName" CssClass="form-control" runat="server" Text='<%# Bind("Cust_FName") %>' PlaceHolder="First Name" />
                             <div class="input-group-addon">
@@ -23,7 +23,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-3" style="padding: 0px; margin-right: 0px;">
+                    <div class="col-sm-3 mgo-formview-form-group">
                         <div class="input-group">
                             <asp:TextBox ID="txtCustLName" CssClass="form-control" runat="server" Text='<%# Bind("Cust_LName") %>' PlaceHolder="Last Name" />
                             <div class="input-group-addon">
@@ -32,7 +32,7 @@
                         </div>
                     </div>
                     </div>
-                    <div class="col-sm-3" style="padding: 0px; margin-right: 0px;">
+                    <div class="col-sm-3 mgo-formview-form-group">
                         <div class="input-group">
                             <asp:TextBox ID="txtCustEMail" CssClass="form-control" runat="server" Text='<%# Bind("Cust_EMail") %>' PlaceHolder="EMail Address" />
                             <div class="input-group-addon">
@@ -40,7 +40,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-3" style="padding: 0px; margin-right: 0px;">
+                    <div class="col-sm-3 mgo-formview-form-group">
                         <div class="input-group">
                             <asp:TextBox ID="txtCustStreet1" CssClass="form-control" runat="server" Text='<%# Bind("Cust_Street1") %>' PlaceHolder="Street1" />
                             <div class="input-group-addon">
@@ -48,10 +48,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-1" style="padding: 0px; margin-right: 0px;">
+                    <div class="col-sm-1 mgo-formview-form-group">
                         <asp:TextBox ID="txtCustStreet2" CssClass="form-control" runat="server" Text='<%# Bind("Cust_Street2") %>' PlaceHolder="Street2" />
                     </div>
-                    <div class="col-sm-2" style="padding: 0px; margin-right: 0px;">
+                    <div class="col-sm-2 mgo-formview-form-group">
                         <div class="input-group">
                             <asp:TextBox ID="txtCustCity" CssClass="form-control" runat="server" Text='<%# Bind("Cust_City") %>' PlaceHolder="City" />
                             <div class="input-group-addon">
@@ -59,7 +59,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-2" style="padding: 0px; margin-right: 0px;">
+                    <div class="col-sm-2 mgo-formview-form-group">
                         <div class="input-group">
                             <asp:TextBox ID="txtCustState" CssClass="form-control" runat="server" Text='<%# Bind("Cust_State") %>' PlaceHolder="State" />
                             <div class="input-group-addon">
@@ -68,7 +68,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-2" style="padding: 0px; margin-right: 0px;">
+                    <div class="col-sm-2 mgo-formview-form-group">
                         <div class="input-group">
                             <asp:TextBox ID="txtCustZIP" CssClass="form-control" runat="server" Text='<%# Bind("Cust_ZIP") %>' PlaceHolder="ZIP" />
                             <div class="input-group-addon">
@@ -120,7 +120,7 @@
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Customer Address" SortExpression="Cust_Street1" HeaderStyle-CssClass="col-sm-4">
                         <EditItemTemplate>
-                            <div class="col-sm-7" style="padding: 0px; margin-right: -2px;">
+                            <div class="col-sm-7 mgo-gridview-form-group">
                                 <div class="input-group">
                                     <asp:TextBox ID="grdCustStreet1" CssClass="form-control" runat="server" Text='<%# Bind("Cust_Street1") %>' PlaceHolder="Street 1"></asp:TextBox>
                                     <div class="input-group-addon">
@@ -128,10 +128,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-5" style="padding: 0px; margin-right: -2px;">
+                            <div class="col-sm-5 mgo-gridview-form-group">
                                 <asp:TextBox ID="grdCustStreet2" CssClass="form-control" runat="server" Text='<%# Bind("Cust_Street2") %>' PlaceHolder="Street 2"></asp:TextBox>
                             </div>
-                            <div class="col-sm-5" style="padding: 0px; margin-right: -2px;">
+                            <div class="col-sm-5 mgo-gridview-form-group">
                                 <div class="input-group">
                                     <asp:TextBox ID="grdCustCity" CssClass="form-control" runat="server" Text='<%# Bind("Cust_City") %>' PlaceHolder="City"></asp:TextBox>
                                     <div class="input-group-addon">
@@ -139,7 +139,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-3" style="padding: 0px; margin-right: -2px;">
+                            <div class="col-sm-3 mgo-gridview-form-group">
                                 <div class="input-group">
                                     <asp:TextBox ID="grdCustState" CssClass="form-control" runat="server" Text='<%# Bind("Cust_State") %>' PlaceHolder="State"></asp:TextBox>
                                     <div class="input-group-addon">
@@ -148,7 +148,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-4" style="padding: 0px; margin-right: -2px;">
+                            <div class="col-sm-4 mgo-gridview-form-group">
                                 <div class="input-group">
                                     <asp:TextBox ID="grdCustZIP" CssClass="form-control" runat="server" Text='<%# Bind("Cust_ZIP") %>' PlaceHolder="ZIP"></asp:TextBox>
                                     <div class="input-group-addon">
