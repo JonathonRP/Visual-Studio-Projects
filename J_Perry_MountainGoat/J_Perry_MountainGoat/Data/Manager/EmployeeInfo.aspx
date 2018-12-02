@@ -5,7 +5,7 @@
         <div class="col-lg-12">
             <asp:FormView ID="FrmViewEmployee" CssClass="form-inline pull-left" runat="server" DataKeyNames="Emp_ID" DataSourceID="EntityEmployees" OnItemInserted="FrmViewEmployee_EmployeeInserted">
                 <InsertItemTemplate>
-                    <div class="col-sm-1" style="padding: 0px; margin-right: 0px;">
+                    <div class="col-sm-1 mgo-formview-form-group">
                         <div class="input-group">
                             <asp:TextBox ID="txtEmpID" CssClass="form-control" runat="server" Text='<%# Bind("Emp_ID") %>' PlaceHolder="ID" />
                             <div class="input-group-addon">
@@ -15,7 +15,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-2" style="padding: 0px; margin-right: 0px;">
+                    <div class="col-sm-2 mgo-formview-form-group">
                         <div class="input-group">
                             <asp:TextBox ID="txtEmpFName" CssClass="form-control" runat="server" Text='<%# Bind("Emp_FName") %>' PlaceHolder="First Name" />
                             <div class="input-group-addon">
@@ -23,7 +23,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-2" style="padding: 0px; margin-right: 0px;">
+                    <div class="col-sm-2 mgo-formview-form-group">
                         <div class="input-group">
                             <asp:TextBox ID="txtEmpLName" CssClass="form-control" runat="server" Text='<%# Bind("Emp_LName") %>' PlaceHolder="Last Name" />
                             <div class="input-group-addon">
@@ -32,7 +32,7 @@
                         </div>
                     </div>
                     </div>
-                    <div class="col-sm-2" style="padding: 0px; margin-right: 0px;">
+                    <div class="col-sm-2 mgo-formview-form-group">
                         <div class="input-group">
                             <asp:TextBox ID="txtEmpPosition" CssClass="form-control" runat="server" Text='<%# Bind("Emp_Position") %>' PlaceHolder="Position" />
                             <div class="input-group-addon">
@@ -40,7 +40,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-2" style="padding: 0px; margin-right: 0px;">
+                    <div class="col-sm-2 mgo-formview-form-group">
                         <div class="input-group">
                             <asp:TextBox ID="txtEmpCommission" CssClass="form-control" runat="server" Text='<%# Bind("Emp_Commission") %>' PlaceHolder="Commission" />
                             <div class="input-group-addon">

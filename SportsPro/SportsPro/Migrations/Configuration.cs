@@ -3,6 +3,7 @@ namespace SportsPro.Migrations
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
+    using System.Diagnostics;
     using System.Linq;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
@@ -25,6 +26,24 @@ namespace SportsPro.Migrations
 
             // add admin role
             context.Roles.AddOrUpdate(r => r.Name, new IdentityRole { Name = "admin" });
+
+            if (!System.Diagnostics.Debugger.IsAttached)
+                System.Diagnostics.Debugger.Launch();
+
+            if (context == null)
+            {
+                Debug.WriteLine($"{context}");
+            }
+            else
+            {
+                Debug.WriteLine($"not null");
+                Debug.WriteLine($"{context.Users}");
+            }
+
+            foreach (var item in context.Users)
+            {
+                Debug.WriteLine($"{item.UserName}");
+            }
 
             // add initial admin to system (add new user and assign admin role)
             if (!context.Users.Any(u => u.UserName == "jreesep@mtsu.edu"))

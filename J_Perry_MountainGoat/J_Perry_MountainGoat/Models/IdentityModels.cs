@@ -10,6 +10,43 @@ using MGO.Models;
 
 namespace MGO.Models
 {
+    public enum MGORoles
+    {
+        employee,
+        manager,
+        teacher
+    }
+
+    public class MGOManager : ApplicationUser
+    {
+        public string Role { get => Enum.GetName(typeof(MGORoles), MGORoles.manager); }
+
+        public MGOManager()
+        {
+
+        }
+    }
+
+    public class MGOEmployee : ApplicationUser
+    {
+        public string Role { get => Enum.GetName(typeof(MGORoles), MGORoles.employee); }
+
+        public MGOEmployee()
+        {
+
+        }
+    }
+
+    public class Teacher : ApplicationUser
+    {
+        public string Role { get => Enum.GetName(typeof(MGORoles), MGORoles.teacher); }
+
+        public Teacher()
+        {
+
+        }
+    }
+
     // You can add User data for the user by adding more properties to your User class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
@@ -32,6 +69,7 @@ namespace MGO.Models
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+
         }
 
         public static ApplicationDbContext Create()

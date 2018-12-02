@@ -47,8 +47,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AspNet.ScriptManager.bootstrap, Version=3.3.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AspNet.ScriptManager.bootstrap.3.3.7\lib\net45\AspNet.ScriptManager.bootstrap.dll</HintPath>
+    <Reference Include="AspNet.ScriptManager.bootstrap, Version=3.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AspNet.ScriptManager.bootstrap.3.1.1\lib\net45\AspNet.ScriptManager.bootstrap.dll</HintPath>
     </Reference>
     <Reference Include="AspNet.ScriptManager.jQuery, Version=3.1.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\AspNet.ScriptManager.jQuery.3.1.1\lib\net45\AspNet.ScriptManager.jQuery.dll</HintPath>
@@ -213,10 +213,15 @@
     <Content Include="Account\ResetPasswordConfirmation.aspx" />
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
+    <Content Include="App_Data\aspnet-MGO.mdf" />
+    <Content Include="App_Data\aspnet-MGO_log.ldf">
+      <DependentUpon>aspnet-MGO.mdf</DependentUpon>
+    </Content>
     <Content Include="App_Data\MountainGoat_Outfitters.mdf" />
     <Content Include="App_Data\MountainGoat_Outfitters_log.ldf">
       <DependentUpon>MountainGoat_Outfitters.mdf</DependentUpon>
     </Content>
+    <Content Include="App_Data\SQLUsersSelectTest.sql" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -289,14 +294,12 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="Properties\PublishProfiles\MountainGoatOutfitters - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
@@ -528,6 +531,10 @@
     <Compile Include="Migrations\201811282152240_AddDataAnnotationsMig.cs" />
     <Compile Include="Migrations\201811282152240_AddDataAnnotationsMig.Designer.cs">
       <DependentUpon>201811282152240_AddDataAnnotationsMig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812012346052_UserType.cs" />
+    <Compile Include="Migrations\201812012346052_UserType.Designer.cs">
+      <DependentUpon>201812012346052_UserType.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs">
@@ -775,6 +782,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811282152240_AddDataAnnotationsMig.resx">
       <DependentUpon>201811282152240_AddDataAnnotationsMig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812012346052_UserType.resx">
+      <DependentUpon>201812012346052_UserType.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
