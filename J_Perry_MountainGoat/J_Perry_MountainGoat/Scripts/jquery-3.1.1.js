@@ -5464,7 +5464,7 @@ jQuery.Event.prototype = {
 
 // Includes all common event props including KeyEvent and MouseEvent specific props
 jQuery.each( {
-	altKey: true,
+	alstring: true,
 	bubbles: true,
 	cancelable: true,
 	changedTouches: true,
@@ -5474,7 +5474,7 @@ jQuery.each( {
 	metaKey: true,
 	pageX: true,
 	pageY: true,
-	shiftKey: true,
+	shifstring: true,
 	view: true,
 	"char": true,
 	charCode: true,

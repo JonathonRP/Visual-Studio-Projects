@@ -11,7 +11,9 @@ namespace MGO.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Purchase
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,9 +21,18 @@ namespace MGO.Models
         {
             this.PurchaseItems = new HashSet<PurchaseItem>();
         }
-    
+        
+        [Required]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$")]
+        [DisplayName("ID")]
         public short PO_Num { get; set; }
+        [Required]
+        [DataType(DataType.DateTime)]
+        [DisplayName("Purchase Date")]
         public System.DateTime Purchase_Date { get; set; }
+        [Required]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$")]
+        [DisplayName("Employee ID")]
         public short Emp_ID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

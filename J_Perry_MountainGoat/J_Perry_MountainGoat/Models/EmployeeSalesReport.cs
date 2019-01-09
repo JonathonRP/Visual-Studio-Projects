@@ -24,7 +24,7 @@ namespace MGO.Models
                          select new EmployeeSalesReport()
                          {
                              Employee_Name = Employee.Emp_FName + " " + Employee.Emp_LName,
-                             Employee_Commission = Employee.Emp_Commission,
+                             Employee_Commission = Employee.Emp_Commission * (float?)(SalesItem.SI_Qty_Sold * Item.Item_Price),
                              Sale_Total = SalesItem.SI_Qty_Sold * Item.Item_Price,
                              Sale_Date = Sale.S_Date                             
                          };

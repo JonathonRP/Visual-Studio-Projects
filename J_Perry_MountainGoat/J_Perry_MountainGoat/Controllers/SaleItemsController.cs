@@ -13,6 +13,7 @@ namespace MGO.Controllers
     public class SaleItemsController : Controller
     {
         private MGO_Entities db = new MGO_Entities();
+        private string Name = "Product Sold";
 
         // GET: SaleItems
         public ActionResult Index()
@@ -33,6 +34,9 @@ namespace MGO.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.Title = "For";
+            ViewBag.Controller = Name;
             return View(saleItem);
         }
 
@@ -41,6 +45,8 @@ namespace MGO.Controllers
         {
             ViewBag.SKU = new SelectList(db.Items, "SKU", "Item_Description");
             ViewBag.Sale_Num = new SelectList(db.Sales, "Sale_Num", "Sale_Num");
+            ViewBag.Title = "New";
+            ViewBag.Controller = Name;
             return View();
         }
 
@@ -60,6 +66,7 @@ namespace MGO.Controllers
 
             ViewBag.SKU = new SelectList(db.Items, "SKU", "Item_Description", saleItem.SKU);
             ViewBag.Sale_Num = new SelectList(db.Sales, "Sale_Num", "Sale_Num", saleItem.Sale_Num);
+            ViewBag.Controller = Name;
             return View(saleItem);
         }
 
@@ -75,8 +82,10 @@ namespace MGO.Controllers
             {
                 return HttpNotFound();
             }
+
             ViewBag.SKU = new SelectList(db.Items, "SKU", "Item_Description", saleItem.SKU);
             ViewBag.Sale_Num = new SelectList(db.Sales, "Sale_Num", "Sale_Num", saleItem.Sale_Num);
+            ViewBag.Controller = Name;
             return View(saleItem);
         }
 
@@ -93,8 +102,10 @@ namespace MGO.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
             ViewBag.SKU = new SelectList(db.Items, "SKU", "Item_Description", saleItem.SKU);
             ViewBag.Sale_Num = new SelectList(db.Sales, "Sale_Num", "Sale_Num", saleItem.Sale_Num);
+            ViewBag.Controller = Name;
             return View(saleItem);
         }
 
@@ -110,6 +121,8 @@ namespace MGO.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.Controller = Name;
             return View(saleItem);
         }
 

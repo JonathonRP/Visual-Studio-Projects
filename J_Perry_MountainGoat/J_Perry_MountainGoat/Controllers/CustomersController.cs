@@ -13,6 +13,7 @@ namespace MGO.Controllers
     public class CustomersController : Controller
     {
         private MGO_Entities db = new MGO_Entities();
+        private string Name = "Customer";
 
         // GET: Customers
         public ActionResult Index()
@@ -32,12 +33,17 @@ namespace MGO.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.Title = "For";
+            ViewBag.Controller = Name;
             return View(customer);
         }
 
         // GET: Customers/Create
         public ActionResult Create()
         {
+            ViewBag.Title = "New";
+            ViewBag.Controller = Name;
             return View();
         }
 
@@ -55,6 +61,7 @@ namespace MGO.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.Controller = Name;
             return View(customer);
         }
 
@@ -70,6 +77,8 @@ namespace MGO.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.Controller = Name;
             return View(customer);
         }
 
@@ -86,6 +95,8 @@ namespace MGO.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
+            ViewBag.Controller = Name;
             return View(customer);
         }
 
@@ -101,6 +112,8 @@ namespace MGO.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.Controller = Name;
             return View(customer);
         }
 

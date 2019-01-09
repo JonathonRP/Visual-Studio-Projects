@@ -1,0 +1,429 @@
+﻿@import "variables";
+@import "../sass/bootstrap.scss";
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+    padding-bottom: 20px;
+}
+
+h1 {
+    color: color(primary);
+}
+
+a {
+    //color: $link;
+    transition: all .3s ease-in;
+
+    /*&:hover,
+    &:focus {
+        color: $link-highlight;
+    }
+
+    &:link {
+        color: $link;
+    }
+
+    &:link:hover,
+    &:link:focus {
+        color: $link-highlight;
+    }*/
+}
+
+main {
+    padding-bottom: 2rem;
+
+    p {
+        color: color(accent);
+    }
+}
+
+footer {
+    padding: .5rem;
+
+    p {
+        display: inline;
+
+        &.float-left {
+            float: left;
+        }
+
+        &.float-right {
+            float: right;
+        }
+    }
+}
+
+//Navbar and jumbotron theming
+/*.navbar-default,
+.navbar-default .navbar-brand,
+.navbar-default .navbar-nav > li > a,
+.navbar-default .navbar-nav > .dropdown > a .caret,
+.navbar-default .navbar-nav .dropdown .dropdown-menu,
+.navbar-default .navbar-nav .dropdown .dropdown-menu > li > a {
+    background-color: $secondary-color !important;
+    color: $primary-color !important;
+}*/
+
+.navbar-default .navbar-toggle {
+    //border-color: $primary-color;
+    transition: all .3s ease-in-out;
+    animation: fade-in .3s ease-in-out 1;
+
+    /*&:hover,
+    &:focus {
+        //background-color: $primary-color;
+    }
+
+    &.icon-bar {
+        background-color: $primary-color;
+    }*/
+
+    &:hover .icon-bar,
+    &:focus .icon-bar {
+        background-color: color(accent);
+    }
+}
+
+/*.navbar-default .navbar-nav .dropdown .dropdown-menu > .dropdown-header {
+    color: $primery-menu-header;
+}
+
+//Navbar and jumbotron highlight theming
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus,
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus,
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus,
+.navbar-default .navbar-nav > .dropdown > a:hover .caret,
+.navbar-default .navbar-nav > .dropdown > a:focus .caret,
+.navbar-default .navbar-nav .dropdown .dropdown-menu > li > a:hover,
+.navbar-default .navbar-nav .dropdown .dropdown-menu > li > a:focus {
+    background-color: $secondary-highlight !important;
+    color: color(primary-highlight) !important;
+}*/
+
+.dropdown-menu {
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all .3s ease-in-out;
+}
+
+.open .dropdown-menu {
+    max-height: 400px;
+    opacity: 1;
+}
+
+.jumbotron {
+    background: $secondary-highlight;
+    color: $primary-highlight;
+
+    @include desktop {
+        background: $secondary-highlight url(/Images/Home.jpg) no-repeat top center;
+        background-size: 70% 100%;
+        background-attachment: fixed;
+    }
+
+    @include smart-phone {
+        margin-top: 20px;
+    }
+}
+
+/*@media screen and (min-width: $screen-lg-min - 175 = 1025px ) {
+    .jumbotron {
+        background: $secondary-highlight url(/Images/Home.jpg) no-repeat top center;
+        background-size: 70% 100%;
+        background-attachment: fixed;
+        color: $primary-highlight;
+    }
+}*/
+
+/*@media (min-width: 768px) and (max-width: 991px) {
+    .navbar-collapse.collapse {
+        display: none !important;
+
+        &.in {
+            display: block !important;
+        }
+    }
+
+    .navbar-header .collapse, .navbar-toggle {
+        display: block !important;
+    }
+
+    .navbar-header {
+        float: none;
+    }
+}*/
+
+//theme bootstrap
+.btn-default {
+    transition: all .3s ease-in-out;
+    /*background-color: $secondary-color;
+    border-color: $secondary-color;
+    color: $primary-color;
+
+    &:hover,
+    &:focus {
+        background-color: $secondary-highlight;
+        border-color: $secondary-highlight;
+        color: $primary-highlight;
+    }
+
+    &:active,
+    &.active {
+        background-color: $secondary-active;
+        border-color: $secondary-active;
+        color: $primary-active;
+    }*/
+}
+
+.btn-primary {
+    transition: all .3s ease-in-out;
+    /*background-color: $primary-color;
+    border-color: $primary-color;
+    color: $secondary-color;
+
+    &:hover,
+    &:focus {
+        background-color: $primary-highlight;
+        border-color: $primary-highlight;
+        color: $secondary-highlight;
+    }
+
+    &:active,
+    &.active {
+        background-color: $primary-active;
+        border-color: $primary-active;
+        color: $secondary-active;
+    }*/
+}
+
+.form-control {
+    /*border-color: $primary-color;
+    color: $secondary-color;*/
+
+    transition: all .3s ease-in-out;
+
+    &:focus,
+    &:hover {
+        //box-shadow: $secondary-highlight;
+        border-color: color(accent);
+        color: color(primary);
+    }
+}
+
+.control-label {
+    color: color(accent);
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+
+    @include smart-phone {
+        padding: 0;
+    }
+}
+
+/*custom css classes*/
+.center-block {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.mgo-welcome-header {
+    font-size: 3rem;
+
+    &.row.mgo-row {
+        padding-bottom: 1.5rem;
+    }
+
+    @include desktop {
+        font-size: 6rem;
+    }
+
+    @include tablet {
+        font-size: 4rem;
+    }
+}
+
+.mgo-home-background-img {
+    height: 35rem;
+    background-size: contain;
+    background-image: url(/Images/k2-amp-shockwave-skis.jpg);
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-attachment: scroll;
+
+    @include tablet {
+        height: 70rem;
+    }
+}
+
+/*@media screen and (min-width: $screen-md-min) {
+    .mgo-home-background-img {
+        height: 70rem;
+        background-size: contain;
+        background-image: url(/Images/k2-amp-shockwave-skis.jpg);
+        background-repeat: no-repeat;
+        background-position: center top;
+        background-attachment: scroll;
+    }
+}*/
+
+.mgo-lawn-background-img {
+    background-size: contain;
+    background-image: url(/Images/Home-Lawn.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.mgo-login-img {
+    height: 35rem;
+}
+
+.mgo-about-img {
+    height: 53rem;
+}
+
+.mgo-grdview-header {
+    background-color: color(accent);
+}
+
+.row.mgo-row {
+    padding-bottom: 2rem;
+}
+
+.mgo-gridview-form-group {
+    padding: 0px !important;
+    margin-right: -2px !important;
+}
+
+.mgo-formview-form-group {
+    padding: 0px !important;
+    margin-right: 0px !important;
+}
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set widths on the form inputs since otherwise they're 100% wide */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="tel"],
+input[type="select"] {
+    max-width: 280px;
+}
+
+/*style text input*/
+/*input:hover,
+textarea:hover {
+    border-color: var(--secondary-color);
+    color: var(--primary-color);
+}*/
+
+/*Change text in autofill textbox*/
+input:-webkit-autofill,
+textarea:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px color(primary) inset;
+    -webkit-text-fill-color: color(accent) !important;
+    transition: all .3s ease-in-out;
+
+    &:hover,
+    &:focus,
+    &:active {
+        border-color: color(accent) !important;
+        -webkit-box-shadow: 0 0 0px 1000px color(accent) inset;
+        -webkit-text-fill-color: color(primary) !important;
+        //transition: all .3s ease-in-out;
+    }
+}
+
+/*style checkbox input*/
+.checkbox {
+    padding-left: 20px;
+
+    label {
+        display: inline-block;
+        vertical-align: middle;
+        position: relative;
+        padding-left: 5px;
+
+        &::before {
+            content: "";
+            display: inline-block;
+            position: absolute;
+            width: 17px;
+            height: 17px;
+            left: 0;
+            margin-left: -20px;
+            border: 1px solid #cccccc;
+            border-radius: 3px;
+            background-color: #fff;
+            -webkit-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+            -o-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+            transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+        }
+
+        &::after {
+            display: inline-block;
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            left: 0;
+            top: 0;
+            margin-left: -20px;
+            padding-left: 3px;
+            padding-top: 1px;
+            font-size: 11px;
+            color: #555555;
+        }
+
+        &[for=MainContent_RememberMe] {
+            color: color(accent);
+        }
+    }
+
+    input[type="checkbox"] {
+        opacity: 0;
+        z-index: 1;
+
+        &:checked + label::after {
+            font-family: "FontAwesome";
+            content: "\f00c";
+        }
+
+        &:checked + label::before {
+            background-color: color(primary);
+            border-color: color(primary);
+            transition: all .3s ease-in-out;
+        }
+
+        &:checked + label::after {
+            color: color(accent);
+        }
+    }
+}
+
+/* Responsive: Portrait tablets and up */
+/*@media screen and (min-width: $screen-sm-min) {
+    .jumbotron {
+        margin-top: 20px;
+    }
+
+    .body-content {
+        padding: 0;
+    }
+}*/

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Microsoft.AspNet.Identity;
 
 namespace MGO
 {
@@ -12,6 +13,12 @@ namespace MGO
         protected void Page_Load(object sender, EventArgs e)
         {
 
+        }
+
+        protected void Logout( object sender, EventArgs e )
+        {
+            Context.GetOwinContext().Authentication.SignOut( DefaultAuthenticationTypes.ApplicationCookie );
+            Response.Redirect( "/" );
         }
     }
 }

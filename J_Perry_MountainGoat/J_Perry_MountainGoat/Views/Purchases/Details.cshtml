@@ -1,13 +1,12 @@
 ﻿@model MGO.Models.Purchase
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Action = "Details";
 }
 
-<h2>Details</h2>
+<h1 class="row mgo-row text-center">@ViewBag.Action @ViewBag.Title @ViewBag.Controller</h1>
 
 <div>
-    <h4>Purchase</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>

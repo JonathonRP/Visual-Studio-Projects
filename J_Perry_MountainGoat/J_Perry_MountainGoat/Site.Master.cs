@@ -72,9 +72,10 @@ namespace MGO
 
         }
 
-        protected void LoginStatus_LoggingOut(object sender, LoginCancelEventArgs e)
+        protected void Logout( object sender, EventArgs e )
         {
-            Context.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            Context.GetOwinContext().Authentication.SignOut( DefaultAuthenticationTypes.ApplicationCookie );
+            Response.Redirect( "/" );
         }
     }
 

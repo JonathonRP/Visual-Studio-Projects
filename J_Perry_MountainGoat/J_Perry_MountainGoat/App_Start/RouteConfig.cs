@@ -1,9 +1,13 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
+using System.Web.Mvc;
 using System.Web.Routing;
 using Microsoft.AspNet.FriendlyUrls;
 using Microsoft.AspNet.FriendlyUrls.Resolvers;
@@ -20,24 +24,27 @@ namespace MGO
             };
 
             routes.EnableFriendlyUrls(settings, new UrlFriendlyResolver());
-
-            //map custom moutain goat outfitters data static routes
-            routes.MapPageRoute("", "", "~/Default.aspx");
-            routes.MapPageRoute("ProductData", "Data/Product", "~/Data/ProductData.aspx");
-            routes.MapPageRoute("CustomerInfo", "Customer/Info", "~/Data/CustomerInfo.aspx");
-            routes.MapPageRoute("CustomerPurchases", "Customer/Purchases", "~/Data/CustomerPurchases.aspx");
-            routes.MapPageRoute("EmployeeInfo", "Employee/Info", "~/Data/Manager/EmployeeInfo.aspx");
-            routes.MapPageRoute("EmployeePurchases", "Employee/Purchases", "~/Data/Manager/EmployeePurchases.aspx");
-
-            routes.MapPageRoute("CommissionsReport", "Report/Commission", "~/Report/Manager/Commission.aspx");
-            routes.MapPageRoute("CutomerReport", "Report/Customer", "~/Report/Customer.aspx");
-            routes.MapPageRoute("EmployeeReport", "Report/Employee", "~/Report/Manager/Employee.aspx");
-            routes.MapPageRoute("ProductReport", "Report/Product", "~/Report/Product.aspx");
-            routes.MapPageRoute("RevenueReport", "Report/Revenue", "~/Report/Manager/Revenue.aspx");
-            routes.MapPageRoute("CategoryRevenueReport", "Report/Revenue/Category", "~/Report/Manager/CategoryRevenue.aspx");
-            routes.MapPageRoute("ProductSalesReport", "Report/Sales/Product", "~/Report/Manager/ProductSales.aspx");
-            routes.MapPageRoute("EmployeeSalesReport", "Report/Sales/Employee", "~/Report/Manager/EmployeeSales.aspx");
-            routes.MapPageRoute("TrendReport", "Report/Trend", "~/Report/Manager/Trend.aspx");
+            
+            //map custom moutain goat outfitters page routes
+            routes.AddRoutes(new [] { new Route("{resource}.axd/{*pathInfo}", new StopRoutingHandler()),
+                                      new WebFormRoutes {
+                                            { "Data/Product", "~/Data/ProductData.aspx" },
+                                            { "Customer/Info", "~/Data/CustomerInfo.aspx" },
+                                            { "Customer/Purchases", "~/Data/CustomerPurchases.aspx"},
+                                            { "Employee/Info", "~/Data/Manager/EmployeeInfo.aspx" },
+                                            { "Employee/Purchases", "~/Data/Manager/EmployeePurchases.aspx" },
+                                            { "Report/Commission", "~/Report/Manager/Commission.aspx" },
+                                            { "Report/Customer", "~/Report/Customer.aspx" },
+                                            { "Report/Employee", "~/Report/Manager/Employee.aspx" },
+                                            { "Report/Product", "~/Report/Product.aspx" },
+                                            { "Report/Revenue", "~/Report/Manager/Revenue.aspx" },
+                                            { "Report/Revenue/Category", "~/Report/Manager/CategoryRevenue.aspx" },
+                                            { "Report/Sales/Product", "~/Report/Manager/ProductSales.aspx" },
+                                            { "Report/Sales/Employee", "~/Report/Manager/EmployeeSales.aspx" },
+                                            { "Report/Trend", "~/Report/Manager/Trend.aspx" }
+                                      },
+                                      new MvcRoute("{controller}/{action}/{id}", new { action = "Index", id = UrlParameter.Optional })
+            });
         }
     }
 
@@ -94,7 +101,7 @@ namespace MGO
                   || path.Contains("ProductSales", StringComparison.CurrentCultureIgnoreCase)
                   || path.Contains("EmployeeSales", StringComparison.CurrentCultureIgnoreCase)
                   || path.Contains("Trend", StringComparison.CurrentCultureIgnoreCase))
-            { 
+            {
                 if (path.Contains("Reports/Manager", StringComparison.CurrentCultureIgnoreCase))
                 {
                     friendly_url = "~/" + path.Replace("Manager/", "", RegexOptions.IgnoreCase).Replace(".aspx", "", RegexOptions.IgnoreCase);
@@ -124,6 +131,191 @@ namespace MGO
         }
     }
 
+    public class WebFormsConstraint : IRouteConstraint
+    {
+        public bool Match(HttpContextBase httpContext, Route route, string parameterName, RouteValueDictionary values, RouteDirection routeDirection)
+        {
+            return routeDirection == RouteDirection.IncomingRequest;
+        }
+    }
+
+    public class WebFormRoutes : WebFormRoute, IDictionary<string, string>
+    {
+        internal List<WebFormRoute> routes;
+        private readonly List<string> keys;
+        private readonly List<string> values;
+
+        public string this[string key] {
+            get => routes[GetIndexOfKey(key)].VirtualPath;
+
+            set => routes[GetIndexOfKey(key)].VirtualPath = value;
+        }
+
+        public ICollection<string> Keys => keys;
+
+        public ICollection<string> Values => values;
+
+        public int Count => routes.Count;
+
+        public bool IsReadOnly => false;
+
+        public WebFormRoutes(string url = "", string virtualPath = "~/Default.aspx") : base(url, virtualPath)
+        {
+            routes = new List<WebFormRoute>();
+            keys = new List<string>();
+            values = new List<string>();
+            
+            routes.Add(new WebFormRoute(url, virtualPath));
+            Keys.Add(url);
+            Values.Add(virtualPath);
+        }
+
+        public void Add(string url, string virtualPath)
+        {
+            routes.Add(new WebFormRoute(url, virtualPath));
+            Keys.Add(url);
+            Values.Add(virtualPath);
+        }
+
+        public void Add(KeyValuePair<string, string> item)
+        {
+            routes.Add(new WebFormRoute(item.Key, item.Value));
+            Keys.Add(item.Key);
+            Values.Add(item.Value);
+        }
+
+        public void Clear()
+        {
+            routes.Clear();
+            Keys.Clear();
+            Values.Clear();
+        }
+
+        public bool Contains(KeyValuePair<string, string> item)
+        {
+            return routes.Contains(new WebFormRoute(item.Key, item.Value));
+        }
+
+        public bool ContainsKey(string key)
+        {
+            return TryGetIndexOfKey(key, out int index);
+        }
+
+        public void CopyTo(KeyValuePair<string, string>[] array, int arrayIndex)
+        {
+            var routesDictionary = new Dictionary<string, string>();
+            foreach(var key in Keys)
+            {
+                foreach(var value in Values)
+                {
+                    routesDictionary.Add(key, value);
+                }
+            }
+
+            Array.Copy(routesDictionary.ToArray(), array, arrayIndex);
+        }
+
+        public IEnumerator<KeyValuePair<string, string>> GetEnumerator()
+        {
+            var routesDictionary = new Dictionary<string, string>();
+            foreach (var key in Keys)
+            {
+                foreach (var value in Values)
+                {
+                    routesDictionary.Add(key, value);
+                }
+            }
+
+            foreach (KeyValuePair<string, string> route in routesDictionary)
+            {
+                yield return route;
+            }
+        }
+
+        public bool Remove(string key)
+        {
+            var url = (routes[GetIndexOfKey(key)] as WebFormRoute).Url;
+            var virtualPath = (routes[GetIndexOfKey(key)] as WebFormRoute).VirtualPath;
+
+            if (routes.Remove(new WebFormRoute(url, virtualPath)))
+            {
+                Keys.Remove(url);
+                Values.Remove(virtualPath);
+                return true;
+            }
+            return false;
+        }
+
+        public bool Remove(KeyValuePair<string, string> item)
+        {
+            var url = item.Key;
+            var virtualPath = item.Value;
+
+            if (routes.Remove(new WebFormRoute(url, virtualPath)))
+            {
+                Keys.Remove(url);
+                Values.Remove(virtualPath);
+                return true;
+            }
+            return false;
+        }
+
+        public bool TryGetValue(string key, out string value)
+        {
+            if (TryGetIndexOfKey(key, out int index))
+            {
+                value = (routes[index] as WebFormRoute).VirtualPath;
+                return true;
+            }
+            value = default(string);
+            return false;
+        }
+
+        private bool TryGetIndexOfKey(string key, out int index)
+        {
+            if (routes.Find(x => (x as WebFormRoute).Url == key) != null)
+            {
+                index = GetIndexOfKey(key);
+                return true;
+            }
+            index = default(int);
+            return false;
+        }
+
+        private int GetIndexOfKey(string key)
+        {
+            return (routes.FindIndex(x => (x as WebFormRoute).Url == key));
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
+        }
+    }
+
+    public class WebFormRoute : Route
+    {
+        public new string Url { get; set; }
+
+        public string VirtualPath { get; set; }
+
+        public WebFormRoute(string url, string virtualPath) 
+            : base(url, null, new RouteValueDictionary { { "outgoing", new WebFormsConstraint() } }, new PageRouteHandler(virtualPath, true))
+        {
+            Url = url;
+            VirtualPath = virtualPath;
+        }
+    }
+
+    public class MvcRoute : Route
+    {
+        public MvcRoute(string url, object defaults) 
+            : base(url, new RouteValueDictionary(defaults), new MvcRouteHandler())
+        {
+            
+        }
+    }
+
     public static class Extension
     {
         public static bool Contains(this string text, string value, StringComparison stringComparison)
@@ -137,6 +329,18 @@ namespace MGO
         public static int IndexLength(this string str)
         {
             return str.Length - 1;
+        }
+        public static void AddRoutes<T>(this ICollection<T> routes, T[] NewRoutes) where T : RouteBase
+        {
+            Array.ForEach(NewRoutes, route => {
+
+                    routes.Add(route);
+
+                    if (route.GetType() == typeof(WebFormRoutes))
+                    {
+                        (route as WebFormRoutes).routes.ForEach(webFormRoute => routes.Add(webFormRoute as T));
+                    }
+            });
         }
     }
 }

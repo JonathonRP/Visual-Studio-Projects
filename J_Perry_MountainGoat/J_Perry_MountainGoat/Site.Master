@@ -6,24 +6,24 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="/Content/Site.css" rel="stylesheet" />
+    <link href="/Styles/style.css" rel="stylesheet" />
     <script src="/Scripts/jquery-3.1.1.min.js"></script>
-    <script src="/Scripts/bootstrap.min.js"></script>
+    <script src="/Scripts/bootstrap.js"></script>
+    <script src="/Scripts/mgoScript.js"></script>
 
     <title>MGO - <%: Page.Title %></title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
-    <webopt:BundleReference runat="server" Path="~/Content/css" />
+    <webopt:BundleReference runat="server" Path="~/Styles/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
 </head>
 <body>
-    <form runat="server" class="form-horizontal">
+    <div class="container">
+        <form id="form1" runat="server" class="form-horizontal">
 
-        <div class="container">
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
                     <div class="navbar-header">
@@ -41,7 +41,7 @@
                             <%if (Page.User.IsInRole("employee") || Page.User.IsInRole("manager"))
                                 { %>
                             <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown">Data&nbsp;<span class="caret"></span></a>
+                                <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Data <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li class="dropdown-header">Customer Data</li>
                                     <li><a href="/Customer/Info">Customer Info</a></li>
@@ -49,66 +49,69 @@
                                     <li class="divider" />
                                     <%if (Page.User.IsInRole("manager"))
                                         { %>
-                                        <li class="dropdown-header">Employee Data</li>
-                                        <li><a href="/Employee/Info">Employee Info</a></li>
-                                        <li><a href="/Employee/Purchases">Employee Purchases</a></li>
-                                        <li class="divider" />
+                                    <li class="dropdown-header">Employee Data</li>
+                                    <li><a href="/Employee/Info">Employee Info</a></li>
+                                    <li><a href="/Employee/Purchases">Employee Purchases</a></li>
+                                    <li class="divider" />
                                     <% } %>
                                     <li><a href="/Data/Product">Product Data</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown">Reports&nbsp;<span class="caret"></span></a>
+                                <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Reports <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <%if (Page.User.IsInRole("manager"))
-                                       { %>
-                                        <li class="dropdown-header">Sales Reports</li>
-                                        <li><a href="/Report/Sales/Employee">Employee Sales Report</a></li>
-                                        <li><a href="/Report/Sales/Product">Product Sales Report</a></li>
-                                        <li class="divider" />
-                                        <li class="dropdown-header">Revenue Reports</li>
-                                        <li><a href="/Report/Revenue">Revenue Report</a></li>
-                                        <li><a href="/Report/Revenue/Category">Category Revenue Report</a></li>
-                                        <li class="divider" />
+                                        { %>
+                                    <li class="dropdown-header">Sales Reports</li>
+                                    <li><a href="/Report/Sales/Employee">Employee Sales Report</a></li>
+                                    <li><a href="/Report/Sales/Product">Product Sales Report</a></li>
+                                    <li class="divider" />
+                                    <li class="dropdown-header">Revenue Reports</li>
+                                    <li><a href="/Report/Revenue">Revenue Report</a></li>
+                                    <li><a href="/Report/Revenue/Category">Category Revenue Report</a></li>
+                                    <li class="divider" />
                                     <% } %>
                                     <%if (Page.User.IsInRole("manager"))
-                                       { %>
-                                        <li><a href="/Report/Commission">Commission Report</a></li>
+                                        { %>
+                                    <li><a href="/Report/Commission">Commission Report</a></li>
                                     <% } %>
                                     <li><a href="/Report/Customer">Customer Report</a></li>
                                     <%if (Page.User.IsInRole("manager"))
-                                       { %>
-                                        <li><a href="/Report/Employee">Employee Report</a></li>
+                                        { %>
+                                    <li><a href="/Report/Employee">Employee Report</a></li>
                                     <% } %>
                                     <li><a href="/Report/Product">Product Report</a></li>
                                     <%if (Page.User.IsInRole("manager"))
-                                       { %>
-                                        <li><a href="/Report/Trend">Trend Report</a></li>
+                                        { %>
+                                    <li><a href="/Report/Trend">Trend Report</a></li>
                                     <% } %>
                                 </ul>
                             </li>
                             <% } %>
                             <li><a href="/About">About Us</a></li>
                         </ul>
-                        <asp:LoginView ID="SPLogin" runat="server" ViewStateMode="Disabled">
-                            <AnonymousTemplate>
-                                <ul class="nav navbar-nav navbar-right">
-                                    <li><a runat="server" href="~/Account/Register">Register</a></li>
-                                    <li><a runat="server" href="~/Account/Login">Log in</a></li>
-                                </ul>
-                            </AnonymousTemplate>
-                            <LoggedInTemplate>
-                                <ul class="nav navbar-nav navbar-right">
-                                    <li><a runat="server" href="~/Account/Manage" title="Manage your account">Hello,
-                                        <%: Context.User.Identity.GetUserName() %> !</a></li>
-                                    <li><a runat="server" href="~/Account/Login">Log in</a></li>
-                                    <li>
-                                        <asp:LoginStatus ID="LoginStatus" runat="server" LogoutAction="Redirect"
-                                            LogoutText="Log Off" LogoutPageUrl="~/Default" OnLoggingOut="LoginStatus_LoggingOut" />
-                                    </li>
-                                </ul>
-                            </LoggedInTemplate>
-                        </asp:LoginView>
+                        <%if ( Page.User.Identity.IsAuthenticated )
+                            {%>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a runat="server" href="~/Account/Manage" title="Manage your account">
+                                    <i class="glyphicon glyphicon-user"></i>
+                                    Hello,
+                                    <%: Context.User.Identity.GetUserName() %>!</a></li>
+                                <%--<li><a runat="server" href="~/Account/Login">Log in</a></li>--%>
+                                <li>
+                                    <asp:LinkButton runat="server" OnClick="Logout">
+                                        <i class="glyphicon glyphicon-log-out"></i>
+                                    </asp:LinkButton>
+                                </li>
+                            </ul>
+                        <% } %>
+                        <% else
+                            {%>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a runat="server" href="~/Account/Register">Register</a></li>
+                                <li><a runat="server" href="~/Account/Login"><i class="glyphicon glyphicon-log-in"></i></a></li>
+                            </ul>
+                        <% } %>
                     </div>
                 </div>
             </nav>
@@ -127,8 +130,8 @@
                 <p class="text-left float-left">&copy; <%: DateTime.Now.Year %></p>
                 <p class="text-right float-right">Version 1.0 Support Call: 1-800-488-9999</p>
             </footer>
-        </div>
-    </form>
 
+        </form>
+    </div>
 </body>
 </html>

@@ -472,7 +472,7 @@ Sys.WebForms.Menu._domHelper = {
         }
         return "ltr";
     },
-    getKeyCode: function(event) { return event.keyCode || event.charCode || 0; },
+    gestringCode: function(event) { return event.keyCode || event.charCode || 0; },
     insertAfter: function(element, elementToInsert) {
         var next = element.nextSibling;
         if (next) {
@@ -689,7 +689,7 @@ Sys.WebForms._MenuContainer.prototype = {
     },
     _onkeydown: function(e) {
         var thisMenu = Sys.WebForms.Menu._elementObjectMapper.getMappedObject(this);
-        var keyCode = Sys.WebForms.Menu._domHelper.getKeyCode(e || window.event);
+        var keyCode = Sys.WebForms.Menu._domHelper.gestringCode(e || window.event);
         if (thisMenu) {
             thisMenu.handleKeyPress(keyCode);
         }

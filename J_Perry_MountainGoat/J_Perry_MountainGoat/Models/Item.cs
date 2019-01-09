@@ -11,7 +11,9 @@ namespace MGO.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Item
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,10 +22,20 @@ namespace MGO.Models
             this.PurchaseItems = new HashSet<PurchaseItem>();
             this.SaleItems = new HashSet<SaleItem>();
         }
-    
+        
+        [Required]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$")]
         public short SKU { get; set; }
+        [Required]
+        [DisplayName("Product")]
         public string Item_Description { get; set; }
+        [Required]
+        [DataType(DataType.Currency)]
+        [DisplayName("Price")]
         public decimal Item_Price { get; set; }
+        [Required]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$")]
+        [DisplayName("Category ID")]
         public short Cat_Num { get; set; }
     
         public virtual Category Category { get; set; }

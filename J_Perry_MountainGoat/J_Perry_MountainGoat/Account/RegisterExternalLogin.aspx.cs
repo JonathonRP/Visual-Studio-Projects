@@ -16,10 +16,10 @@ namespace MGO.Account
             private set { ViewState["ProviderName"] = value; }
         }
 
-        protected string ProviderAccountKey
+        protected string ProviderAccounstring
         {
-            get { return (string)ViewState["ProviderAccountKey"] ?? String.Empty; }
-            private set { ViewState["ProviderAccountKey"] = value; }
+            get { return (string)ViewState["ProviderAccounstring"] ?? String.Empty; }
+            private set { ViewState["ProviderAccounstring"] = value; }
         }
 
         private void RedirectOnFail()

@@ -18,47 +18,50 @@ namespace MGO.Account
 
             var user = new ApplicationUser();
             var teacher = new Teacher();
-            IdentityResult result;
 
             if (Email.Text == "melinda.korzaan@mtsu.edu")
             {
                 teacher.UserName = Email.Text;
                 teacher.Email = Email.Text;
 
-                result = manager.Create(teacher, Password.Text);
+                var result = manager.Create(teacher, Password.Text);
+
+                if (result.Succeeded)
+                {
+                    manager.AddToRole(teacher.Id, teacher.Role);
+                    signInManager.SignIn(teacher, isPersistent: false, rememberBrowser: false);
+
+                    IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
+                }
+                else
+                {
+                    ErrorMessage.Text = result.Errors.FirstOrDefault();
+                }
             }
             else
             {
                 user.UserName = Email.Text;
                 user.Email = Email.Text;
 
-                result = manager.Create(user, Password.Text);
-            }
+                var result = manager.Create(user, Password.Text);
 
-            if (result.Succeeded)
-            {
-                // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                //string code = manager.GenerateEmailConfirmationToken(user.Id);
-                //string callbackUrl = IdentityHelper.GetUserConfirmationRedirectUrl(code, user.Id, Request);
-                //manager.SendEmail(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>.");
-                
-                //manager.AddToRole(user.Id, "employee");
-
-                if (Email.Text == "melinda.korzaan@mtsu.edu" && !Page.User.IsInRole("teacher"))
+                if (result.Succeeded)
                 {
-                    manager.AddToRole(teacher.Id, teacher.Role);
-                    signInManager.SignIn(teacher, isPersistent: false, rememberBrowser: false);
+                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                    //string code = manager.GenerateEmailConfirmationToken(user.Id);
+                    //string callbackUrl = IdentityHelper.GetUserConfirmationRedirectUrl(code, user.Id, Request);
+                    //manager.SendEmail(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>.");
+
+                    //manager.AddToRole(user.Id, "employee");
+                    
+                    signInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
+
+                    IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
                 }
                 else
                 {
-                    signInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
+                    ErrorMessage.Text = result.Errors.FirstOrDefault();
                 }
-                
-                IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
-            }
-            else 
-            {
-                ErrorMessage.Text = result.Errors.FirstOrDefault();
             }
         }
     }

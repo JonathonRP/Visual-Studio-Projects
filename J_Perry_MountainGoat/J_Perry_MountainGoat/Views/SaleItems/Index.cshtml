@@ -1,15 +1,15 @@
 ﻿@model IEnumerable<MGO.Models.SaleItem>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Controller = "Products Sold";
 }
 
-<h2>Index</h2>
+<h1 class="row mgo-row text-center">@ViewBag.Controller</h1>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table class="table table-condensed table-hover table-striped">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.SI_Qty_Sold)
@@ -18,28 +18,29 @@
             @Html.DisplayNameFor(model => model.Item.Item_Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Sale.Sale_Num)
+            @Html.DisplayNameFor(model => model.Sale.S_Date)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.SI_Qty_Sold)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Item.Item_Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Sale.Sale_Num)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SI_Qty_Sold)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item.Item_Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sale.S_Date)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
 
 </table>

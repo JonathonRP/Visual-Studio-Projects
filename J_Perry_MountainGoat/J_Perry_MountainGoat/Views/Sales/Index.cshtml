@@ -1,15 +1,15 @@
 ﻿@model IEnumerable<MGO.Models.Sale>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Controller = "Sales";
 }
 
-<h2>Index</h2>
+<h1 class="row mgo-row text-center">@ViewBag.Controller</h1>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table class="table table-condensed table-hover table-striped">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.S_Date)

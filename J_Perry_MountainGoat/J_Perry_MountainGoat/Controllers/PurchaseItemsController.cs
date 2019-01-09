@@ -13,6 +13,7 @@ namespace MGO.Controllers
     public class PurchaseItemsController : Controller
     {
         private MGO_Entities db = new MGO_Entities();
+        private string Name = "Purchased Product";
 
         // GET: PurchaseItems
         public ActionResult Index()
@@ -33,6 +34,9 @@ namespace MGO.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.Title = "For";
+            ViewBag.Controller = Name;
             return View(purchaseItem);
         }
 
@@ -41,6 +45,8 @@ namespace MGO.Controllers
         {
             ViewBag.SKU = new SelectList(db.Items, "SKU", "Item_Description");
             ViewBag.PO_Num = new SelectList(db.Purchases, "PO_Num", "PO_Num");
+            ViewBag.Title = "New";
+            ViewBag.Controller = Name;
             return View();
         }
 
@@ -60,6 +66,7 @@ namespace MGO.Controllers
 
             ViewBag.SKU = new SelectList(db.Items, "SKU", "Item_Description", purchaseItem.SKU);
             ViewBag.PO_Num = new SelectList(db.Purchases, "PO_Num", "PO_Num", purchaseItem.PO_Num);
+            ViewBag.Controller = Name;
             return View(purchaseItem);
         }
 
@@ -77,6 +84,7 @@ namespace MGO.Controllers
             }
             ViewBag.SKU = new SelectList(db.Items, "SKU", "Item_Description", purchaseItem.SKU);
             ViewBag.PO_Num = new SelectList(db.Purchases, "PO_Num", "PO_Num", purchaseItem.PO_Num);
+            ViewBag.Controller = Name;
             return View(purchaseItem);
         }
 
@@ -95,6 +103,7 @@ namespace MGO.Controllers
             }
             ViewBag.SKU = new SelectList(db.Items, "SKU", "Item_Description", purchaseItem.SKU);
             ViewBag.PO_Num = new SelectList(db.Purchases, "PO_Num", "PO_Num", purchaseItem.PO_Num);
+            ViewBag.Controller = Name;
             return View(purchaseItem);
         }
 
@@ -110,6 +119,8 @@ namespace MGO.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.Controller = Name;
             return View(purchaseItem);
         }
 

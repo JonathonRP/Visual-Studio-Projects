@@ -3,29 +3,127 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
+    <title>MGO - @ViewBag.Action @ViewBag.Title @ViewBag.Controller</title>
+    @Styles.Render("~/Styles/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                    </ul>
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                </ul>
-            </div>
-        </div>
-    </div>
+        </div>*@
 
     <div class="container body-content">
+
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed"
+                            data-toggle="collapse" data-target="#mainMenu">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">Mountain Goat Outfitters</a>
+                </div>
+                <div class="collapse navbar-collapse" id="mainMenu">
+                    <ul class="nav navbar-nav">
+                        @if ( User.IsInRole( "employee" ) || User.IsInRole( "manager" ) )
+                        {
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown">Data&nbsp;<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-header">Customer Data</li>
+                                    <li><a href="/Customer/Info">Customer Info</a></li>
+                                    <li><a href="/Customer/Purchases">Customer Purchases</a></li>
+                                    <li class="divider" />
+                                    @if ( User.IsInRole( "manager" ) )
+                                    {
+                                        <li class="dropdown-header">Employee Data</li>
+                                        <li><a href="/Employee/Info">Employee Info</a></li>
+                                        <li><a href="/Employee/Purchases">Employee Purchases</a></li>
+                                        <li class="divider" />
+                                    }
+                                    <li><a href="/Data/Product">Product Data</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown">Reports&nbsp;<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    @if ( User.IsInRole( "manager" ) )
+                                    {
+                                        <li class="dropdown-header">Sales Reports</li>
+                                        <li><a href="/Report/Sales/Employee">Employee Sales Report</a></li>
+                                        <li><a href="/Report/Sales/Product">Product Sales Report</a></li>
+                                        <li class="divider" />
+                                        <li class="dropdown-header">Revenue Reports</li>
+                                        <li><a href="/Report/Revenue">Revenue Report</a></li>
+                                        <li><a href="/Report/Revenue/Category">Category Revenue Report</a></li>
+                                        <li class="divider" />
+                                    }
+                                    @if ( User.IsInRole( "manager" ) )
+                                    {
+                                        <li><a href="/Report/Commission">Commission Report</a></li>
+                                    }
+                                    <li><a href="/Report/Customer">Customer Report</a></li>
+                                    @if ( User.IsInRole( "manager" ) )
+                                    {
+                                        <li><a href="/Report/Employee">Employee Report</a></li>
+                                    }
+                                    <li><a href="/Report/Product">Product Report</a></li>
+                                    @if ( User.IsInRole( "manager" ) )
+                                    {
+                                        <li><a href="/Report/Trend">Trend Report</a></li>
+                                    }
+                                </ul>
+                            </li>
+                        }
+                        <li><a href="/About">About Us</a></li>
+                    </ul>
+                    @if ( User.Identity.IsAuthenticated )
+                    {
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a runat="server" href="~/Account/Manage" title="Manage your account">
+                                    <i class="glyphicon glyphicon-user"></i>
+                                    Hello,
+                                    @Context.User.Identity.Name!
+                                </a>
+                            </li>
+                            <li>
+                                <a runat="server" href="@Url.Action("Logout", "Home")">
+                                    <i class="glyphicon glyphicon-log-out"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a runat="server" href="~/Account/Register">Register</a></li>
+                            <li><a runat="server" href="~/Account/Login"><i class="glyphicon glyphicon-log-in"></i></a></li>
+                        </ul>
+                    }
+                </div>
+            </div>
+        </nav>
+
+        <header class="img-responsive img-rounded jumbotron">
+            <h1 class="text-center">Mountain Goat Outfitters</h1>
+        </header>
         @RenderBody()
         <hr />
         <footer>
@@ -35,6 +133,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/mgoScript")
     @RenderSection("scripts", required: false)
 </body>
 </html>

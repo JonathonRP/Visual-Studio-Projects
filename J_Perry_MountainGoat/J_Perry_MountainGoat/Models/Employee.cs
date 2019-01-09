@@ -11,7 +11,9 @@ namespace MGO.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Employee
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,11 +22,22 @@ namespace MGO.Models
             this.Sales = new HashSet<Sale>();
             this.Purchases = new HashSet<Purchase>();
         }
-    
+        
+        [Required]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$")]
+        [DisplayName("ID")]
         public short Emp_ID { get; set; }
+        [Required]
+        [DisplayName("First Name")]
         public string Emp_FName { get; set; }
+        [Required]
+        [DisplayName("Last Name")]
         public string Emp_LName { get; set; }
+        [Required]
+        [DisplayName("Position")]
         public string Emp_Position { get; set; }
+        [Range(0,1)]
+        [DisplayName("Commission")]
         public Nullable<float> Emp_Commission { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

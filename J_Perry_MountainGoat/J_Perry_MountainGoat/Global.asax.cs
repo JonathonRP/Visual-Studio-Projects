@@ -19,7 +19,6 @@ namespace MGO
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             AreaRegistration.RegisterAllAreas();
-            RouteConfig2.RegisterRoutes(RouteTable.Routes);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             BundleConfig2.RegisterBundles(BundleTable.Bundles);
         }

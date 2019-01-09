@@ -1,15 +1,15 @@
 ﻿@model IEnumerable<MGO.Models.Purchase>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Controller = "Purchases";
 }
 
-<h2>Index</h2>
+<h1 class="row mgo-row text-center">@ViewBag.Controller</h1>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table class="table table-condensed table-hover table-striped">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Purchase_Date)
@@ -20,20 +20,21 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Purchase_Date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Employee.Emp_FName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PO_Num }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PO_Num }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PO_Num })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Purchase_Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee.Emp_FName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.PO_Num }) |
+                @Html.ActionLink("Details", "Details", new { id = item.PO_Num }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.PO_Num })
+            </td>
+        </tr>
+    }
 
 </table>

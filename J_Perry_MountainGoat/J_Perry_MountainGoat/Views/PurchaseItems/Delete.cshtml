@@ -1,12 +1,13 @@
 ﻿@model MGO.Models.PurchaseItem
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Action = "Delete";
 }
 
-<h2>Delete</h2>
+<h1 class="row mgo-row text-center">@ViewBag.Action @ViewBag.Title @ViewBag.Controller</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Are you sure you want to @ViewBag.Action.ToLower() @ViewBag.Controller.ToLower() @Model.Item.Item_Description?</h3>
+
 <div>
     <h4>PurchaseItem</h4>
     <hr />

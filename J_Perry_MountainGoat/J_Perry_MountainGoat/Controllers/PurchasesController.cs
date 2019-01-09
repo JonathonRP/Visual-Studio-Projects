@@ -13,6 +13,7 @@ namespace MGO.Controllers
     public class PurchasesController : Controller
     {
         private MGO_Entities db = new MGO_Entities();
+        private string Name = "Purchase";
 
         // GET: Purchases
         public ActionResult Index()
@@ -33,6 +34,9 @@ namespace MGO.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.Title = "For";
+            ViewBag.Controller = Name;
             return View(purchase);
         }
 
@@ -40,6 +44,8 @@ namespace MGO.Controllers
         public ActionResult Create()
         {
             ViewBag.Emp_ID = new SelectList(db.Employees, "Emp_ID", "Emp_FName");
+            ViewBag.Title = "New";
+            ViewBag.Controller = Name;
             return View();
         }
 
@@ -58,6 +64,7 @@ namespace MGO.Controllers
             }
 
             ViewBag.Emp_ID = new SelectList(db.Employees, "Emp_ID", "Emp_FName", purchase.Emp_ID);
+            ViewBag.Controller = Name;
             return View(purchase);
         }
 
@@ -73,7 +80,9 @@ namespace MGO.Controllers
             {
                 return HttpNotFound();
             }
+
             ViewBag.Emp_ID = new SelectList(db.Employees, "Emp_ID", "Emp_FName", purchase.Emp_ID);
+            ViewBag.Controller = Name;
             return View(purchase);
         }
 
@@ -90,7 +99,9 @@ namespace MGO.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
             ViewBag.Emp_ID = new SelectList(db.Employees, "Emp_ID", "Emp_FName", purchase.Emp_ID);
+            ViewBag.Controller = Name;
             return View(purchase);
         }
 
@@ -106,6 +117,8 @@ namespace MGO.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.Controller = Name;
             return View(purchase);
         }
 
