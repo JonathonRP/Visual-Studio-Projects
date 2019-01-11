@@ -8,11 +8,13 @@ body {
 
 h1 {
     color: color(primary);
+    @include mgo-animation;
 }
 
 a {
     //color: $link;
     @include mgo-transition;
+    @include mgo-animation;
     /*&:hover,
     &:focus {
         color: $link-highlight;
@@ -30,6 +32,7 @@ a {
 
 main {
     padding-bottom: 2rem;
+    @include mgo-animation;
 
     p {
         color: color(accent);
@@ -38,6 +41,7 @@ main {
 
 footer {
     padding: .5rem;
+    @include mgo-animation;
 
     p {
         display: inline;
@@ -117,16 +121,13 @@ footer {
 }
 
 .jumbotron {
-    background-image: none;
-    background-color: $secondary-highlight;
+    background: $secondary-highlight center bottom;
     color: $primary-highlight;
-    @include mgo-transition(background-image);
+    @include mgo-transition;
     @include mgo-animation;
 
     @include desktop {
-        background-image: url(/Images/Home.jpg);
-        background-repeat: no-repeat;
-        background-position: top center;
+        background: transparent url(/Images/Home.jpg) no-repeat top center;
         background-size: 70% 100%;
         background-attachment: fixed;
     }
@@ -228,6 +229,8 @@ footer {
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    @include mgo-transition;
+    @include mgo-animation;
 
     @include smart-phone {
         padding: 0;
@@ -244,6 +247,7 @@ footer {
 .mgo-welcome-header {
     font-size: 3rem;
     @include mgo-transition;
+    @include mgo-animation;
 
     &.row.mgo-row {
         padding-bottom: 1.5rem;
@@ -266,6 +270,7 @@ footer {
     background-position: center top;
     background-attachment: scroll;
     @include mgo-transition;
+    @include mgo-animation;
 
     @include tablet {
         height: 70rem;
@@ -289,14 +294,17 @@ footer {
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
+    @include mgo-animation;
 }
 
 .mgo-login-img {
     height: 35rem;
+    @include mgo-animation;
 }
 
 .mgo-about-img {
     height: 53rem;
+    @include mgo-animation;
 }
 
 .mgo-grdview-header {

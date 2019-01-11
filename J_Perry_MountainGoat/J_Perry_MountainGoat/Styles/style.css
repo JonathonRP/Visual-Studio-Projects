@@ -5166,10 +5166,12 @@ body {
   padding-bottom: 20px; }
 
 h1 {
-  color: #B9C892; }
+  color: #B9C892;
+  animation: fade-in 0.3s ease-in-out 1; }
 
 a {
   transition: all 0.3s ease-in-out;
+  animation: fade-in 0.3s ease-in-out 1;
   /*&:hover,
     &:focus {
         color: $link-highlight;
@@ -5185,12 +5187,14 @@ a {
     }*/ }
 
 main {
-  padding-bottom: 2rem; }
+  padding-bottom: 2rem;
+  animation: fade-in 0.3s ease-in-out 1; }
   main p {
     color: #9f6841; }
 
 footer {
-  padding: .5rem; }
+  padding: .5rem;
+  animation: fade-in 0.3s ease-in-out 1; }
   footer p {
     display: inline; }
     footer p.float-left {
@@ -5253,16 +5257,13 @@ footer {
   opacity: 1; }
 
 .jumbotron {
-  background-image: none;
-  background-color: #98633d;
+  background: #98633d center bottom;
   color: #bbd37e;
-  transition: background-image 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   animation: fade-in 0.3s ease-in-out 1; }
   @media screen and (min-width: 1850px) {
     .jumbotron {
-      background-image: url(/Images/Home.jpg);
-      background-repeat: no-repeat;
-      background-position: top center;
+      background: transparent url(/Images/Home.jpg) no-repeat top center;
       background-size: 70% 100%;
       background-attachment: fixed; } }
   @media screen and (min-width: 768px) {
@@ -5349,7 +5350,9 @@ footer {
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
   padding-left: 15px;
-  padding-right: 15px; }
+  padding-right: 15px;
+  transition: all 0.3s ease-in-out;
+  animation: fade-in 0.3s ease-in-out 1; }
   @media screen and (min-width: 768px) {
     .body-content {
       padding: 0; } }
@@ -5362,7 +5365,8 @@ footer {
 
 .mgo-welcome-header {
   font-size: 3rem;
-  transition: all 0.3s ease-in-out; }
+  transition: all 0.3s ease-in-out;
+  animation: fade-in 0.3s ease-in-out 1; }
   .mgo-welcome-header.row.mgo-row {
     padding-bottom: 1.5rem; }
   @media screen and (min-width: 1850px) {
@@ -5379,7 +5383,8 @@ footer {
   background-repeat: no-repeat;
   background-position: center top;
   background-attachment: scroll;
-  transition: all 0.3s ease-in-out; }
+  transition: all 0.3s ease-in-out;
+  animation: fade-in 0.3s ease-in-out 1; }
   @media screen and (min-width: 992px) {
     .mgo-home-background-img {
       height: 70rem; } }
@@ -5399,13 +5404,16 @@ footer {
   background-image: url(/Images/Home-Lawn.jpg);
   background-repeat: no-repeat;
   background-position: center;
-  background-attachment: fixed; }
+  background-attachment: fixed;
+  animation: fade-in 0.3s ease-in-out 1; }
 
 .mgo-login-img {
-  height: 35rem; }
+  height: 35rem;
+  animation: fade-in 0.3s ease-in-out 1; }
 
 .mgo-about-img {
-  height: 53rem; }
+  height: 53rem;
+  animation: fade-in 0.3s ease-in-out 1; }
 
 .mgo-grdview-header {
   background-color: #9f6841; }
