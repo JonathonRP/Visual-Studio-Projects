@@ -383,7 +383,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Styles\_variables.scss" />
+    <Content Include="Styles\mgo-style\_variables.scss" />
     <None Include="Properties\PublishProfiles\MountainGoatManagement - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -853,6 +853,11 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Styles\mgo-style\_mixins.scss" />
+    <Content Include="Styles\mgo-style\_animations.scss" />
+    <Content Include="Styles\mgo-style\_functions.scss" />
+    <Content Include="Styles\mgo-style\_maps.scss" />
+    <Content Include="Styles\mgo-style.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

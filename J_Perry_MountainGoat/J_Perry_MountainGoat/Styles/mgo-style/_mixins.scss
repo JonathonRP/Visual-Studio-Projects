@@ -1,0 +1,28 @@
+﻿@import "animations";
+@import "variables";
+
+@mixin desktop {
+    @media screen and (min-width: #{$screen-lg-min} + 650 /*= 1850px */ ) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media screen and (min-width: #{$screen-md-min}) {
+        @content;
+    }
+}
+
+@mixin smart-phone {
+    @media screen and (min-width: #{$screen-sm-min}) {
+        @content;
+    }
+}
+
+@mixin mgo-transition($property: all) {
+    transition: #{$property} .3s ease-in-out;
+}
+
+@mixin mgo-animation($animation: fade-in) {
+    animation: #{$animation} .3s ease-in-out 1;
+}

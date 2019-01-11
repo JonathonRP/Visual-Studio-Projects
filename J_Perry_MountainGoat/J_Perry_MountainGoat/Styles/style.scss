@@ -1,4 +1,4 @@
-﻿@import "variables";
+﻿@import "mgo-style";
 @import "../sass/bootstrap.scss";
 
 /* Move down content because we have a fixed navbar that is 50px tall */
@@ -12,8 +12,7 @@ h1 {
 
 a {
     //color: $link;
-    transition: all .3s ease-in;
-
+    @include mgo-transition;
     /*&:hover,
     &:focus {
         color: $link-highlight;
@@ -66,8 +65,8 @@ footer {
 
 .navbar-default .navbar-toggle {
     //border-color: $primary-color;
-    transition: all .3s ease-in-out;
-    animation: fade-in .3s ease-in-out 1;
+    @include mgo-transition;
+    @include mgo-animation;
 
     /*&:hover,
     &:focus {
@@ -109,7 +108,7 @@ footer {
     max-height: 0;
     overflow: hidden;
     opacity: 0;
-    transition: all .3s ease-in-out;
+    @include mgo-transition;
 }
 
 .open .dropdown-menu {
@@ -118,11 +117,16 @@ footer {
 }
 
 .jumbotron {
-    background: $secondary-highlight;
+    background-image: none;
+    background-color: $secondary-highlight;
     color: $primary-highlight;
+    @include mgo-transition(background-image);
+    @include mgo-animation;
 
     @include desktop {
-        background: $secondary-highlight url(/Images/Home.jpg) no-repeat top center;
+        background-image: url(/Images/Home.jpg);
+        background-repeat: no-repeat;
+        background-position: top center;
         background-size: 70% 100%;
         background-attachment: fixed;
     }
@@ -161,7 +165,7 @@ footer {
 
 //theme bootstrap
 .btn-default {
-    transition: all .3s ease-in-out;
+    @include mgo-transition;
     /*background-color: $secondary-color;
     border-color: $secondary-color;
     color: $primary-color;
@@ -182,7 +186,7 @@ footer {
 }
 
 .btn-primary {
-    transition: all .3s ease-in-out;
+    @include mgo-transition;
     /*background-color: $primary-color;
     border-color: $primary-color;
     color: $secondary-color;
@@ -205,8 +209,7 @@ footer {
 .form-control {
     /*border-color: $primary-color;
     color: $secondary-color;*/
-
-    transition: all .3s ease-in-out;
+    @include mgo-transition;
 
     &:focus,
     &:hover {
@@ -240,6 +243,7 @@ footer {
 
 .mgo-welcome-header {
     font-size: 3rem;
+    @include mgo-transition;
 
     &.row.mgo-row {
         padding-bottom: 1.5rem;
@@ -261,6 +265,7 @@ footer {
     background-repeat: no-repeat;
     background-position: center top;
     background-attachment: scroll;
+    @include mgo-transition;
 
     @include tablet {
         height: 70rem;
@@ -339,7 +344,7 @@ input:-webkit-autofill,
 textarea:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px color(primary) inset;
     -webkit-text-fill-color: color(accent) !important;
-    transition: all .3s ease-in-out;
+    @include mgo-transition;
 
     &:hover,
     &:focus,
@@ -347,7 +352,6 @@ textarea:-webkit-autofill {
         border-color: color(accent) !important;
         -webkit-box-shadow: 0 0 0px 1000px color(accent) inset;
         -webkit-text-fill-color: color(primary) !important;
-        //transition: all .3s ease-in-out;
     }
 }
 
@@ -408,7 +412,7 @@ textarea:-webkit-autofill {
         &:checked + label::before {
             background-color: color(primary);
             border-color: color(primary);
-            transition: all .3s ease-in-out;
+            @include mgo-transition;
         }
 
         &:checked + label::after {
