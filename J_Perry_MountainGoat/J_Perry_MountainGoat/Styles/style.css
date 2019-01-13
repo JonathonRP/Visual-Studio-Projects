@@ -5,6 +5,12 @@
   to {
     opacity: 1; } }
 
+@keyframes grow-in {
+  from {
+    transform: scale(0.9); }
+  to {
+    transform: scale(1); } }
+
 /*! normalize.css v3.0.1 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif;
@@ -7496,11 +7502,11 @@ body {
 
 h1 {
   color: #B9C892;
-  animation: fade-in 0.3s ease-in-out 1; }
+  animation: fade-in 0.3s ease-in-out  1; }
 
 a {
   transition: all 0.3s ease-in-out;
-  animation: fade-in 0.3s ease-in-out 1;
+  animation: fade-in 0.3s ease-in-out  1;
   /*&:hover,
     &:focus {
         color: $link-highlight;
@@ -7517,13 +7523,13 @@ a {
 
 main {
   padding-bottom: 2rem;
-  animation: fade-in 0.3s ease-in-out 1; }
+  animation: fade-in 0.3s ease-in-out  1; }
   main p {
     color: #9f6841; }
 
 footer {
   padding: .5rem;
-  animation: fade-in 0.3s ease-in-out 1; }
+  animation: fade-in 0.3s ease-in-out  1; }
   footer p {
     display: inline; }
     footer p.float-left {
@@ -7542,7 +7548,7 @@ footer {
 }*/
 .navbar-default .navbar-toggle {
   transition: all 0.3s ease-in-out;
-  animation: fade-in 0.3s ease-in-out 1;
+  animation: fade-in 0.3s ease-in-out  1;
   /*&:hover,
     &:focus {
         //background-color: $primary-color;
@@ -7586,18 +7592,28 @@ footer {
   opacity: 1; }
 
 .jumbotron {
-  background: #98633d center bottom;
+  background: transparent;
   color: #bbd37e;
   transition: all 0.3s ease-in-out;
-  animation: fade-in 0.3s ease-in-out 1; }
-  @media screen and (min-width: 1850px) {
-    .jumbotron {
-      background: transparent url(/Images/Home.jpg) no-repeat top center;
-      background-size: 70% 100%;
-      background-attachment: fixed; } }
+  animation: fade-in 0.3s ease-in-out  1; }
+  .jumbotron .mgo-jumbotron {
+    background: #98633d none no-repeat center center;
+    color: #bbd37e;
+    transition: all 0.3s ease-in-out;
+    animation: fade-in 0.3s ease-in-out  1; }
+    @media screen and (min-width: 1850px) {
+      .jumbotron .mgo-jumbotron {
+        background: #98633d url(/Images/Home.jpg) no-repeat center center;
+        background-size: 70% 100%;
+        background-attachment: fixed;
+        animation: grow-in 0.3s ease-in-out  1; } }
   @media screen and (min-width: 768px) {
     .jumbotron {
       margin-top: 20px; } }
+
+.mgo-jumbotron-background {
+  padding: 0px !important;
+  margin: 0px !important; }
 
 /*@media screen and (min-width: $screen-lg-min - 175 = 1025px ) {
     .jumbotron {
@@ -7681,7 +7697,7 @@ footer {
   padding-left: 15px;
   padding-right: 15px;
   transition: all 0.3s ease-in-out;
-  animation: fade-in 0.3s ease-in-out 1; }
+  animation: fade-in 0.3s ease-in-out  1; }
   @media screen and (min-width: 768px) {
     .body-content {
       padding: 0; } }
@@ -7693,17 +7709,26 @@ footer {
   margin-left: auto; }
 
 .mgo-welcome-header {
-  font-size: 3rem;
+  font-size: 2.2rem;
   transition: all 0.3s ease-in-out;
-  animation: fade-in 0.3s ease-in-out 1; }
-  .mgo-welcome-header.row.mgo-row {
-    padding-bottom: 1.5rem; }
+  animation: fade-in 0.3s ease-in-out  1; }
   @media screen and (min-width: 1850px) {
     .mgo-welcome-header {
       font-size: 6rem; } }
-  @media screen and (min-width: 992px) {
+  @media screen and (min-width: 1200px) and (max-width: 1849px) {
+    .mgo-welcome-header {
+      font-size: 6rem; } }
+  @media screen and (min-width: 992px) and (max-width: 1199px) {
+    .mgo-welcome-header {
+      font-size: 5rem; } }
+  @media screen and (min-width: 768px) and (max-width: 991px) {
     .mgo-welcome-header {
       font-size: 4rem; } }
+  @media screen and (min-width: 480px) and (max-width: 767px) {
+    .mgo-welcome-header {
+      font-size: 3rem; } }
+  .mgo-welcome-header.row.mgo-row {
+    padding-bottom: 1.5rem; }
 
 .mgo-home-background-img {
   height: 35rem;
@@ -7713,7 +7738,7 @@ footer {
   background-position: center top;
   background-attachment: scroll;
   transition: all 0.3s ease-in-out;
-  animation: fade-in 0.3s ease-in-out 1; }
+  animation: fade-in 0.3s ease-in-out  1; }
   @media screen and (min-width: 992px) {
     .mgo-home-background-img {
       height: 70rem; } }
@@ -7734,15 +7759,15 @@ footer {
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
-  animation: fade-in 0.3s ease-in-out 1; }
+  animation: fade-in 0.3s ease-in-out  1; }
 
 .mgo-login-img {
   height: 35rem;
-  animation: fade-in 0.3s ease-in-out 1; }
+  animation: fade-in 0.3s ease-in-out  1; }
 
 .mgo-about-img {
   height: 53rem;
-  animation: fade-in 0.3s ease-in-out 1; }
+  animation: fade-in 0.3s ease-in-out  1; }
 
 .mgo-grdview-header {
   background-color: #9f6841; }

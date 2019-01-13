@@ -8,3 +8,13 @@
         opacity: 1;
     }
 }
+// Animation to grow-in
+@keyframes grow-in {
+    from {
+        transform: scale(0.9);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}

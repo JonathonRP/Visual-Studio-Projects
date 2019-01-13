@@ -876,9 +876,8 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Styles\mgo-style\_mixins.scss" />
     <Content Include="Styles\mgo-style\_animations.scss" />
-    <Content Include="Styles\mgo-style\_functions.scss" />
-    <Content Include="Styles\mgo-style\_maps.scss" />
     <Content Include="Styles\mgo-style.scss" />
+    <Content Include="Styles\mgo-style\mgo-style.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

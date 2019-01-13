@@ -1,21 +1,28 @@
-﻿@import "animations";
-@import "variables";
+﻿
+@mixin breakpoint($screen) {
+    
+    $screen-size: break-point(#{$screen}-min);
 
-@mixin desktop {
-    @media screen and (min-width: #{$screen-lg-min} + 650 /*= 1850px */ ) {
+    @media screen and (min-width: #{$screen-size} ) {
         @content;
     }
 }
 
-@mixin tablet {
-    @media screen and (min-width: #{$screen-md-min}) {
-        @content;
-    }
-}
+@mixin stepping-into($screen) {
 
-@mixin smart-phone {
-    @media screen and (min-width: #{$screen-sm-min}) {
-        @content;
+    @if $screen == "desktop-lg" {
+
+        @include breakpoint($screen) {
+            @content;
+        }
+    }
+    @else {
+        $screen-min: break-point(#{$screen}-min);
+        $screen-max: break-point(#{$screen}-max);
+
+        @media screen and (min-width: #{$screen-min}) and (max-width: #{$screen-max}) {
+            @content;
+        }
     }
 }
 
@@ -23,6 +30,6 @@
     transition: #{$property} .3s ease-in-out;
 }
 
-@mixin mgo-animation($animation: fade-in) {
-    animation: #{$animation} .3s ease-in-out 1;
+@mixin mgo-animation($animation: fade-in, $delay: "") {
+    animation: #{$animation} .3s ease-in-out #{$delay} 1;
 }
