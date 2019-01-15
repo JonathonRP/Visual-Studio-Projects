@@ -21,6 +21,7 @@
                 <!-- in-page code {like JavaScript, but C#} if user is in role of 'teacher' display content in brackets -->
                 <% if (Page.User.IsInRole("teacher"))
                     { %>
+                <!-- authorization accounts information to login and play with the site at differnt authorization levels -->
                 <p style="padding-top: 1.8rem; color:green; text-align:center;">Employee login: "jreesep@mtsu.edu", "Reese93!"</p>
                 <p style="color:green; text-align:center;">Manager login: "manager1@mountaingoatoutfitters.com", "#1Manager!"</p>
                 <% } %>
