@@ -3,6 +3,7 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="row">
         <div class="col-md-8">
+            <!-- display title -->
             <h2><%: Title %>.</h2>
             <h3>Mountain Goat Outfitters Application Description Page.</h3>
             <p style="padding-top: 1.8rem; font-size: 1.8rem; text-align:center;">
@@ -17,6 +18,7 @@
             </p>
             <p style="padding-top: 1.8rem; font-size: 1.5rem; text-align:center;">
                 Dr. Melinda Korzaan: please create login with melinda.korzaan@mtsu.edu as your email.
+                <!-- in-page code {like JavaScript, but C#} if user is in role of 'teacher' display content in brackets -->
                 <% if (Page.User.IsInRole("teacher"))
                     { %>
                 <p style="padding-top: 1.8rem; color:green; text-align:center;">Employee login: "jreesep@mtsu.edu", "Reese93!"</p>
