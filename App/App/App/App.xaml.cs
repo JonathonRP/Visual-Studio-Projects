@@ -9,11 +9,11 @@ namespace App
 {
 	public partial class App : Application
 	{
+		// entry point, MainPage property loads IntroPage object -> IntroPage.cs
 		public App ()
 		{
 			InitializeComponent();
-
-            MainPage = new IntroPage();
+            		MainPage = new IntroPage();
 		}
 
 		protected override void OnStart ()
