@@ -7,6 +7,7 @@ using Xamarin.Forms;
 
 namespace App
 {
+	// inherits from ContentPage to load into MainPage property of -> App.axml.cs
 	public class IntroPage : ContentPage
 	{
         private Button button1;
@@ -99,14 +100,15 @@ namespace App
             };
 
             Content =  layout;
-		}
+	}
 
         void onButtonClicked(object sender, EventArgs e)
         {
+	    // if textbox dosn't have a value typed in it, encluding spaces
             if (string.IsNullOrEmpty(Textbox.Text) || string.IsNullOrWhiteSpace(Textbox.Text))
             {
                 count++;
-
+		//only show l2 {second label: error message} if button clicked more than once
                 if (count > 1)
                 {
                     l2.IsVisible = true;
