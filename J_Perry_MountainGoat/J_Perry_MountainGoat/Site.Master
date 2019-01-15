@@ -6,6 +6,7 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- loading files manually -->
     <link href="/Styles/style.css" rel="stylesheet" />
     <script src="/Scripts/jquery-3.1.1.min.js"></script>
     <script src="/Scripts/bootstrap.js"></script>
@@ -16,6 +17,7 @@
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
+    <!-- loading css files from path '/Styles/css' -->
     <webopt:BundleReference runat="server" Path="~/Styles/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
