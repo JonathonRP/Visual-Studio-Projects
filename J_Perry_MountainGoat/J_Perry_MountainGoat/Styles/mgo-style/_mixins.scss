@@ -26,10 +26,10 @@
     }
 }
 
-@mixin mgo-transition($property: all) {
-    transition: #{$property} .3s ease-in-out;
+@mixin mgo-transition($property: all, $delay: "") {
+    transition: #{$property} .3s ease-in-out #{$delay};
 }
 
-@mixin mgo-animation($animation: fade-in, $delay: "") {
-    animation: #{$animation} .3s ease-in-out #{$delay} 1;
+@mixin mgo-animation($animation: fade-in, $delay: "", $animation-direction: "") {
+    animation: #{$animation} .3s ease-in-out #{$delay} 1 #{$animation-direction};
 }

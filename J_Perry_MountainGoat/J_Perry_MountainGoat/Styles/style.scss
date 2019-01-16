@@ -68,23 +68,31 @@ footer {
     color: $primary-color !important;
 }*/
 
-.navbar-default .navbar-toggle {
-    //border-color: $primary-color;
-    @include mgo-transition;
-    @include mgo-animation;
+.navbar-default {
+    margin-top: 15px;
+    box-shadow: 0 2px 25px rgba(0,0,0,0.5);
+    //background-color: transparentize(color(accent), 0.2);
 
-    /*&:hover,
-    &:focus {
-        //background-color: $primary-color;
+    .dropdown {
+        cursor: pointer;
     }
 
-    &.icon-bar {
-        background-color: $primary-color;
-    }*/
+    & .navbar-toggle {
+        //border-color: $primary-color;
+        @include mgo-transition;
+        @include mgo-animation;
+        /*&:hover,
+        &:focus {
+            //background-color: $primary-color;
+        }
 
-    &:hover .icon-bar,
-    &:focus .icon-bar {
-        background-color: color(accent);
+        &.icon-bar {
+            background-color: $primary-color;
+        }*/
+        &:hover .icon-bar,
+        &:focus .icon-bar {
+            background-color: color(accent);
+        }
     }
 }
 
@@ -109,16 +117,77 @@ footer {
 }*/
 
 .dropdown-menu {
-    display: block;
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    @include mgo-transition;
-}
 
-.open .dropdown-menu {
-    max-height: 400px;
-    opacity: 1;
+    @include breakpoint(tablet) {
+        width: 200px;
+        padding: 0;
+        margin: 0;
+        border: 0px;
+        box-shadow: none;
+
+        & > li {
+            opacity: 0;
+            background-color: color(accent);
+            @include mgo-animation(dropdown, $animation-direction: forwards);
+
+            &.divide {
+                border-bottom: 1px solid $dropdown-divider-bg;
+            }
+
+            & a {
+                padding: 10px 20px;
+            }
+        }
+
+        @for $i from 1 through 13 {
+            .open & li:nth-child(#{$i}) {
+                animation-delay: $i * .3s;
+            }
+        }
+
+        .dropdown & {
+            position: absolute;
+            top: 125%;
+            left: 0;
+            right: 0;
+            background: transparent;
+        }
+
+        .dropdown &:after {
+            content: "";
+            width: 0;
+            height: 0;
+            position: absolute;
+            bottom: 100%;
+            left: 25px;
+            border-width: 0 6px 6px 6px;
+            border-style: solid;
+            border-color: $dropdown-bg transparent;
+        }
+
+        .dropdown &:before {
+            content: "";
+            width: 0;
+            height: 0;
+            position: absolute;
+            bottom: 100%;
+            left: 25px;
+            border-width: 0 8px 8px 8px;
+            border-style: solid;
+            border-color: rgba(0,0,0,0.1) transparent;
+        }
+
+        .dropdown & li:first-of-type {
+            padding-top: 10px;
+            border-radius: 7px 7px 0 0;
+        }
+
+        .dropdown & li:last-of-type {
+            padding-bottom: 0px;
+            border-radius: 0 0 7px 7px;
+            border: none;
+        }
+    }
 }
 
 .jumbotron {

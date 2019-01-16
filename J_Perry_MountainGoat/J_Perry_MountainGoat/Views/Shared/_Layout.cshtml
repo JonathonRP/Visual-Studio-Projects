@@ -48,14 +48,14 @@
                                 <ul class="dropdown-menu">
                                     <li class="dropdown-header">Customer Data</li>
                                     <li><a href="/Customer/Info">Customer Info</a></li>
-                                    <li><a href="/Customer/Purchases">Customer Purchases</a></li>
-                                    <li class="divider" />
+                                    <li class="divide"><a href="/Customer/Purchases">Customer Purchases</a></li>
+                                    @*<li class="divider" />*@
                                     @if ( User.IsInRole( "manager" ) )
                                     {
                                         <li class="dropdown-header">Employee Data</li>
                                         <li><a href="/Employee/Info">Employee Info</a></li>
-                                        <li><a href="/Employee/Purchases">Employee Purchases</a></li>
-                                        <li class="divider" />
+                                        <li class="divide"><a href="/Employee/Purchases">Employee Purchases</a></li>
+                                        @*<li class="divider" />*@
                                     }
                                     <li><a href="/Data/Product">Product Data</a></li>
                                 </ul>
@@ -67,12 +67,12 @@
                                     {
                                         <li class="dropdown-header">Sales Reports</li>
                                         <li><a href="/Report/Sales/Employee">Employee Sales Report</a></li>
-                                        <li><a href="/Report/Sales/Product">Product Sales Report</a></li>
-                                        <li class="divider" />
+                                        <li class="divide"><a href="/Report/Sales/Product">Product Sales Report</a></li>
+                                        @*<li class="divider" />*@
                                         <li class="dropdown-header">Revenue Reports</li>
                                         <li><a href="/Report/Revenue">Revenue Report</a></li>
-                                        <li><a href="/Report/Revenue/Category">Category Revenue Report</a></li>
-                                        <li class="divider" />
+                                        <li class="divide"><a href="/Report/Revenue/Category">Category Revenue Report</a></li>
+                                        @*<li class="divider" />*@
                                     }
                                     @if ( User.IsInRole( "manager" ) )
                                     {
