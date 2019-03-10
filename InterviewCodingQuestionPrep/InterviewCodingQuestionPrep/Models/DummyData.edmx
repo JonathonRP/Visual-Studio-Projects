@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DummyDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cowboys">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cowboy_Name" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Indians">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Indian_Name" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Killed">
+          <Key>
+            <PropertyRef Name="Killed_Cowboy" />
+            <PropertyRef Name="Killed_Indian" />
+          </Key>
+          <Property Name="Killed_Cowboy" Type="int" Nullable="false" />
+          <Property Name="Killed_Indian" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Killed_Cowboy">
+          <End Role="Cowboys" Type="Self.Cowboys" Multiplicity="1" />
+          <End Role="Killed" Type="Self.Killed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cowboys">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Killed">
+              <PropertyRef Name="Killed_Cowboy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Killed_Indian">
+          <End Role="Indians" Type="Self.Indians" Multiplicity="1" />
+          <End Role="Killed" Type="Self.Killed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Indians">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Killed">
+              <PropertyRef Name="Killed_Indian" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DummyDataModelStoreContainer">
+          <EntitySet Name="Cowboys" EntityType="Self.Cowboys" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Indians" EntityType="Self.Indians" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Killed" EntityType="Self.Killed" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Killed_Cowboy" Association="Self.FK_Killed_Cowboy">
+            <End Role="Cowboys" EntitySet="Cowboys" />
+            <End Role="Killed" EntitySet="Killed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Killed_Indian" Association="Self.FK_Killed_Indian">
+            <End Role="Indians" EntitySet="Indians" />
+            <End Role="Killed" EntitySet="Killed" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DummyDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cowboys">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cowboy_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Indians" Relationship="Self.Killed" FromRole="Cowboys" ToRole="Indians" />
+        </EntityType>
+        <EntityType Name="Indians">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Indian_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Cowboys" Relationship="Self.Killed" FromRole="Indians" ToRole="Cowboys" />
+        </EntityType>
+        <Association Name="Killed">
+          <End Role="Cowboys" Type="Self.Cowboys" Multiplicity="*" />
+          <End Role="Indians" Type="Self.Indians" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="DummyDataEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cowboys" EntityType="Self.Cowboys" />
+          <EntitySet Name="Indians" EntityType="Self.Indians" />
+          <AssociationSet Name="Killed" Association="Self.Killed">
+            <End Role="Cowboys" EntitySet="Cowboys" />
+            <End Role="Indians" EntitySet="Indians" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DummyDataModelStoreContainer" CdmEntityContainer="DummyDataEntities">
+          <EntitySetMapping Name="Cowboys">
+            <EntityTypeMapping TypeName="DummyDataModel.Cowboys">
+              <MappingFragment StoreEntitySet="Cowboys">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Cowboy_Name" ColumnName="Cowboy_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Indians">
+            <EntityTypeMapping TypeName="DummyDataModel.Indians">
+              <MappingFragment StoreEntitySet="Indians">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Indian_Name" ColumnName="Indian_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Killed" TypeName="DummyDataModel.Killed" StoreEntitySet="Killed">
+            <EndProperty Name="Cowboys">
+              <ScalarProperty Name="Id" ColumnName="Killed_Cowboy" />
+            </EndProperty>
+            <EndProperty Name="Indians">
+              <ScalarProperty Name="Id" ColumnName="Killed_Indian" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

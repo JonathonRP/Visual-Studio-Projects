@@ -1,0 +1,41 @@
+﻿@model InterviewCodingQuestionPrep.Models.Indians
+
+@{
+    ViewBag.Title = "Indian Details";
+}
+
+<div>
+    <h4 class="text-info">Indian</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor( model => model.Indian_Name )
+        </dt>
+
+        <dd>
+            @Html.DisplayFor( model => model.Indian_Name )
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor( model => model.Cowboys )
+        </dt>
+
+        <dd class="col-2">
+            <table class="table table-sm table-striped">
+            @foreach ( var cowboy in Model.Cowboys )
+            {
+                <tr>
+                    <td scope="row">
+                        @Html.DisplayFor( model => cowboy.Cowboy_Name )
+                    </td>
+                </tr>
+            }
+            </table>
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink( "Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-outline-warning" } )
+    @Html.ActionLink( "Back to List", "Index", null, new { @class = "btn btn-outline-secondary" } )
+</p>

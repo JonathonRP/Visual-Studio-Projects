@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Wild Wild West</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        @Html.ActionLink( "Wild Wild West", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" } )
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#menu">
+            <span class="navbar-toggler-icon"/>
+        </button>
+        <div class="collapse navbar-collapse" id="menu">
+            <ul class="navbar-nav">
+                <li class="nav-item">@Html.ActionLink( "Cowboys", "Index", "Cowboys", null, htmlAttributes: new { @class = "nav-link" } )</li>
+                <li class="nav-item">@Html.ActionLink( "Indians", "Index", "Indians", null, htmlAttributes: new { @class = "nav-link" } )</li>
+                <li class="nav-item">@Html.ActionLink( "About", "About", "Home", null, htmlAttributes: new { @class = "nav-link" } )</li>
+                <li class="nav-item">@Html.ActionLink( "Contact", "Contact", "Home", null, htmlAttributes: new { @class = "nav-link" } )</li>
+            </ul>
+        </div>
+    </nav>
+    <div class="pt-5 container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Wild Wild West</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,42 @@
+﻿@model IEnumerable<InterviewCodingQuestionPrep.Models.Indians>
+
+@{
+    ViewBag.Title = "Indians";
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @Class = "btn btn-outline-success" } )
+</p>
+<table class="table table-condensed table-striped table-hover">
+    <tr>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.Indian_Name)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.Cowboys)
+        </th>
+        <th scope="col"></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td scope="row">
+            @Html.DisplayFor( modelItem => item.Indian_Name )
+        </td>
+        <td>
+            @foreach ( var cowboy in item.Cowboys )
+            {
+                <p>
+                    @Html.DisplayFor( modelItem => cowboy.Cowboy_Name )
+                </p>
+            }
+        </td>
+        <td>
+            @Html.ActionLink( "Edit", "Edit", new { id = item.Id }, htmlAttributes: new { @Class = "btn btn-outline-warning" } )
+            @Html.ActionLink( "Details", "Details", new { id = item.Id }, htmlAttributes: new { @Class = "btn btn-outline-info" } )
+            @Html.ActionLink( "Delete", "Delete", new { id = item.Id }, htmlAttributes: new { @Class = "btn btn-outline-danger" } )
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,66 @@
+﻿@model InterviewCodingQuestionPrep.Models.Indians
+
+@{
+    ViewBag.Title = "Edit Indian";
+}
+
+
+@using ( Html.BeginForm() )
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4 class="text-warning">Indians</h4>
+    <hr />
+    @Html.ValidationSummary( true, "", new { @class = "text-danger" } )
+    @Html.HiddenFor( model => model.Id )
+
+    <div class="form-group">
+        @Html.LabelFor( model => model.Indian_Name, htmlAttributes: new { @class = "control-label col-md-2" } )
+        <div class="col-md-10">
+            @Html.EditorFor( model => model.Indian_Name, new { htmlAttributes = new { @class = "form-control" } } )
+            @Html.ValidationMessageFor( model => model.Indian_Name, "", new { @class = "text-danger" } )
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor( model => model.Cowboys, htmlAttributes: new { @class = "control-label col-md-2" } )
+        <div class="col-md-10">
+            <table>
+                @{
+                    int cnt = 0;
+                    List<InterviewCodingQuestionPrep.Models.KilledViewModel> kills = ViewBag.Killed;
+
+                    foreach ( var kill in kills )
+                    {
+                        @:<tr>
+                            if ( cnt++ % 3 == 0 )
+                            {
+                                @:</tr><tr>
+                            }
+                            <td>
+                                <input type="checkbox"
+                                       name="selectedCowboys"
+                                       value="@kill.Id"
+                                       @(Html.Raw( kill.IsAssigned ? "checked=\"checked\"" : "" )) />
+                                @kill.Name
+                            </td>
+                        @:</tr>
+                    }
+                }
+            </table>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-outline-primary" />
+            @Html.ActionLink( "Back to List", "Index", null, new { @class = "btn btn-outline-secondary" } )
+        </div>
+    </div>
+</div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
