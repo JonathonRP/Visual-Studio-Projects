@@ -186,6 +186,34 @@ namespace InterviewCodingQuestionPrep.Controllers
             return RedirectToAction("Index");
         }
 
+        public JsonResult Count(int? id)
+        {
+            Stat CowboysStat = new Stat { Label = "Cowboys" };
+            
+            if ( id.HasValue )
+            {
+                CowboysStat.Label = db.Cowboys.Include( c => c.Indians ).Single( c => c.Id == id ).Cowboy_Name + " killed";
+                CowboysStat.Count = db.Cowboys.Include( c => c.Indians ).Single( c => c.Id == id ).Indians.Count;
+            }
+            else
+            {
+               CowboysStat.Count = db.Cowboys.Include( c => c.Indians ).Count();
+            }
+
+            return Json( CowboysStat, JsonRequestBehavior.AllowGet );
+        }
+
+        public ActionResult Stats(int? id)
+        {
+            Cowboys cowboy = db.Cowboys.Include( c => c.Indians ).Single( c => c.Id == id );
+            if ( id.HasValue && cowboy == null )
+            {
+                return HttpNotFound();
+            }
+
+            return View(cowboy);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

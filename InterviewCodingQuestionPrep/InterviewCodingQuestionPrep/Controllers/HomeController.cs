@@ -26,5 +26,10 @@ namespace InterviewCodingQuestionPrep.Controllers
 
             return View();
         }
+
+        public ActionResult Stats()
+        {
+            return View();
+        }
     }
 }

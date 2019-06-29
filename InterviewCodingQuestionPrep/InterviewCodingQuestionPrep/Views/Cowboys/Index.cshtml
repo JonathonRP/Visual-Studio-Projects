@@ -5,7 +5,8 @@
 }
 
 <p>
-    @Html.ActionLink("Create New", "Create", null, new { @Class = "btn btn-outline-success" } )
+    @Html.ActionLink( "Create New", "Create", null, new { @Class = "btn btn-outline-success" } )
+    @Html.ActionLink( "Stats", "Stats", "Home", null, new { @Class = "float-right btn btn-outline-info" } )
 </p>
 <table class="table table-condensed table-striped table-hover">
     <tr>
@@ -16,12 +17,13 @@
             @Html.DisplayNameFor(model => model.Indians)
         </th>
         <th scope="col"></th>
+        <th scope="col"></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td scope="row">
-            @Html.DisplayFor(modelItem => item.Cowboy_Name)
+            @Html.DisplayFor( modelItem => item.Cowboy_Name )
         </td>
         <td>
             @foreach ( var indian in item.Indians )
@@ -32,9 +34,12 @@
             }
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }, htmlAttributes: new { @Class = "btn btn-outline-warning" } )
-            @Html.ActionLink("Details", "Details", new { id=item.Id }, htmlAttributes: new { @Class = "btn btn-outline-info" } )
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id }, htmlAttributes: new { @Class = "btn btn-outline-danger" } )
+            @Html.ActionLink( "Stats", "Stats", new { id = item.Id }, htmlAttributes: new { @Class = "btn btn-outline-secondary" } )
+        </td>
+        <td>
+            @Html.ActionLink( "Edit", "Edit", new { id = item.Id }, htmlAttributes: new { @Class = "btn btn-outline-warning" } )
+            @Html.ActionLink( "Details", "Details", new { id = item.Id }, htmlAttributes: new { @Class = "btn btn-outline-info" } )
+            @Html.ActionLink( "Delete", "Delete", new { id = item.Id }, htmlAttributes: new { @Class = "btn btn-outline-danger" } )
         </td>
     </tr>
 }

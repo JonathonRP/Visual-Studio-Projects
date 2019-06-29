@@ -164,6 +164,7 @@
       <DependentUpon>DummyData.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\KilledViewModel.cs" />
+    <Compile Include="Models\Stat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -271,6 +272,9 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Home\Stats.cshtml" />
+    <Content Include="Views\Indians\Stats.cshtml" />
+    <Content Include="Views\Cowboys\Stats.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
